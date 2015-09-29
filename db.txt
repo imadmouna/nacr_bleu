@@ -1,0 +1,89 @@
+-- phpMyAdmin SQL Dump
+-- version 4.1.4
+-- http://www.phpmyadmin.net
+--
+-- Client :  127.0.0.1
+-- Généré le :  Mar 29 Septembre 2015 à 11:34
+-- Version du serveur :  5.6.15-log
+-- Version de PHP :  5.5.8
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Base de données :  `nacr_bleu`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `bien`
+--
+
+CREATE TABLE IF NOT EXISTS `bien` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `titre` text NOT NULL,
+  `Description` text NOT NULL,
+  `prix` text NOT NULL,
+  `superficie` text NOT NULL,
+  `nbr_piece` text NOT NULL,
+  `id_ville` int(11) NOT NULL,
+  `id_cat` int(11) NOT NULL,
+  `id_sous_cat` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `categorie`
+--
+
+CREATE TABLE IF NOT EXISTS `categorie` (
+  `id_cat` int(11) NOT NULL AUTO_INCREMENT,
+  `libelle` text NOT NULL,
+  PRIMARY KEY (`id_cat`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `manager`
+--
+
+CREATE TABLE IF NOT EXISTS `manager` (
+  `login` text NOT NULL,
+  `pass` text NOT NULL,
+  `salt` text NOT NULL,
+  `last_login` text NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `manager`
+--
+
+INSERT INTO `manager` (`login`, `pass`, `salt`, `last_login`) VALUES
+('admin', 'bfXRV7V4R1OJE', 'bfcaec2d1296930ee50e874480c638e6f78cd0b4', 'Tue 29 Sep 11h, 2015');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `sous_categorie`
+--
+
+CREATE TABLE IF NOT EXISTS `sous_categorie` (
+  `id_sous_cat` int(11) NOT NULL AUTO_INCREMENT,
+  `id_cat` int(11) NOT NULL,
+  `libelle` text NOT NULL,
+  PRIMARY KEY (`id_sous_cat`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
