@@ -159,6 +159,12 @@ include("../connect.php");
                       <textarea id="editor1" name="editor1" rows="10" cols="80" required>Entrez la Description</textarea>
                     </div>
 
+
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Photo principale </label>
+                      <input class="form-group" type="file" name="photo" id="photo" />
+                    </div>
+
                   </div>
 
                   <div class="box-footer">
@@ -169,6 +175,15 @@ include("../connect.php");
 
 
 
+              <!-- general form elements -->
+              <div class="box box-alert">
+                <div class="box-header">
+                  <h3 class="box-title">Liste des biens</h3>
+                </div><!-- /.box-header -->
+                
+
+
+              </div>
 
 
 
