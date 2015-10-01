@@ -88,28 +88,75 @@ include("../connect.php");
                   <div class="box-body">
 
                     <div class="form-group">
-                      <label for="exampleInputEmail1">Titre</label>
-                      <input class="form-control" id="exampleInputEmail1" placeholder="Entrez le titre" type="">
+                      <label for="exampleInputEmail1">Titre *</label>
+                      <input class="form-control" id="exampleInputEmail1" placeholder="Entrez le titre" type="" required>
                     </div>
 
                     <div class="form-group">
-                      <label for="exampleInputEmail1">Prix</label>
-                      <input class="form-control" id="exampleInputEmail1" placeholder="Entrez le prix" type="">
+                      <label for="exampleInputEmail1">Prix *</label>
+                      <input class="form-control" id="exampleInputEmail1" placeholder="Entrez le prix" type="" required>
                     </div>
 
                     <div class="form-group">
-                      <label for="exampleInputEmail1">Superficie</label>
-                      <input class="form-control" id="exampleInputEmail1" placeholder="Entrez la superficie" type="">
+                      <label for="exampleInputEmail1">Superficie *</label>
+                      <input class="form-control" id="exampleInputEmail1" placeholder="Entrez la superficie" type="" required>
                     </div>                    
 
                     <div class="form-group">
-                      <label for="exampleInputEmail1">Nombre de pi&egrave;ces</label>
-                      <input class="form-control" id="exampleInputEmail1" placeholder="Entrez le nombre de pieces" type="">
+                      <label for="exampleInputEmail1">Nombre de pi&egrave;ces *</label>
+                      <input class="form-control" id="exampleInputEmail1" placeholder="Entrez le nombre de pieces" type="" required>
                     </div>            
 
+
+
+
                     <div class="form-group">
-                      <label for="exampleInputEmail1">Description</label>
-                      <textarea id="editor1" name="editor1" rows="10" cols="80">Entrez la Description</textarea>
+                      <label for="exampleInputEmail1">Cat&eacute;gorie *</label>
+                       <select id="cat" name="cat" class="form-control" required>
+                        <option value=""></option>
+                        <?php
+                          $r = mysql_query("select * from ville order by id");
+                          while($tt = mysql_fetch_array($r)){
+                        ?>
+                        <option value="<?php echo $tt[0];?>"><?php echo $tt[1];?></option>
+                        <?php
+                          }
+                        ?>
+                    </select>
+                    </div>  
+
+
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Sous cat&eacute;gorie *</label>
+                       <select id="scat" name="scat" class="form-control" required>
+                        <option value=""></option>
+                    </select>
+                    </div>  
+
+
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Ville *</label>
+                       <select id="ville" name="ville" class="form-control" required>
+                        <option value=""></option>
+                        <?php
+                          $r = mysql_query("select * from ville order by id");
+                          while($tt = mysql_fetch_array($r)){
+                        ?>
+                        <option value="<?php echo $tt[0];?>"><?php echo $tt[1];?></option>
+                        <?php
+                          }
+                        ?>
+                    </select>
+                    </div>  
+
+
+
+
+
+
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Description *</label>
+                      <textarea id="editor1" name="editor1" rows="10" cols="80" required>Entrez la Description</textarea>
                     </div>
 
                   </div>
@@ -160,6 +207,15 @@ include("../connect.php");
         //bootstrap WYSIHTML5 - text editor
         $(".textarea").wysihtml5();
       });
+    </script>
+
+
+    <link href="dist/css/select2.css" rel="stylesheet" />
+    <link href="dist/css/select2-bootstrap.css" rel="stylesheet" />
+    <script src="dist/js/select2.min.js"></script>
+
+    <script type="text/javascript">
+      $('select').select2();
     </script>
 
     <!-- AdminLTE for demo purposes <script src="dist/js/demo.js" type="text/javascript"></script>-->

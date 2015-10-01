@@ -18,22 +18,17 @@
             <li class="header"> - </li>
             
             <li>
-              <a href="pages/widgets.html">
-                <i class="fa fa-th"></i> <span>Biens</span> <small class="label pull-right bg-green">new</small>
-              </a>
-            </li>
-            <li>
-              <a href="pages/widgets.html">
-                <i class="fa fa-th"></i> <span>Villes</span> <small class="label pull-right bg-green">new</small>
-              </a>
-            </li>
-            <li>
-              <a href="pages/widgets.html">
-                <i class="fa fa-th"></i> <span>Cat&eacute;gories</span> <small class="label pull-right bg-green">new</small>
+              <a href="dashboard.php">
+                <i class="fa fa-th"></i> <span>Biens</span>
               </a>
             </li>
             
-            <li><a href="documentation/index.html"><i class="fa fa-book"></i> Documentation</a></li>
+            <li>
+              <a href="cats.php">
+                <i class="fa fa-book"></i> <span>Cat&eacute;gories</span>
+              </a>
+            </li>
+            
             <li class="header">AUTRES</li>
             <li><a href="#"><i class="fa fa-circle-o text-danger"></i> Mon profil</a></li>
           </ul>
