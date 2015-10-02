@@ -17,6 +17,18 @@
           <ul class="sidebar-menu">
             <li class="header"> - </li>
             
+
+            <li class="treeview">
+              <a href="#">
+                <i class="fa fa-dashboard"></i> <span>Accueil</span> <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="slider.php"><i class="fa fa-circle-o"></i> Banni&egrave;re</a></li>
+                <li><a href="../index2.html"><i class="fa fa-circle-o"></i> Mise en avant</a></li>
+                <li><a href="../index2.html"><i class="fa fa-circle-o"></i> A propos</a></li>
+              </ul>
+            </li>
+
             <li>
               <a href="dashboard.php">
                 <i class="fa fa-th"></i> <span>Biens</span>
