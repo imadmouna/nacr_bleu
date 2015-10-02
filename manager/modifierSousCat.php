@@ -10,19 +10,13 @@ if(isset($_REQUEST["dec"]) and $_REQUEST["dec"]=="1"){
 }
 include("../connect.php");
 
-if(isset($_POST["libelle"]) and $_POST["libelle"] and isset($_POST["id_cat"]) and $_POST["id_cat"]){
-  mysql_query("insert into sous_categorie(libelle, id_cat) values('".utf8_encode(addslashes($_POST["libelle"]))."',".$_POST["id_cat"].")");
-  echo "<script language='javascript'>document.location.href='sousCat.php?id=".$_POST["id_cat"]."';</script>";
+if(isset($_POST["libelle"]) and $_POST["libelle"] and isset($_POST["id_sous_cat"]) and $_POST["id_sous_cat"] and isset($_POST["id_cat"]) and $_POST["id_cat"]){
+  mysql_query("update sous_categorie set libelle = '".utf8_encode(addslashes($_POST["libelle"]))."' where id_sous_cat=".$_POST["id_sous_cat"]);
+  echo "<script language='javascript'>document.location.href='modifierSousCat.php?id_sous_cat=".$_POST["id_sous_cat"]."&id_cat=".$_POST["id_cat"]."';</script>";
 }
 
-if(isset($_REQUEST['id_sp']) and is_numeric($_REQUEST['id_sp'])){
-  mysql_query("delete from sous_categorie where id_sous_cat = ".$_REQUEST['id_sp']);
-  mysql_query("delete from bien where id_sous_cat = ".$_REQUEST['id_sp']);
-  echo "<script language='javascript'>document.location.href='sousCat.php?id=".$_REQUEST['id']."';</script>";
-}
-
-if(isset($_REQUEST['id']) and is_numeric($_REQUEST['id'])){
-  $rr = mysql_query("select * from categorie where id_cat = ".$_REQUEST['id']);
+if(isset($_REQUEST['id_sous_cat']) and is_numeric($_REQUEST['id_sous_cat'])){
+  $rr = mysql_query("select * from sous_categorie where id_sous_cat = ".$_REQUEST['id_sous_cat']);
   $t = mysql_fetch_array($rr);
 
   if(!$t){
@@ -87,7 +81,7 @@ if(isset($_REQUEST['id']) and is_numeric($_REQUEST['id'])){
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Sous cat&eacute;gories
+            <a href="sousCat.php?id=<?php echo $_REQUEST['id_cat'];?>">Sous cat&eacute;gories</a>
             <small>Panneau de controle</small>
           </h1>
           <ol class="breadcrumb">
@@ -102,16 +96,17 @@ if(isset($_REQUEST['id']) and is_numeric($_REQUEST['id'])){
               <!-- general form elements -->
               <div class="box box-primary">
                 <div class="box-header">
-                  <h3 class="box-title">Nouvelle sous cat&eacute;gorie pour <i><?php echo $t[1];?></i></h3>
+                  <h3 class="box-title">Modifier sous cat&eacute;gorie: <i><?php echo $t[2]; ?></i></h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form role="form" method="post" action="sousCat.php?id=<?php echo $t[0]; ?>">
+                <form role="form" method="post" action="modifierSousCat.php?id_sous_cat=<?php echo $t[0]; ?>&id_cat=<?php echo $t[1]; ?>">
                   <div class="box-body">
 
                     <div class="form-group">
                       <label for="exampleInputEmail1">Libelle *</label>
-                      <input class="form-control" id="exampleInputEmail1" name="libelle" placeholder="Entrez le libelle" type="" required>                      
-                      <input type="hidden" name="id_cat" class="form-control" value="<?php echo $t[0]; ?>">
+                      <input class="form-control" name="libelle" placeholder="Entrez le libelle" value="<?php echo $t[2]; ?>" required>
+                      <input type="hidden" name="id_cat" class="form-control" value="<?php echo $t[1]; ?>">
+                      <input type="hidden" name="id_sous_cat" class="form-control" value="<?php echo $t[0]; ?>">
                     </div>
 
                     
@@ -126,44 +121,7 @@ if(isset($_REQUEST['id']) and is_numeric($_REQUEST['id'])){
 
 
 
-              <!-- general form elements -->
-              <div class="box box-alert">
-                <div class="box-header">
-                  <h3 class="box-title">Liste des sous cat&eacute;gories</h3>
-                </div><!-- /.box-header -->
-                
-                <div class="box-body">
-
-
-                  <?php
-                    $q = mysql_query("select * from sous_categorie where id_cat=".$_REQUEST['id']."  order by id_sous_cat");
-                    while($tab = mysql_fetch_array($q)){
-                  ?>
-
-                  <table width="100%" border="0" cellspacing="0" cellpadding="0" style="font-size:11px">
-                    <tr>
-                      
-                      <td width="200" align="left" valign="top">
-                      <?php
-                        echo stripslashes(utf8_decode($tab[2]));
-                      ?>
-                      </td>
-                      <td width="100" align="left" valign="top">&nbsp;</td>
-                      <td align="right" valign="top">&nbsp;</td>
-                      <td align="right" valign="top">
-                      
-                      <a href="modifierSousCat.php?id_sous_cat=<?php echo $tab[0];?>&id_cat=<?php echo $_REQUEST['id'];?>" title="Modifier <?php echo stripslashes(utf8_decode($tab[1]));?>">Modifier</a>
-                      &nbsp;&nbsp;&nbsp;
-                      <a href="javascript:sup('<?php echo $tab[0];?>')" title="Supprimer">Supprimer</a>
-                      </td>
-                    </tr>
-                  </table>
-                  <?php
-                    }
-                  ?>
-                </div>
-
-              </div>
+              
 
 
 
@@ -213,8 +171,8 @@ if(isset($_REQUEST['id']) and is_numeric($_REQUEST['id'])){
       $('select').select2();
 
       function sup(id){
-        if(confirm('Etes-vous sure de supprimer cette entite?\n Attention: il se peut que des biens sont enregistres sous cette sous categorie!')){
-          document.location.href='sousCat.php?id_sp='+id+'&id=<?php echo $_REQUEST['id'];?>';
+        if(confirm('Etes-vous sure de supprimer cette entite?\n Attention: il se peut que des biens sont enregistres sous cette categorie!')){
+          document.location.href='cats.php?id_sp='+id;
         }
       }
     </script>
