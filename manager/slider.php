@@ -16,9 +16,8 @@ if(isset($_POST["libelle"]) and $_POST["libelle"]){
 }
 
 if(isset($_REQUEST['id_sp']) and is_numeric($_REQUEST['id_sp'])){
-  mysql_query("delete from categorie where id_cat = ".$_REQUEST['id_sp']);
-  mysql_query("delete from bien where id_cat = ".$_REQUEST['id_sp']);
-  echo "<script language='javascript'>document.location.href='cats.php';</script>";
+  mysql_query("delete from slider where id = ".$_REQUEST['id_sp']);
+  echo "<script language='javascript'>document.location.href='slider.php';</script>";
 }
 
 
@@ -252,8 +251,8 @@ if(isset($_REQUEST['id_sp']) and is_numeric($_REQUEST['id_sp'])){
       $('select').select2();
 
       function sup(id){
-        if(confirm('Etes-vous sure de supprimer cette entite?\n Attention: il se peut que des biens sont enregistres sous cette categorie!')){
-          document.location.href='cats.php?id_sp='+id;
+        if(confirm('Etes-vous sure de supprimer cette photo?')){
+          document.location.href='slider.php?id_sp='+id;
         }
       }
     </script>
