@@ -129,8 +129,8 @@ include("../connect.php");
                     <div class="form-group">
                       <label for="exampleInputEmail1">Sous cat&eacute;gorie *</label>
                        <select id="scat" name="scat" class="form-control" required>
-                        <option value=""></option>
-                    </select>
+                        
+                        </select>
                     </div>  
 
 
@@ -221,6 +221,20 @@ include("../connect.php");
         CKEDITOR.replace('editor1');
         //bootstrap WYSIHTML5 - text editor
         $(".textarea").wysihtml5();
+
+
+        $("#cat").click(function(){
+          valeur = $(this).val();
+          $.ajax({
+                type: "POST",
+                url: "ajax/getSCat.php",
+                data: {id:valeur},
+                success: function(data){
+                  $("#scat").html(data);
+                },
+                dataType: "html"
+          });
+        });
       });
     </script>
 
