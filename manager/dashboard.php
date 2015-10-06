@@ -77,10 +77,17 @@ if(isset($_POST['titre']) and isset($_POST['prix']) and isset($_POST['superficie
         if($_FILES['photo']['type']=='image/gif'){$type="gif";}
         if($_FILES['photo']['type']=='image/png'){$type="png";}
 
+        $dossier = time();
         
         //CREER SOURCE DOSSIER
-        $fichier_max = "images/bien/big/";
-        $fichier_min = "images/bien/small/";
+        $fichier_max = "images/bien/".$dossier."/big/";
+        $fichier_min = "images/bien/".$dossier."/small/";
+
+
+
+        mkdir("../images/bien/".$dossier,0777);
+        mkdir("../images/bien/".$dossier."/big/",0777);
+        mkdir("../images/bien/".$dossier."/small/",0777);
         
         $fichier_src = time()."_".$_FILES['photo']['name'];
         
@@ -94,7 +101,7 @@ if(isset($_POST['titre']) and isset($_POST['prix']) and isset($_POST['superficie
         
         //SAUVEGARDE DB
        mysql_query(
-          "INSERT INTO `nacr_bleu`.`bien` (`titre`, `Description`, `prix`, `superficie`, `nbr_piece`, `id_ville`, `id_cat`, `id_sous_cat`, `photo`) 
+          "INSERT INTO `nacr_bleu`.`bien` (`titre`, `Description`, `prix`, `superficie`, `nbr_piece`, `id_ville`, `id_cat`, `id_sous_cat`, `photo`, `dossier`) 
           VALUES (
             '".addslashes(utf8_encode($_POST['titre']))."',
             '".addslashes(utf8_encode($_POST['editor1']))."',
@@ -104,9 +111,11 @@ if(isset($_POST['titre']) and isset($_POST['prix']) and isset($_POST['superficie
             '".addslashes(utf8_encode($_POST['ville']))."',
             '".addslashes(utf8_encode($_POST['cat']))."',
             '".addslashes(utf8_encode($_POST['scat']))."',
-            '".$fichier_src."'
+            '".$fichier_src."',
+            '".$dossier."'
             );"
         );
+       echo "<script language='javascript'>document.location.href='dashboard.php';</script>";
       }else{
         $err = 1;
       }
@@ -304,19 +313,15 @@ if(isset($_POST['titre']) and isset($_POST['prix']) and isset($_POST['superficie
                   <table width="100%" border="0" cellspacing="0" cellpadding="0" style="font-size:11px">
                     <tr>
                       <td width="200" align="left" valign="top">
-                        <img src="../images/bien/small/<?php echo $tab[9];?>" width="50" height="50" style="padding:2px;border:1px solid #ccc" />
+                        <img src="../images/bien/<?php echo $tab[9];?>/small/<?php echo $tab[10];?>" width="50" height="50" style="padding:2px;border:1px solid #ccc" />
                       </td>
                       <td width="200" align="left" valign="top"><?php echo stripslashes(utf8_decode($tab[1]));?></td>
-                      <td width="200" align="left" valign="top">
-                      <?php
-                        echo stripslashes(utf8_decode($tab[1]));
-                      ?>
-                      </td>
+                      
                       <td width="100" align="left" valign="top">&nbsp;</td>
                       <td align="right" valign="top">&nbsp;</td>
                       <td align="right" valign="top">
                       
-                      <a href="galerie.php?id=<?php echo $tab[0];?>" title="<?php echo $tab[1];?>">Galerie photos</a>
+                      <a href="galerie.php?id=<?php echo $tab[0];?>" title="<?php echo stripslashes(utf8_decode($tab[1]));?>">Galerie photos</a>
                       &nbsp;&nbsp;&nbsp;
                       <a href="modifierBien.php?id=<?php echo $tab[0];?>" title="Modifier <?php echo stripslashes(utf8_decode($tab[1]));?>">Modifier</a>
                       &nbsp;&nbsp;&nbsp;

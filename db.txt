@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- G�n�r� le :  Mar 29 Septembre 2015 � 11:34
+-- G�n�r� le :  Mar 06 Octobre 2015 � 22:46
 -- Version du serveur :  5.6.15-log
 -- Version de PHP :  5.5.8
 
@@ -23,6 +23,23 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `apropos`
+--
+
+CREATE TABLE IF NOT EXISTS `apropos` (
+  `texte` text NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `apropos`
+--
+
+INSERT INTO `apropos` (`texte`) VALUES
+('<p>Nacr Bleu est une scoci&eacute;t&eacute; immobilliere qui s&#39;engage d&#39;aider les clients de trouver des appartements et villas haute standing pour un sejour ou pour long du&eacute;e ainsi de faciliter la tache pour nos cher clients de trouver ce qu&#39;ils veullent en toute faciliter est s&eacute;curiter...</p>\r\n');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `bien`
 --
 
@@ -36,8 +53,17 @@ CREATE TABLE IF NOT EXISTS `bien` (
   `id_ville` int(11) NOT NULL,
   `id_cat` int(11) NOT NULL,
   `id_sous_cat` int(11) NOT NULL,
+  `dossier` text NOT NULL,
+  `photo` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
+
+--
+-- Contenu de la table `bien`
+--
+
+INSERT INTO `bien` (`id`, `titre`, `Description`, `prix`, `superficie`, `nbr_piece`, `id_ville`, `id_cat`, `id_sous_cat`, `dossier`, `photo`) VALUES
+(19, 'mm', '<p>Entrez la Description</p>\r\n', 'mm', 'mm', 'mm', 97, 2, 2, '1444163885', '1444163885_Desert.jpg');
 
 -- --------------------------------------------------------
 
@@ -49,6 +75,30 @@ CREATE TABLE IF NOT EXISTS `categorie` (
   `id_cat` int(11) NOT NULL AUTO_INCREMENT,
   `libelle` text NOT NULL,
   PRIMARY KEY (`id_cat`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+
+--
+-- Contenu de la table `categorie`
+--
+
+INSERT INTO `categorie` (`id_cat`, `libelle`) VALUES
+(2, 'Villa et maison'),
+(5, 'terrain');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `galerie`
+--
+
+CREATE TABLE IF NOT EXISTS `galerie` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `small` text NOT NULL,
+  `big` text NOT NULL,
+  `chemin` text NOT NULL,
+  `date_ajout` text NOT NULL,
+  `id_bien` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -69,7 +119,35 @@ CREATE TABLE IF NOT EXISTS `manager` (
 --
 
 INSERT INTO `manager` (`login`, `pass`, `salt`, `last_login`) VALUES
-('admin', 'bfXRV7V4R1OJE', 'bfcaec2d1296930ee50e874480c638e6f78cd0b4', 'Tue 29 Sep 11h, 2015');
+('admin', 'bfXRV7V4R1OJE', 'bfcaec2d1296930ee50e874480c638e6f78cd0b4', 'Tue 06 Oct 20h, 2015');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `slider`
+--
+
+CREATE TABLE IF NOT EXISTS `slider` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `photo` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+
+--
+-- Contenu de la table `slider`
+--
+
+INSERT INTO `slider` (`id`, `photo`) VALUES
+(3, 'images/1443807603_Koala.jpg'),
+(4, 'images/1443807603_Lighthouse.jpg'),
+(5, 'images/1443807603_Penguins.jpg'),
+(6, 'images/1443807682_Desert.jpg'),
+(7, 'images/1443807682_Hydrangeas.jpg'),
+(8, 'images/1443807682_Jellyfish.jpg'),
+(9, 'images/1443807682_Koala.jpg'),
+(10, 'images/1443807682_Lighthouse.jpg'),
+(11, 'images/1443807682_Penguins.jpg'),
+(12, 'images/1443807682_Tulips.jpg');
 
 -- --------------------------------------------------------
 
@@ -82,7 +160,425 @@ CREATE TABLE IF NOT EXISTS `sous_categorie` (
   `id_cat` int(11) NOT NULL,
   `libelle` text NOT NULL,
   PRIMARY KEY (`id_sous_cat`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+
+--
+-- Contenu de la table `sous_categorie`
+--
+
+INSERT INTO `sous_categorie` (`id_sous_cat`, `id_cat`, `libelle`) VALUES
+(4, 2, 'Louer'),
+(3, 2, 'Vendre');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ville`
+--
+
+CREATE TABLE IF NOT EXISTS `ville` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ville` varchar(40) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=403 ;
+
+--
+-- Contenu de la table `ville`
+--
+
+INSERT INTO `ville` (`id`, `ville`) VALUES
+(1, 'Aïn Harrouda'),
+(2, 'Ben Yakhlef'),
+(3, 'Bouskoura'),
+(4, 'Casablanca'),
+(5, 'Médiouna'),
+(6, 'Mohammédia'),
+(7, 'Tit Mellil'),
+(8, 'Ben Yakhlef'),
+(9, 'Bejaâd'),
+(10, 'Ben Ahmed'),
+(11, 'Benslimane'),
+(12, 'Berrechid'),
+(13, 'Boujniba'),
+(14, 'Boulanouare'),
+(15, 'Bouznika'),
+(16, 'Deroua'),
+(17, 'El Borouj'),
+(18, 'El Gara'),
+(19, 'Guisser'),
+(20, 'Hattane'),
+(21, 'Khouribga'),
+(22, 'Loulad'),
+(23, 'Oued Zem'),
+(24, 'Oulad Abbou'),
+(25, 'Oulad H''Riz Sahel'),
+(26, 'Oulad M''rah'),
+(27, 'Oulad Saïd'),
+(28, 'Oulad Sidi Ben Daoud'),
+(29, 'Ras El Aïn'),
+(30, 'Settat'),
+(31, 'Sidi Rahhal Chataï'),
+(32, 'Soualem'),
+(33, 'Azemmour'),
+(34, 'Bir Jdid'),
+(35, 'Bouguedra'),
+(36, 'Echemmaia'),
+(37, 'El Jadida'),
+(38, 'Hrara'),
+(39, 'Ighoud'),
+(40, 'Jamâat Shaim'),
+(41, 'Jorf Lasfar'),
+(42, 'Khemis Zemamra'),
+(43, 'Laaounate'),
+(44, 'Moulay Abdallah'),
+(45, 'Oualidia'),
+(46, 'Oulad Amrane'),
+(47, 'Oulad Frej'),
+(48, 'Oulad Ghadbane'),
+(49, 'Safi'),
+(50, 'Sebt El Maârif'),
+(51, 'Sebt Gzoula'),
+(52, 'Sidi Ahmed'),
+(53, 'Sidi Ali Ban Hamdouche'),
+(54, 'Sidi Bennour'),
+(55, 'Sidi Bouzid'),
+(56, 'Sidi Smaïl'),
+(57, 'Youssoufia'),
+(58, 'Fès'),
+(59, 'Aïn Cheggag'),
+(60, 'Bhalil'),
+(61, 'Boulemane'),
+(62, 'El Menzel'),
+(63, 'Guigou'),
+(64, 'Imouzzer Kandar'),
+(65, 'Imouzzer Marmoucha'),
+(66, 'Missour'),
+(67, 'Moulay Yaâcoub'),
+(68, 'Ouled Tayeb'),
+(69, 'Outat El Haj'),
+(70, 'Ribate El Kheir'),
+(71, 'Séfrou'),
+(72, 'Skhinate'),
+(73, 'Tafajight'),
+(74, 'Arbaoua'),
+(75, 'Aïn Dorij'),
+(76, 'Dar Gueddari'),
+(77, 'Had Kourt'),
+(78, 'Jorf El Melha'),
+(79, 'Kénitra'),
+(80, 'Khenichet'),
+(81, 'Lalla Mimouna'),
+(82, 'Mechra Bel Ksiri'),
+(83, 'Mehdia'),
+(84, 'Moulay Bousselham'),
+(85, 'Sidi Allal Tazi'),
+(86, 'Sidi Kacem'),
+(87, 'Sidi Slimane'),
+(88, 'Sidi Taibi'),
+(89, 'Sidi Yahya El Gharb'),
+(90, 'Souk El Arbaa'),
+(91, 'Akka'),
+(92, 'Assa'),
+(93, 'Bouizakarne'),
+(94, 'El Ouatia'),
+(95, 'Es-Semara'),
+(96, 'Fam El Hisn'),
+(97, 'Foum Zguid'),
+(98, 'Guelmim'),
+(99, 'Taghjijt'),
+(100, 'Tan-Tan'),
+(101, 'Tata'),
+(102, 'Zag'),
+(103, 'Marrakech'),
+(104, 'Ait Daoud'),
+(115, 'Amizmiz'),
+(116, 'Assahrij'),
+(117, 'Aït Ourir'),
+(118, 'Ben Guerir'),
+(119, 'Chichaoua'),
+(120, 'El Hanchane'),
+(121, 'El Kelaâ des Sraghna'),
+(122, 'Essaouira'),
+(123, 'Fraïta'),
+(124, 'Ghmate'),
+(125, 'Ighounane'),
+(126, 'Imintanoute'),
+(127, 'Kattara'),
+(128, 'Lalla Takerkoust'),
+(129, 'Loudaya'),
+(130, 'Lâattaouia'),
+(131, 'Moulay Brahim'),
+(132, 'Mzouda'),
+(133, 'Ounagha'),
+(134, 'Sid L''Mokhtar'),
+(135, 'Sid Zouin'),
+(136, 'Sidi Abdallah Ghiat'),
+(137, 'Sidi Bou Othmane'),
+(138, 'Sidi Rahhal'),
+(139, 'Skhour Rehamna'),
+(140, 'Smimou'),
+(141, 'Tafetachte'),
+(142, 'Tahannaout'),
+(143, 'Talmest'),
+(144, 'Tamallalt'),
+(145, 'Tamanar'),
+(146, 'Tamansourt'),
+(147, 'Tameslouht'),
+(148, 'Tanalt'),
+(149, 'Zeubelemok'),
+(150, 'Meknès‎'),
+(151, 'Khénifra'),
+(152, 'Agourai'),
+(153, 'Ain Taoujdate'),
+(154, 'MyAliCherif'),
+(155, 'Rissani'),
+(156, 'Amalou Ighriben'),
+(157, 'Aoufous'),
+(158, 'Arfoud'),
+(159, 'Azrou'),
+(160, 'Aïn Jemaa'),
+(161, 'Aïn Karma'),
+(162, 'Aïn Leuh'),
+(163, 'Aït Boubidmane'),
+(164, 'Aït Ishaq'),
+(165, 'Boudnib'),
+(166, 'Boufakrane'),
+(167, 'Boumia'),
+(168, 'El Hajeb'),
+(169, 'Elkbab'),
+(170, 'Er-Rich'),
+(171, 'Errachidia'),
+(172, 'Gardmit'),
+(173, 'Goulmima'),
+(174, 'Gourrama'),
+(175, 'Had Bouhssoussen'),
+(176, 'Haj Kaddour'),
+(177, 'Ifrane'),
+(178, 'Itzer'),
+(179, 'Jorf'),
+(180, 'Kehf Nsour'),
+(181, 'Kerrouchen'),
+(182, 'M''haya'),
+(183, 'M''rirt'),
+(184, 'Midelt'),
+(185, 'Moulay Ali Cherif'),
+(186, 'Moulay Bouazza'),
+(187, 'Moulay Idriss Zerhoun'),
+(188, 'Moussaoua'),
+(189, 'N''Zalat Bni Amar'),
+(190, 'Ouaoumana'),
+(191, 'Oued Ifrane'),
+(192, 'Sabaa Aiyoun'),
+(193, 'Sebt Jahjouh'),
+(194, 'Sidi Addi'),
+(195, 'Tichoute'),
+(196, 'Tighassaline'),
+(197, 'Tighza'),
+(198, 'Timahdite'),
+(199, 'Tinejdad'),
+(200, 'Tizguite'),
+(201, 'Toulal'),
+(202, 'Tounfite'),
+(203, 'Zaouia d''Ifrane'),
+(204, 'Zaïda'),
+(205, 'Ahfir'),
+(206, 'Aklim'),
+(207, 'Al Aroui'),
+(208, 'Aïn Bni Mathar'),
+(209, 'Aïn Erreggada'),
+(210, 'Ben Taïeb'),
+(211, 'Berkane'),
+(212, 'Bni Ansar'),
+(213, 'Bni Chiker'),
+(214, 'Bni Drar'),
+(215, 'Bni Tadjite'),
+(216, 'Bouanane'),
+(217, 'Bouarfa'),
+(218, 'Bouhdila'),
+(219, 'Dar El Kebdani'),
+(220, 'Debdou'),
+(221, 'Douar Kannine'),
+(222, 'Driouch'),
+(223, 'El Aïoun Sidi Mellouk'),
+(224, 'Farkhana'),
+(225, 'Figuig'),
+(226, 'Ihddaden'),
+(227, 'Jaâdar'),
+(228, 'Jerada'),
+(229, 'Kariat Arekmane'),
+(230, 'Kassita'),
+(231, 'Kerouna'),
+(232, 'Laâtamna'),
+(233, 'Madagh'),
+(234, 'Midar'),
+(235, 'Nador'),
+(236, 'Naima'),
+(237, 'Oued Heimer'),
+(238, 'Oujda'),
+(239, 'Ras El Ma'),
+(240, 'Saïdia'),
+(241, 'Selouane'),
+(242, 'Sidi Boubker'),
+(243, 'Sidi Slimane Echcharaa'),
+(244, 'Talsint'),
+(245, 'Taourirt'),
+(246, 'Tendrara'),
+(247, 'Tiztoutine'),
+(248, 'Touima'),
+(249, 'Touissit'),
+(250, 'Zaïo'),
+(251, 'Zeghanghane'),
+(252, 'Rabat'),
+(253, 'Salé'),
+(254, 'Ain El Aouda'),
+(255, 'Harhoura'),
+(256, 'Khémisset'),
+(257, 'Oulmès'),
+(258, 'Rommani'),
+(259, 'Sidi Allal El Bahraoui'),
+(260, 'Sidi Bouknadel'),
+(261, 'Skhirat'),
+(262, 'Tamesna'),
+(263, 'Témara'),
+(264, 'Tiddas'),
+(265, 'Tiflet'),
+(266, 'Touarga'),
+(267, 'Agadir'),
+(268, 'Agdz'),
+(269, 'Agni Izimmer'),
+(270, 'Aït Melloul'),
+(271, 'Alnif'),
+(272, 'Anzi'),
+(273, 'Aoulouz'),
+(274, 'Aourir'),
+(275, 'Arazane'),
+(276, 'Aït Baha'),
+(277, 'Aït Iaâza'),
+(278, 'Aït Yalla'),
+(279, 'Ben Sergao'),
+(280, 'Biougra'),
+(281, 'Boumalne-Dadès'),
+(282, 'Dcheira El Jihadia'),
+(283, 'Drargua'),
+(284, 'El Guerdane'),
+(285, 'Harte Lyamine'),
+(286, 'Ida Ougnidif'),
+(287, 'Ifri'),
+(288, 'Igdamen'),
+(289, 'Ighil n''Oumgoun'),
+(290, 'Imassine'),
+(291, 'Inezgane'),
+(292, 'Irherm'),
+(293, 'Kelaat-M''Gouna'),
+(294, 'Lakhsas'),
+(295, 'Lakhsass'),
+(296, 'Lqliâa'),
+(297, 'M''semrir'),
+(298, 'Massa (Maroc)'),
+(299, 'Megousse'),
+(300, 'Ouarzazate'),
+(301, 'Oulad Berhil'),
+(302, 'Oulad Teïma'),
+(303, 'Sarghine'),
+(304, 'Sidi Ifni'),
+(305, 'Skoura'),
+(306, 'Tabounte'),
+(307, 'Tafraout'),
+(308, 'Taghzout'),
+(309, 'Tagzen'),
+(310, 'Taliouine'),
+(311, 'Tamegroute'),
+(312, 'Tamraght'),
+(313, 'Tanoumrite Nkob Zagora'),
+(314, 'Taourirt ait zaghar'),
+(315, 'Taroudant'),
+(316, 'Temsia'),
+(317, 'Tifnit'),
+(318, 'Tisgdal'),
+(319, 'Tiznit'),
+(320, 'Toundoute'),
+(321, 'Zagora'),
+(322, 'Afourar'),
+(323, 'Aghbala'),
+(324, 'Azilal'),
+(325, 'Aït Majden'),
+(326, 'Beni Ayat'),
+(327, 'Béni Mellal'),
+(328, 'Bin elouidane'),
+(329, 'Bradia'),
+(330, 'Bzou'),
+(331, 'Dar Oulad Zidouh'),
+(332, 'Demnate'),
+(333, 'Dra''a'),
+(334, 'El Ksiba'),
+(335, 'Foum Jamaa'),
+(336, 'Fquih Ben Salah'),
+(337, 'Kasba Tadla'),
+(338, 'Ouaouizeght'),
+(339, 'Oulad Ayad'),
+(340, 'Oulad M''Barek'),
+(341, 'Oulad Yaich'),
+(342, 'Sidi Jaber'),
+(343, 'Souk Sebt Oulad Nemma'),
+(344, 'Zaouïat Cheikh'),
+(345, 'Tanger‎'),
+(346, 'Tétouan‎'),
+(347, 'Akchour'),
+(348, 'Assilah'),
+(349, 'Bab Berred'),
+(350, 'Bab Taza'),
+(351, 'Brikcha'),
+(352, 'Chefchaouen'),
+(353, 'Dar Bni Karrich'),
+(354, 'Dar Chaoui'),
+(355, 'Fnideq'),
+(356, 'Gueznaia'),
+(357, 'Jebha'),
+(358, 'Karia'),
+(359, 'Khémis Sahel'),
+(360, 'Ksar El Kébir'),
+(361, 'Larache'),
+(362, 'M''diq'),
+(363, 'Martil'),
+(364, 'Moqrisset'),
+(365, 'Oued Laou'),
+(366, 'Oued Rmel'),
+(367, 'Ouezzane'),
+(368, 'Point Cires'),
+(369, 'Sidi Lyamani'),
+(370, 'Sidi Mohamed ben Abdallah el-Raisuni'),
+(371, 'Zinat'),
+(372, 'Ajdir‎'),
+(373, 'Aknoul‎'),
+(374, 'Al Hoceïma‎'),
+(375, 'Aït Hichem‎'),
+(376, 'Bni Bouayach‎'),
+(377, 'Bni Hadifa‎'),
+(378, 'Ghafsai‎'),
+(379, 'Guercif‎'),
+(380, 'Imzouren‎'),
+(381, 'Inahnahen‎'),
+(382, 'Issaguen (Ketama)‎'),
+(383, 'Karia (El Jadida)‎'),
+(384, 'Karia Ba Mohamed‎'),
+(385, 'Oued Amlil‎'),
+(386, 'Oulad Zbair‎'),
+(387, 'Tahla‎'),
+(388, 'Tala Tazegwaght‎'),
+(389, 'Tamassint‎'),
+(390, 'Taounate‎'),
+(391, 'Targuist‎'),
+(392, 'Taza‎'),
+(393, 'Taïnaste‎'),
+(394, 'Thar Es-Souk‎'),
+(395, 'Tissa‎'),
+(396, 'Tizi Ouasli‎'),
+(397, 'Laayoune‎'),
+(398, 'El Marsa‎'),
+(399, 'Tarfaya‎'),
+(400, 'Boujdour‎'),
+(401, 'Awsard'),
+(402, 'Oued-Eddahab ');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
