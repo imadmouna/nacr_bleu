@@ -9,6 +9,115 @@ if(isset($_REQUEST["dec"]) and $_REQUEST["dec"]=="1"){
   echo "<script language='javascript'>document.location.href='index.php';</script>";
 }
 include("../connect.php");
+
+function resizeImage($file_src, $file_dest, $new_width, $new_height, $proportional=true){   
+    $attr=getimagesize($file_src);
+    $fw=$attr[0]/$new_width;
+    $fh=$attr[1]/$new_height;
+    
+    if($proportional)
+      $f=$fw>$fh?$fw:$fh;
+    else
+      $f=$fw>$fh?$fh:$fw;
+
+    $w=$attr[0]/$f;
+    $h=$attr[1]/$f;
+        
+    $file_src_infos=pathinfo($file_src);
+    
+    $ext=strtolower($file_src_infos['extension']);
+    if($ext=="jpg")
+      $ext="jpeg";
+    
+    $func="imagecreatefrom".$ext;
+    $src  = $func($file_src);
+    
+    // Création de l'image de destination. La taille de la miniature sera wxh 
+    $x=0;
+    $y=0;
+    if($proportional)
+      $dest = imagecreatetruecolor($w,$h);
+    else
+    {
+      $dest = imagecreatetruecolor($new_width,$new_height);
+      $x=($new_width-$w)/2;
+      $y=($new_height-$h)/2;
+    }
+
+    // Configuration du canal alpha pour la transparence
+    imagealphablending($dest,false);
+    imagesavealpha($dest,true);
+
+    // Redimensionnement de src sur dest 
+    imagecopyresampled($dest,$src,$x,$y,0,0,$w,$h,$attr[0],$attr[1]);
+
+    $func="image".$ext;
+    $func($dest, $file_dest);
+    imagedestroy($dest);
+    
+    return true;    
+}
+
+if(isset($_POST['titre']) and isset($_POST['prix']) and isset($_POST['superficie']) and isset($_POST['nbrp']) 
+  and isset($_POST['cat']) and isset($_POST['scat']) and isset($_POST['ville']) and isset($_POST['editor1']) and isset($_FILES['photo']['tmp_name'])){
+  
+  if($_POST['titre'] and $_POST['prix'] and $_POST['superficie'] and $_POST['nbrp'] and $_POST['cat'] and $_POST['scat'] 
+    and $_POST['ville'] and $_POST['editor1'] and $_FILES['photo']['tmp_name']){
+
+      $err = 0;
+      $type="";
+      $prop=getimagesize($_FILES['photo']['tmp_name']);
+      if($prop[1]>=400){
+        if($_FILES['photo']['type']=='image/jpeg'){$type="jpg";}
+        if($_FILES['photo']['type']=='image/gif'){$type="gif";}
+        if($_FILES['photo']['type']=='image/png'){$type="png";}
+
+        
+        //CREER SOURCE DOSSIER
+        $fichier_max = "images/bien/big/";
+        $fichier_min = "images/bien/small/";
+        
+        $fichier_src = time()."_".$_FILES['photo']['name'];
+        
+        //COPIER LES FICHIERS
+        copy($_FILES['photo']['tmp_name'],"../".$fichier_max.$fichier_src);
+        copy($_FILES['photo']['tmp_name'],"../".$fichier_min.$fichier_src);
+        
+        //REDIMENSIONNER LES FICHIERS COPIES
+        resizeImage("../".$fichier_max.$fichier_src, "../".$fichier_max.$fichier_src, 600, 600, $proportional=true);
+        resizeImage("../".$fichier_min.$fichier_src, "../".$fichier_min.$fichier_src, 150, 150, $proportional=true);
+        
+        //SAUVEGARDE DB
+       mysql_query(
+          "INSERT INTO `nacr_bleu`.`bien` (`titre`, `Description`, `prix`, `superficie`, `nbr_piece`, `id_ville`, `id_cat`, `id_sous_cat`, `photo`) 
+          VALUES (
+            '".addslashes(utf8_encode($_POST['titre']))."',
+            '".addslashes(utf8_encode($_POST['editor1']))."',
+            '".addslashes(utf8_encode($_POST['prix']))."',
+            '".addslashes(utf8_encode($_POST['superficie']))."',
+            '".addslashes(utf8_encode($_POST['nbrp']))."',
+            '".addslashes(utf8_encode($_POST['ville']))."',
+            '".addslashes(utf8_encode($_POST['cat']))."',
+            '".addslashes(utf8_encode($_POST['scat']))."',
+            '".$fichier_src."'
+            );"
+        );
+      }else{
+        $err = 1;
+      }
+      if($err == 1){
+        echo "<script language='javascript'>alert('Une ou plusieurs photos ne respectent pas la taille minimum requise, veuillez utiliser une image de taille superieure !');</script>";
+      } 
+
+
+
+
+
+
+    
+  }
+
+}
 ?>
 
 <!DOCTYPE html>
@@ -84,30 +193,28 @@ include("../connect.php");
                   <h3 class="box-title">Nouveau bien</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form role="form">
+                <form role="form" method="post" action="dashboard.php" enctype="multipart/form-data">
                   <div class="box-body">
 
                     <div class="form-group">
                       <label for="exampleInputEmail1">Titre *</label>
-                      <input class="form-control" id="exampleInputEmail1" placeholder="Entrez le titre" type="" required>
+                      <input class="form-control" name="titre" placeholder="Entrez le titre" type="" required>
                     </div>
 
                     <div class="form-group">
                       <label for="exampleInputEmail1">Prix *</label>
-                      <input class="form-control" id="exampleInputEmail1" placeholder="Entrez le prix" type="" required>
+                      <input class="form-control" name="prix" placeholder="Entrez le prix" type="" required>
                     </div>
 
                     <div class="form-group">
                       <label for="exampleInputEmail1">Superficie *</label>
-                      <input class="form-control" id="exampleInputEmail1" placeholder="Entrez la superficie" type="" required>
+                      <input class="form-control" name="superficie" placeholder="Entrez la superficie" type="" required>
                     </div>                    
 
                     <div class="form-group">
                       <label for="exampleInputEmail1">Nombre de pi&egrave;ces *</label>
-                      <input class="form-control" id="exampleInputEmail1" placeholder="Entrez le nombre de pieces" type="" required>
+                      <input class="form-control" name="nbrp" placeholder="Entrez le nombre de pieces" type="" required>
                     </div>            
-
-
 
 
                     <div class="form-group">
