@@ -10,6 +10,11 @@ if(isset($_REQUEST["dec"]) and $_REQUEST["dec"]=="1"){
 }
 include("../connect.php");
 
+if(isset($_REQUEST['id_sp']) and is_numeric($_REQUEST['id_sp'])){
+  mysql_query("delete from bien where id = ".$_REQUEST['id_sp']);
+  echo "<script language='javascript'>document.location.href='dashboard.php';</script>";
+}
+
 function resizeImage($file_src, $file_dest, $new_width, $new_height, $proportional=true){   
     $attr=getimagesize($file_src);
     $fw=$attr[0]/$new_width;
@@ -65,7 +70,7 @@ if(isset($_POST['titre']) and isset($_POST['prix']) and isset($_POST['superficie
     and $_POST['ville'] and $_POST['editor1'] and $_FILES['photo']['tmp_name']){
 
       $err = 0;
-      $type="";
+      $value="";
       $prop=getimagesize($_FILES['photo']['tmp_name']);
       if($prop[1]>=400){
         if($_FILES['photo']['type']=='image/jpeg'){$type="jpg";}
@@ -106,7 +111,7 @@ if(isset($_POST['titre']) and isset($_POST['prix']) and isset($_POST['superficie
         $err = 1;
       }
       if($err == 1){
-        echo "<script language='javascript'>alert('Une ou plusieurs photos ne respectent pas la taille minimum requise, veuillez utiliser une image de taille superieure !');</script>";
+        echo "<script language='javascript'>alert('La photo ne respecte pas la taille minimum requise, veuillez utiliser une image de taille superieure !');</script>";
       } 
 
 
@@ -198,22 +203,22 @@ if(isset($_POST['titre']) and isset($_POST['prix']) and isset($_POST['superficie
 
                     <div class="form-group">
                       <label for="exampleInputEmail1">Titre *</label>
-                      <input class="form-control" name="titre" placeholder="Entrez le titre" type="" required>
+                      <input class="form-control" name="titre" placeholder="Entrez le titre" value="<?php if(isset($_POST['titre']) and $_POST['titre'])echo $_POST['titre']; ?>" required>
                     </div>
 
                     <div class="form-group">
                       <label for="exampleInputEmail1">Prix *</label>
-                      <input class="form-control" name="prix" placeholder="Entrez le prix" type="" required>
+                      <input class="form-control" name="prix" placeholder="Entrez le prix" value="<?php if(isset($_POST['prix']) and $_POST['prix'])echo $_POST['prix']; ?>" required>
                     </div>
 
                     <div class="form-group">
                       <label for="exampleInputEmail1">Superficie *</label>
-                      <input class="form-control" name="superficie" placeholder="Entrez la superficie" type="" required>
+                      <input class="form-control" name="superficie" placeholder="Entrez la superficie" value="<?php if(isset($_POST['superficie']) and $_POST['superficie'])echo $_POST['superficie']; ?>" required>
                     </div>                    
 
                     <div class="form-group">
                       <label for="exampleInputEmail1">Nombre de pi&egrave;ces *</label>
-                      <input class="form-control" name="nbrp" placeholder="Entrez le nombre de pieces" type="" required>
+                      <input class="form-control" name="nbrp" placeholder="Entrez le nombre de pieces" value="<?php if(isset($_POST['nbrp']) and $_POST['nbrp'])echo $_POST['nbrp']; ?>" required>
                     </div>            
 
 
@@ -263,7 +268,7 @@ if(isset($_POST['titre']) and isset($_POST['prix']) and isset($_POST['superficie
 
                     <div class="form-group">
                       <label for="exampleInputEmail1">Description *</label>
-                      <textarea id="editor1" name="editor1" rows="10" cols="80" required>Entrez la Description</textarea>
+                      <textarea id="editor1" name="editor1" rows="10" cols="80" required><?php if(isset($_POST['nbrp']) and $_POST['nbrp'])echo $_POST['nbrp'];else echo "Entrez la Description"; ?></textarea>
                     </div>
 
 
@@ -288,7 +293,41 @@ if(isset($_POST['titre']) and isset($_POST['prix']) and isset($_POST['superficie
                   <h3 class="box-title">Liste des biens</h3>
                 </div><!-- /.box-header -->
                 
+                <div class="box-body">
 
+
+                  <?php
+                    $q = mysql_query("select * from bien order by id");
+                    while($tab = mysql_fetch_array($q)){
+                  ?>
+
+                  <table width="100%" border="0" cellspacing="0" cellpadding="0" style="font-size:11px">
+                    <tr>
+                      <td width="200" align="left" valign="top">
+                        <img src="../images/bien/small/<?php echo $tab[9];?>" width="50" height="50" style="padding:2px;border:1px solid #ccc" />
+                      </td>
+                      <td width="200" align="left" valign="top"><?php echo stripslashes(utf8_decode($tab[1]));?></td>
+                      <td width="200" align="left" valign="top">
+                      <?php
+                        echo stripslashes(utf8_decode($tab[1]));
+                      ?>
+                      </td>
+                      <td width="100" align="left" valign="top">&nbsp;</td>
+                      <td align="right" valign="top">&nbsp;</td>
+                      <td align="right" valign="top">
+                      
+                      <a href="galerie.php?id=<?php echo $tab[0];?>" title="<?php echo $tab[1];?>">Galerie photos</a>
+                      &nbsp;&nbsp;&nbsp;
+                      <a href="modifierBien.php?id=<?php echo $tab[0];?>" title="Modifier <?php echo stripslashes(utf8_decode($tab[1]));?>">Modifier</a>
+                      &nbsp;&nbsp;&nbsp;
+                      <a href="javascript:sup('<?php echo $tab[0];?>')" title="Supprimer">Supprimer</a>
+                      </td>
+                    </tr>
+                  </table><br>
+                  <?php
+                    }
+                  ?>
+                </div>
 
               </div>
 
@@ -352,6 +391,11 @@ if(isset($_POST['titre']) and isset($_POST['prix']) and isset($_POST['superficie
 
     <script type="text/javascript">
       $('select').select2();
+      function sup(id){
+        if(confirm('Etes-vous sure de supprimer cette entite?')){
+          document.location.href='dashboard.php?id_sp='+id;
+        }
+      }
     </script>
 
     <!-- AdminLTE for demo purposes <script src="dist/js/demo.js" type="text/javascript"></script>-->
