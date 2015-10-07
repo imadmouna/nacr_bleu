@@ -10,8 +10,13 @@ if(isset($_REQUEST["dec"]) and $_REQUEST["dec"]=="1"){
 }
 include("../connect.php");
 
-if(isset($_REQUEST['id_sp']) and is_numeric($_REQUEST['id_sp'])){
-  mysql_query("delete from bien where id = ".$_REQUEST['id_sp']);
+$tab = "";
+
+if(isset($_REQUEST['id']) and is_numeric($_REQUEST['id'])){
+  $req = mysql_query("select * from bien where id = ".$_REQUEST['id']);
+  $tab = mysql_fetch_array($req);
+
+  if(!$tab)
   echo "<script language='javascript'>document.location.href='dashboard.php';</script>";
 }
 
@@ -64,64 +69,83 @@ function resizeImage($file_src, $file_dest, $new_width, $new_height, $proportion
 }
 
 if(isset($_POST['titre']) and isset($_POST['prix']) and isset($_POST['superficie']) and isset($_POST['nbrp']) 
-  and isset($_POST['cat']) and isset($_POST['scat']) and isset($_POST['ville']) and isset($_POST['editor1']) and isset($_FILES['photo']['tmp_name'])){
+  and isset($_POST['cat']) and isset($_POST['scat']) and isset($_POST['ville']) and isset($_POST['editor1']) and isset($_POST['id'])){
   
   if($_POST['titre'] and $_POST['prix'] and $_POST['superficie'] and $_POST['nbrp'] and $_POST['cat'] and $_POST['scat'] 
-    and $_POST['ville'] and $_POST['editor1'] and $_FILES['photo']['tmp_name']){
+    and $_POST['ville'] and $_POST['editor1'] and $_POST['id']){
 
       $err = 0;
-      $value="";
-      $prop=getimagesize($_FILES['photo']['tmp_name']);
-      if($prop[1]>=400){
-        if($_FILES['photo']['type']=='image/jpeg'){$type="jpg";}
-        if($_FILES['photo']['type']=='image/gif'){$type="gif";}
-        if($_FILES['photo']['type']=='image/png'){$type="png";}
+      
 
-        $dossier = time();
-        
-        //CREER SOURCE DOSSIER
-        $fichier_max = "images/bien/".$dossier."/big/";
-        $fichier_min = "images/bien/".$dossier."/small/";
+      if(isset($_FILES['photo']['tmp_name']) and $_FILES['photo']['tmp_name']){
+          $prop=getimagesize($_FILES['photo']['tmp_name']);
+          if($prop[1]>=400){
+            if($_FILES['photo']['type']=='image/jpeg'){$type="jpg";}
+            if($_FILES['photo']['type']=='image/gif'){$type="gif";}
+            if($_FILES['photo']['type']=='image/png'){$type="png";}
 
 
+            $req1 = mysql_query("select * from bien where id = ".$_REQUEST['id']);
+            $tab1 = mysql_fetch_array($req1);
+            $dossier = $tab1['dossier'];
+            
+            //CREER SOURCE DOSSIER
+            $fichier_max = "images/bien/".$dossier."/big/";
+            $fichier_min = "images/bien/".$dossier."/small/";
 
-        mkdir("../images/bien/".$dossier,0777);
-        mkdir("../images/bien/".$dossier."/big/",0777);
-        mkdir("../images/bien/".$dossier."/small/",0777);
-        
-        $fichier_src = time()."_".$_FILES['photo']['name'];
-        
-        //COPIER LES FICHIERS
-        copy($_FILES['photo']['tmp_name'],"../".$fichier_max.$fichier_src);
-        copy($_FILES['photo']['tmp_name'],"../".$fichier_min.$fichier_src);
-        
-        //REDIMENSIONNER LES FICHIERS COPIES
-        resizeImage("../".$fichier_max.$fichier_src, "../".$fichier_max.$fichier_src, 600, 600, $proportional=true);
-        resizeImage("../".$fichier_min.$fichier_src, "../".$fichier_min.$fichier_src, 150, 150, $proportional=true);
-        
-        //SAUVEGARDE DB
-       mysql_query(
-          "INSERT INTO `nacr_bleu`.`bien` (`titre`, `Description`, `prix`, `superficie`, `nbr_piece`, `id_ville`, `id_cat`, `id_sous_cat`, `photo`, `dossier`) 
-          VALUES (
-            '".addslashes(utf8_encode($_POST['titre']))."',
-            '".addslashes(utf8_encode($_POST['editor1']))."',
-            '".addslashes(utf8_encode($_POST['prix']))."',
-            '".addslashes(utf8_encode($_POST['superficie']))."',
-            '".addslashes(utf8_encode($_POST['nbrp']))."',
-            '".addslashes(utf8_encode($_POST['ville']))."',
-            '".addslashes(utf8_encode($_POST['cat']))."',
-            '".addslashes(utf8_encode($_POST['scat']))."',
-            '".$fichier_src."',
-            '".$dossier."'
-            );"
-        );
-       echo "<script language='javascript'>document.location.href='dashboard.php';</script>";
+
+            /*
+            mkdir("../images/bien/".$dossier,0777);
+            mkdir("../images/bien/".$dossier."/big/",0777);
+            mkdir("../images/bien/".$dossier."/small/",0777);
+            */
+            $fichier_src = time()."_".$_FILES['photo']['name'];
+            
+            //COPIER LES FICHIERS
+            copy($_FILES['photo']['tmp_name'],"../".$fichier_max.$fichier_src);
+            copy($_FILES['photo']['tmp_name'],"../".$fichier_min.$fichier_src);
+            
+            //REDIMENSIONNER LES FICHIERS COPIES
+            resizeImage("../".$fichier_max.$fichier_src, "../".$fichier_max.$fichier_src, 600, 600, $proportional=true);
+            resizeImage("../".$fichier_min.$fichier_src, "../".$fichier_min.$fichier_src, 150, 150, $proportional=true);
+            
+            //SAUVEGARDE DB
+           mysql_query(
+              "update `nacr_bleu`.`bien` set 
+              `titre`='".addslashes(utf8_encode($_POST['titre']))."', 
+              `Description`='".addslashes(utf8_encode($_POST['editor1']))."', 
+              `prix`='".addslashes(utf8_encode($_POST['prix']))."', 
+              `superficie`='".addslashes(utf8_encode($_POST['superficie']))."',
+              `nbr_piece`='".addslashes(utf8_encode($_POST['nbrp']))."',
+              `id_ville`='".addslashes(utf8_encode($_POST['ville']))."',
+              `id_cat`='".addslashes(utf8_encode($_POST['cat']))."',
+              `id_sous_cat`= '".addslashes(utf8_encode($_POST['scat']))."',
+              `photo` = '".$fichier_src."'
+              where id = ".$_POST['id']
+            );
+           echo "<script language='javascript'>document.location.href='modifierBien.php?id=".$_POST['id']."';</script>";
+          }else{
+            $err = 1;
+          }
+          if($err == 1){
+            echo "<script language='javascript'>alert('La photo ne respecte pas la taille minimum requise, veuillez utiliser une image de taille superieure !');</script>";
+          } 
+
       }else{
-        $err = 1;
+         mysql_query(
+              "update `nacr_bleu`.`bien` set 
+              `titre`='".addslashes(utf8_encode($_POST['titre']))."', 
+              `Description`='".addslashes(utf8_encode($_POST['editor1']))."', 
+              `prix`='".addslashes(utf8_encode($_POST['prix']))."', 
+              `superficie`='".addslashes(utf8_encode($_POST['superficie']))."',
+              `nbr_piece`='".addslashes(utf8_encode($_POST['nbrp']))."',
+              `id_ville`=".addslashes(utf8_encode($_POST['ville'])).",
+              `id_cat`=".addslashes(utf8_encode($_POST['cat'])).",
+              `id_sous_cat`= ".addslashes(utf8_encode($_POST['scat']))."
+              where id = ".$_POST['id']
+            );
+           echo "<script language='javascript'>document.location.href='modifierBien.php?id=".$_POST['id']."';</script>";
       }
-      if($err == 1){
-        echo "<script language='javascript'>alert('La photo ne respecte pas la taille minimum requise, veuillez utiliser une image de taille superieure !');</script>";
-      } 
 
 
 
@@ -189,12 +213,12 @@ if(isset($_POST['titre']) and isset($_POST['prix']) and isset($_POST['superficie
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Dashboard
+            Bien
             <small>Panneau de controle</small>
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Accueil</a></li>
-            <li class="active">Dashboard</li>
+            <li class="active">Bien</li>
           </ol>
         </section>
 
@@ -204,30 +228,30 @@ if(isset($_POST['titre']) and isset($_POST['prix']) and isset($_POST['superficie
               <!-- general form elements -->
               <div class="box box-primary">
                 <div class="box-header">
-                  <h3 class="box-title">Nouveau bien</h3>
+                  <h3 class="box-title">Modifier bien</h3>
                 </div><!-- /.box-header -->
                 <!-- form start -->
-                <form role="form" method="post" action="dashboard.php" enctype="multipart/form-data">
+                <form role="form" method="post" action="modifierBien.php?id=<?php echo $_REQUEST['id'];?>" enctype="multipart/form-data">
                   <div class="box-body">
 
                     <div class="form-group">
                       <label for="exampleInputEmail1">Titre *</label>
-                      <input class="form-control" name="titre" placeholder="Entrez le titre" value="<?php if(isset($_POST['titre']) and $_POST['titre'])echo $_POST['titre']; ?>" required>
+                      <input class="form-control" name="titre" placeholder="Entrez le titre" value="<?php if(isset($_POST['titre']) and $_POST['titre'])echo $_POST['titre'];else echo $tab['titre']; ?>" required>
                     </div>
 
                     <div class="form-group">
                       <label for="exampleInputEmail1">Prix *</label>
-                      <input class="form-control" name="prix" placeholder="Entrez le prix" value="<?php if(isset($_POST['prix']) and $_POST['prix'])echo $_POST['prix']; ?>" required>
+                      <input class="form-control" name="prix" placeholder="Entrez le prix" value="<?php if(isset($_POST['prix']) and $_POST['prix'])echo $_POST['prix'];else echo $tab['prix']; ?>" required>
                     </div>
 
                     <div class="form-group">
                       <label for="exampleInputEmail1">Superficie *</label>
-                      <input class="form-control" name="superficie" placeholder="Entrez la superficie" value="<?php if(isset($_POST['superficie']) and $_POST['superficie'])echo $_POST['superficie']; ?>" required>
+                      <input class="form-control" name="superficie" placeholder="Entrez la superficie" value="<?php if(isset($_POST['superficie']) and $_POST['superficie'])echo $_POST['superficie'];else echo $tab['superficie']; ?>" required>
                     </div>                    
 
                     <div class="form-group">
                       <label for="exampleInputEmail1">Nombre de pi&egrave;ces *</label>
-                      <input class="form-control" name="nbrp" placeholder="Entrez le nombre de pieces" value="<?php if(isset($_POST['nbrp']) and $_POST['nbrp'])echo $_POST['nbrp']; ?>" required>
+                      <input class="form-control" name="nbrp" placeholder="Entrez le nombre de pieces" value="<?php if(isset($_POST['nbrp']) and $_POST['nbrp'])echo $_POST['nbrp'];else echo $tab['nbr_piece']; ?>" required>
                     </div>            
 
 
@@ -239,17 +263,20 @@ if(isset($_POST['titre']) and isset($_POST['prix']) and isset($_POST['superficie
                           $r = mysql_query("select * from categorie order by id_cat");
                           while($tt = mysql_fetch_array($r)){
                         ?>
-                        <option value="<?php echo $tt[0];?>"><?php echo $tt[1];?></option>
+                        <option value="<?php echo $tt[0];?>" <?php if($tab['id_cat']==$tt[0])echo "selected"; ?>><?php echo $tt[1];?></option>
                         <?php
                           }
                         ?>
                     </select>
                     </div>  
 
-
                     <div class="form-group">
                       <label for="exampleInputEmail1">Sous cat&eacute;gorie *</label>
                        <select id="scat" name="scat" class="form-control" required>
+                        <?php 
+                          $tq = mysql_fetch_array(mysql_query("select * from sous_categorie where id_sous_cat = ".$tab['id_sous_cat']));
+                          echo "<option value='".$tq[0]."'>".$tq[2]."</option>";
+                        ?>
                         
                         </select>
                     </div>  
@@ -263,7 +290,7 @@ if(isset($_POST['titre']) and isset($_POST['prix']) and isset($_POST['superficie
                           $r = mysql_query("select * from ville order by id");
                           while($tt = mysql_fetch_array($r)){
                         ?>
-                        <option value="<?php echo $tt[0];?>"><?php echo $tt[1];?></option>
+                        <option value="<?php echo $tt[0];?>" <?php if($tab['id_ville']==$tt[0])echo "selected"; ?>><?php echo $tt[1];?></option>
                         <?php
                           }
                         ?>
@@ -277,16 +304,24 @@ if(isset($_POST['titre']) and isset($_POST['prix']) and isset($_POST['superficie
 
                     <div class="form-group">
                       <label for="exampleInputEmail1">Description *</label>
-                      <textarea id="editor1" name="editor1" rows="10" cols="80" required><?php if(isset($_POST['editor1']) and $_POST['editor1'])echo $_POST['editor1'];else echo "Entrez la Description"; ?></textarea>
+                      <textarea id="editor1" name="editor1" rows="10" cols="80" required><?php if(isset($_POST['editor1']) and $_POST['editor1'])echo $_POST['editor1'];else if($tab != "")echo $tab['Description'];else echo "Entrez la Description"; ?></textarea>
                     </div>
 
 
                     <div class="form-group">
                       <label for="exampleInputEmail1">Photo principale </label>
+                      <br>
+                      <img src="../images/bien/<?php echo $tab[9];?>/small/<?php echo $tab[10];?>" width="100" height="100" style="padding:2px;border:1px solid #ccc" />
+                      <br>
                       <input class="form-group" type="file" name="photo" id="photo" />
                     </div>
 
                   </div>
+
+
+                  <input type="hidden" name="id" value="<?php echo $_REQUEST['id']; ?>" />
+
+
 
                   <div class="box-footer">
                     <button type="submit" class="btn btn-primary">Valider</button>
@@ -297,44 +332,7 @@ if(isset($_POST['titre']) and isset($_POST['prix']) and isset($_POST['superficie
 
 
               <!-- general form elements -->
-              <div class="box box-alert">
-                <div class="box-header">
-                  <h3 class="box-title">Liste des biens</h3>
-                </div><!-- /.box-header -->
-                
-                <div class="box-body">
-
-
-                  <?php
-                    $q = mysql_query("select * from bien order by id");
-                    while($tab = mysql_fetch_array($q)){
-                  ?>
-
-                  <table width="100%" border="0" cellspacing="0" cellpadding="0" style="font-size:11px">
-                    <tr>
-                      <td width="200" align="left" valign="top">
-                        <img src="../images/bien/<?php echo $tab[9];?>/small/<?php echo $tab[10];?>" width="50" height="50" style="padding:2px;border:1px solid #ccc" />
-                      </td>
-                      <td width="200" align="left" valign="top"><?php echo stripslashes(utf8_decode($tab[1]));?></td>
-                      
-                      <td width="100" align="left" valign="top">&nbsp;</td>
-                      <td align="right" valign="top">&nbsp;</td>
-                      <td align="right" valign="top">
-                      
-                      <a href="galerie.php?id=<?php echo $tab[0];?>" title="<?php echo stripslashes(utf8_decode($tab[1]));?>">Galerie photos</a>
-                      &nbsp;&nbsp;&nbsp;
-                      <a href="modifierBien.php?id=<?php echo $tab[0];?>" title="Modifier <?php echo stripslashes(utf8_decode($tab[1]));?>">Modifier</a>
-                      &nbsp;&nbsp;&nbsp;
-                      <a href="javascript:sup('<?php echo $tab[0];?>')" title="Supprimer">Supprimer</a>
-                      </td>
-                    </tr>
-                  </table><br>
-                  <?php
-                    }
-                  ?>
-                </div>
-
-              </div>
+              
 
 
 
