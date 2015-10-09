@@ -236,22 +236,22 @@ if(isset($_POST['titre']) and isset($_POST['prix']) and isset($_POST['superficie
 
                     <div class="form-group">
                       <label for="exampleInputEmail1">Titre *</label>
-                      <input class="form-control" name="titre" placeholder="Entrez le titre" value="<?php if(isset($_POST['titre']) and $_POST['titre'])echo $_POST['titre'];else echo $tab['titre']; ?>" required>
+                      <input class="form-control" name="titre" placeholder="Entrez le titre" value="<?php if(isset($_POST['titre']) and $_POST['titre'])echo $_POST['titre'];else echo stripslashes(utf8_decode($tab['titre'])); ?>" required>
                     </div>
 
                     <div class="form-group">
                       <label for="exampleInputEmail1">Prix *</label>
-                      <input class="form-control" name="prix" placeholder="Entrez le prix" value="<?php if(isset($_POST['prix']) and $_POST['prix'])echo $_POST['prix'];else echo $tab['prix']; ?>" required>
+                      <input class="form-control" name="prix" placeholder="Entrez le prix" value="<?php if(isset($_POST['prix']) and $_POST['prix'])echo $_POST['prix'];else echo stripslashes(utf8_decode($tab['prix'])); ?>" required>
                     </div>
 
                     <div class="form-group">
                       <label for="exampleInputEmail1">Superficie *</label>
-                      <input class="form-control" name="superficie" placeholder="Entrez la superficie" value="<?php if(isset($_POST['superficie']) and $_POST['superficie'])echo $_POST['superficie'];else echo $tab['superficie']; ?>" required>
+                      <input class="form-control" name="superficie" placeholder="Entrez la superficie" value="<?php if(isset($_POST['superficie']) and $_POST['superficie'])echo $_POST['superficie'];else echo stripslashes(utf8_decode($tab['superficie'])); ?>" required>
                     </div>                    
 
                     <div class="form-group">
                       <label for="exampleInputEmail1">Nombre de pi&egrave;ces *</label>
-                      <input class="form-control" name="nbrp" placeholder="Entrez le nombre de pieces" value="<?php if(isset($_POST['nbrp']) and $_POST['nbrp'])echo $_POST['nbrp'];else echo $tab['nbr_piece']; ?>" required>
+                      <input class="form-control" name="nbrp" placeholder="Entrez le nombre de pieces" value="<?php if(isset($_POST['nbrp']) and $_POST['nbrp'])echo $_POST['nbrp'];else echo stripslashes(utf8_decode($tab['nbr_piece'])); ?>" required>
                     </div>            
 
 
@@ -304,7 +304,7 @@ if(isset($_POST['titre']) and isset($_POST['prix']) and isset($_POST['superficie
 
                     <div class="form-group">
                       <label for="exampleInputEmail1">Description *</label>
-                      <textarea id="editor1" name="editor1" rows="10" cols="80" required><?php if(isset($_POST['editor1']) and $_POST['editor1'])echo $_POST['editor1'];else if($tab != "")echo $tab['Description'];else echo "Entrez la Description"; ?></textarea>
+                      <textarea id="editor1" name="editor1" rows="10" cols="80" required><?php if(isset($_POST['editor1']) and $_POST['editor1'])echo $_POST['editor1'];else if($tab != "")echo stripslashes(utf8_decode($tab['Description']));else echo "Entrez la Description"; ?></textarea>
                     </div>
 
 

@@ -24,7 +24,7 @@
               </a>
               <ul class="treeview-menu">
                 <li><a href="slider.php"><i class="fa fa-circle-o"></i> Banni&egrave;re</a></li>
-                <li><a href="../index2.html"><i class="fa fa-circle-o"></i> Mise en avant</a></li>
+                <li><a href="mise_avant.php"><i class="fa fa-circle-o"></i> Mise en avant</a></li>
                 <li><a href="apropos.php"><i class="fa fa-circle-o"></i> A propos</a></li>
               </ul>
             </li>
