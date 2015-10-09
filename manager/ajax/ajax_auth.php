@@ -11,7 +11,7 @@
 
 			$salt = $t[2];
 			$pass = $t[1];
-			$crypt = crypt(addslashes($_POST['pass']), $salt);
+			$crypt = crypt(addslashes(utf8_encode($_POST['pass'])), $salt);
 
 			if($crypt == $pass){
 				$_SESSION['admin']=$_POST['login'];
