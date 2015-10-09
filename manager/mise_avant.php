@@ -10,20 +10,37 @@ if(isset($_REQUEST["dec"]) and $_REQUEST["dec"]=="1"){
 }
 include("../connect.php");
 
-if(isset($_POST["libelle"]) and $_POST["libelle"]){
-  mysql_query("insert into categorie(libelle) values('".utf8_encode(addslashes($_POST["libelle"]))."')");
-  echo "<script language='javascript'>document.location.href='galerie.php';</script>";
+if(isset($_POST["liste"]) and $_POST["liste"]){
+
+  $main_lst = array();
+  $lst = explode(",", $_POST['liste']);
+  foreach ($lst as $value) {
+    if(isset($_POST['ch'.$value])){
+      array_push($main_lst, $value);
+    }
+  }
+
+  if(count($main_lst)>4){
+    echo "<script language='javascript'>alert('Erreur, le nombre est superieur a 4 !');</script>"; 
+  }else if(count($main_lst)>0){
+    mysql_query("delete from mise_avant");
+    foreach ($main_lst as $key => $value) {
+      mysql_query("insert into mise_avant(id_bien) values(".$value.");");
+    }
+    echo "<script language='javascript'>document.location.href='mise_avant.php';</script>";
+  }
+
 }
 
-if(isset($_REQUEST['id_sp']) and is_numeric($_REQUEST['id_sp']) and isset($_REQUEST['id']) and is_numeric($_REQUEST['id'])){
-  mysql_query("delete from galerie where id = ".$_REQUEST['id_sp']);
-  echo "<script language='javascript'>document.location.href='galerie.php?id=".$_REQUEST['id']."';</script>";
+
+
+
+$liste = "";
+$liste_db_mea = array();
+$q = mysql_query("select * from mise_avant");
+while($ta = mysql_fetch_array($q)){
+  array_push($liste_db_mea, $ta[1]);
 }
-
-
-
-
-
 
 
 
@@ -48,9 +65,8 @@ if(isset($_REQUEST['id_sp']) and is_numeric($_REQUEST['id_sp']) and isset($_REQU
     <!-- AdminLTE Skins. Choose a skin from the css/skins 
          folder instead of downloading all of them to reduce the load. -->
     <link href="dist/css/skins/skin-blue.min.css" rel="stylesheet" type="text/css" />
-    <link href="plugins/iCheck/minimal/blue.css" rel="stylesheet" type="text/css" />
-    <!-- iCheck -->
-    <link href="plugins/iCheck/flat/blue.css" rel="stylesheet" type="text/css" />
+
+    <link href="plugins/iCheck/square/blue.css" rel="stylesheet" type="text/css" />
     <!-- Morris chart -->
     <link href="plugins/morris/morris.css" rel="stylesheet" type="text/css" />
     <!-- jvectormap -->
@@ -109,7 +125,7 @@ if(isset($_REQUEST['id_sp']) and is_numeric($_REQUEST['id_sp']) and isset($_REQU
               <div class="box box-alert">
 
 
-                <form method='get'>
+                <form method='post' action="mise_avant.php">
                 <div class="box-header">
                   <h3 class="box-title">Liste des biens</h3>
                 </div><!-- /.box-header -->
@@ -119,6 +135,7 @@ if(isset($_REQUEST['id_sp']) and is_numeric($_REQUEST['id_sp']) and isset($_REQU
                   <?php
                     $q = mysql_query("select * from bien order by id");
                     while($tab = mysql_fetch_array($q)){
+                      $liste .= $tab['id'].",";
                   ?>
                   <span style="float:left;padding:20px;">
                     <table width="120" border="0" cellspacing="0" cellpadding="0" style="font-size:11px;">
@@ -131,7 +148,11 @@ if(isset($_REQUEST['id_sp']) and is_numeric($_REQUEST['id_sp']) and isset($_REQU
                       <tr>
                         <td align="left" valign="top">
                           <div><br>
-                            <input type="checkbox" name="ch<?php echo $tab['id'];?>" />
+                            <input type="checkbox" name="ch<?php echo $tab['id'];?>" 
+                            <?php foreach ($liste_db_mea as $key => $value) {
+                              if($value == $tab['id'])echo "checked";
+                            }?> 
+                            />
                           </div>
                         </td>
                       </tr>
@@ -145,7 +166,7 @@ if(isset($_REQUEST['id_sp']) and is_numeric($_REQUEST['id_sp']) and isset($_REQU
 
 
 
-
+                  <input type="hidden" name="liste" value="<?php echo $liste; ?>" />
 
                   <div class="box-footer">                   
                       <button type="submit" class="btn btn-primary">Valider mon choix</button>
@@ -180,25 +201,9 @@ if(isset($_REQUEST['id_sp']) and is_numeric($_REQUEST['id_sp']) and isset($_REQU
     <!-- AdminLTE for demo purposes 
     <script src="dist/js/demo.js" type="text/javascript"></script>-->
     <script src="plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-    <!-- CK Editor -->
-    <script src="//cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
-    <!-- Bootstrap WYSIHTML5 -->
-    <script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
-    <script type="text/javascript">
-      $(function () {
-        // Replace the <textarea id="editor1"> with a CKEditor
-        // instance, using default configuration.
-        CKEDITOR.replace('editor1');
-        //bootstrap WYSIHTML5 - text editor
-        $(".textarea").wysihtml5();
-      });
-    </script>
-
-
-    <link href="dist/css/select2.css" rel="stylesheet" />
-    <link href="dist/css/select2-bootstrap.css" rel="stylesheet" />
-    <script src="dist/js/select2.min.js"></script>
-    <script src="plugins/jQuery/jQuery-2.1.3.min.js"></script>
+    
+    
+   
 
     <script src="plugins/iCheck/icheck.min.js" type="text/javascript"></script>
 
@@ -211,12 +216,11 @@ if(isset($_REQUEST['id_sp']) and is_numeric($_REQUEST['id_sp']) and isset($_REQU
 
         //iCheck for checkbox and radio inputs
         $('input[type="checkbox"]').iCheck({
-          checkboxClass: 'icheckbox_minimal-blue',
+          checkboxClass: 'icheckbox_square-blue',
           radioClass: 'iradio_minimal-blue'
         });
       });
 
-      $('select').select2();
 
       function sup(id, id_bien){
         if(confirm('Etes-vous sure de supprimer cette photo?')){
