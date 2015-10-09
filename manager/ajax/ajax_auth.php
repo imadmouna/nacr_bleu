@@ -6,7 +6,7 @@
 	
 
     	// Your code here to handle a successful verification
-		$t=mysql_fetch_array(mysql_query("select * from manager where login='".addslashes($_POST['login'])."'"));
+		$t=mysql_fetch_array(mysql_query("select * from manager where login='".addslashes(utf8_encode($_POST['login']))."'"));
 		if($t[0]){
 
 			$salt = $t[2];
