@@ -88,12 +88,12 @@ if(isset($_REQUEST['id_sp']) and is_numeric($_REQUEST['id_sp']) and isset($_REQU
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Photos de la galerie
+            Mise en avant des biens
             <small>Panneau de controle</small>
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Accueil</a></li>
-            <li class="active">Photos de la galerie</li>
+            <li class="active">Mise en avant des biens</li>
           </ol>
         </section>
 
@@ -107,40 +107,51 @@ if(isset($_REQUEST['id_sp']) and is_numeric($_REQUEST['id_sp']) and isset($_REQU
 
               <!-- general form elements -->
               <div class="box box-alert">
+
+
+                <form method='get'>
                 <div class="box-header">
                   <h3 class="box-title">Liste des biens</h3>
                 </div><!-- /.box-header -->
                 
                 <div class="box-body">
-
                   <div class="row" style="padding-left:40px">
                   <?php
-
                     $q = mysql_query("select * from bien order by id");
                     while($tab = mysql_fetch_array($q)){
                   ?>
                   <span style="float:left;padding:20px;">
-                  <table width="120" border="0" cellspacing="0" cellpadding="0" style="font-size:11px;">
-                    <tr>
-                      <td align="left" valign="top">
-                        <img src="../images/bien/<?php echo $tab['dossier'];?>/big/<?php echo stripslashes(utf8_decode($tab['photo'])); ?>" width="70" height="70" style="border:1px solid #ccc;padding:2px" />
-                        <br><b><?php echo stripslashes(utf8_decode($tab['titre']));?></b>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td align="left" valign="top">
-                        <div><br>
-                          <input type="checkbox" />
-                        </div>
-                      </td>
-                    </tr>
-                  </table>
-                </span>
+                    <table width="120" border="0" cellspacing="0" cellpadding="0" style="font-size:11px;">
+                      <tr>
+                        <td align="left" valign="top">
+                          <img src="../images/bien/<?php echo $tab['dossier'];?>/big/<?php echo stripslashes(utf8_decode($tab['photo'])); ?>" width="70" height="70" style="border:1px solid #ccc;padding:2px" />
+                          <br><b><?php echo stripslashes(utf8_decode($tab['titre']));?></b>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td align="left" valign="top">
+                          <div><br>
+                            <input type="checkbox" name="ch<?php echo $tab['id'];?>" />
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
+                  </span>
                   <?php
                     }
                   ?>
                 </div>
                 </div>
+
+
+
+
+
+                  <div class="box-footer">                   
+                      <button type="submit" class="btn btn-primary">Valider mon choix</button>
+                  </div>
+
+              </form>
 
               </div>
 
