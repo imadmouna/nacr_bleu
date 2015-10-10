@@ -205,26 +205,32 @@ include("connect.php");
         <section class="well1">
           <div class="container">
             <div class="row">
-              <div class="grid_4">
+              <div class="grid_7">
                 <h3>A Propos</h3><img src="images/logo_footer.png" alt="">
-                <p>Nacr Bleu est une scociété immobilliere qui s'engage d'aider les clients de trouver des appartements et villas haute standing pour un sejour ou pour long duée ainsi de faciliter la tache pour nos cher clients de trouver ce qu'ils veullent en toute faciliter est sécuriter...</p><a href="#" class="btn">Lire la suite</a>
+                <p>
+                    <?php
+                      $t = mysql_fetch_array(mysql_query("select texte from apropos"));
+                      echo stripslashes(utf8_decode($t[0]));
+                    ?>
+                </p>
               </div>
-              <div class="grid_4">
-                <h3>Services</h3><img src="images/31.jpg" alt="">
-                <p>Nous somme ici pour vous offre cher clients tous que vous chechez pour passer un bon sejour et on vous aidera de trouver l'appartement ou villa ideal pour vous.</p>
-                <p>  </p>
-                <p>Voila quelque services que nous propose a nos cher clients.</p>
-                <ul class="marked-list">
-                 
-                </ul>
-              </div>
-              <div class="grid_4">
+              
+              <div class="grid_5">
                 <div class="info-box">
-                  <h3 class="fa-comment">Dernier Avis</h3>
-                  <hr><a href="#">> Villa dans une cartier chic a targa -Marrakech</a><br
-                  <hr><a href="#">> Appartement haute standing a Gueliz</a><br
-                  <hr><a href="#">> Riad a vendre a medina </a><br
-                  <hr><a href="#">> Terrain a vendre a 12 km de marrakech (route de casablnaca)</a>
+                  <h3 class="fa-comment">M&eacute;t&eacute;o Marrakech</h3>
+                  <hr>
+                  <!-- widget meteo -->
+<div id="widget_705e297ff3439d6933c8c1c6ec6ce2f7">
+<span id="l_705e297ff3439d6933c8c1c6ec6ce2f7"><a href="http://www.my-meteo.fr/previsions+meteo+maroc/marrakech.html"></a></span>
+<script type="text/javascript">
+(function() {
+  var my = document.createElement("script"); my.type = "text/javascript"; my.async = true;
+  my.src = "http://services.my-meteo.fr/widget/js2.php?ville=334&format=carre&nb_jours=3&temps&vent&c1=ebffcc&c2=ebffcc&c3=57AACD&c4=57AACD&c5=ffffff&c6=ffd4d4&police=0&t_icones=13&x=336&y=254&id=705e297ff3439d6933c8c1c6ec6ce2f7";
+  var z = document.getElementsByTagName("script")[0]; z.parentNode.insertBefore(my, z);
+})();
+</script>
+</div>
+<!-- widget meteo -->
                   <h3></h3>
                  
                  
