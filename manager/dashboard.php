@@ -170,7 +170,7 @@ if(isset($_POST['titre']) and isset($_POST['prix']) and isset($_POST['superficie
         <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
   </head>
-  <body class="skin-blue">
+  <body class="skin-blue" onload="javascript:getBiens()">
     <div class="wrapper">
       
       <?php
@@ -304,34 +304,45 @@ if(isset($_POST['titre']) and isset($_POST['prix']) and isset($_POST['superficie
                 
                 <div class="box-body">
 
+                  <div class="row">
 
-                  <?php
-                    $q = mysql_query("select * from bien order by id");
-                    while($tab = mysql_fetch_array($q)){
-                  ?>
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Cat&eacute;gorie</label>
+                         <select id="cat1" name="cat1" class="form-control" required>
+                          <option value=""></option>
+                          <?php
+                            $r1 = mysql_query("select * from categorie order by id_cat");
+                            while($tt1 = mysql_fetch_array($r1)){
+                          ?>
+                          <option value="<?php echo $tt1[0];?>"><?php echo $tt1[1];?></option>
+                          <?php
+                            }
+                          ?>
+                      </select>
+                      </div>  
 
-                  <table width="100%" border="0" cellspacing="0" cellpadding="0" style="font-size:11px">
-                    <tr>
-                      <td width="200" align="left" valign="top">
-                        <img src="../images/bien/<?php echo $tab[9];?>/small/<?php echo $tab[10];?>" width="50" height="50" style="padding:2px;border:1px solid #ccc" />
-                      </td>
-                      <td width="200" align="left" valign="top"><?php echo stripslashes(utf8_decode($tab[1]));?></td>
-                      
-                      <td width="100" align="left" valign="top">&nbsp;</td>
-                      <td align="right" valign="top">&nbsp;</td>
-                      <td align="right" valign="top">
-                      
-                      <a href="galerie.php?id=<?php echo $tab[0];?>" title="<?php echo stripslashes(utf8_decode($tab[1]));?>">Galerie photos</a>
-                      &nbsp;&nbsp;&nbsp;
-                      <a href="modifierBien.php?id=<?php echo $tab[0];?>" title="Modifier <?php echo stripslashes(utf8_decode($tab[1]));?>">Modifier</a>
-                      &nbsp;&nbsp;&nbsp;
-                      <a href="javascript:sup('<?php echo $tab[0];?>')" title="Supprimer">Supprimer</a>
-                      </td>
-                    </tr>
-                  </table><br>
-                  <?php
-                    }
-                  ?>
+
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Sous cat&eacute;gorie *</label>
+                         <select id="scat1" name="scat1" class="form-control" required>
+                          
+                         </select>
+                      </div>
+
+                      <div class="form-group">
+                        <button type="button" class="btn btn-warning btn-search">Lancer la recherche</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div style="border-top:1px solid #ccc"><br></div>
+                  
+                  <div class="row" id="divi">
+                  
+                  </div>
+
+
                 </div>
 
               </div>
@@ -350,22 +361,44 @@ if(isset($_POST['titre']) and isset($_POST['prix']) and isset($_POST['superficie
       </footer>
     </div><!-- ./wrapper -->
 
-    <!-- jQuery 2.1.3 -->
     <script src="plugins/jQuery/jQuery-2.1.3.min.js"></script>
-    <!-- Bootstrap 3.3.2 JS -->
     <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-    <!-- FastClick -->
     <script src='plugins/fastclick/fastclick.min.js'></script>
-    <!-- AdminLTE App -->
     <script src="dist/js/app.min.js" type="text/javascript"></script>
-    <!-- AdminLTE for demo purposes 
-    <script src="dist/js/demo.js" type="text/javascript"></script>-->
     <script src="plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-    <!-- CK Editor -->
     <script src="//cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
-    <!-- Bootstrap WYSIHTML5 -->
     <script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
     <script type="text/javascript">
+
+
+
+      $(".btn-search").click(function(){
+        $("#divi").html("<div class='col-md-12'><img src='images/loading.gif' /></div>");
+        $.ajax({
+              type: "POST",
+              url: "ajax/getBiens.php",
+              data: {id_cat:$("#cat1").val(),id_sous_cat:$("#scat1").val()},
+              success: function(data){
+                $("#divi").html(data);
+              },
+              dataType: "html"
+        });
+      });
+
+      function getBiens(){
+        $("#divi").html("<div class='col-md-12'><img src='images/loading.gif' /></div>");
+        $.ajax({
+              type: "POST",
+              url: "ajax/getBiens.php",
+              data: {},
+              success: function(data){
+                $("#divi").html(data);
+              },
+              dataType: "html"
+        });
+      }
+
+
       $(function () {
         // Replace the <textarea id="editor1"> with a CKEditor
         // instance, using default configuration.
@@ -373,9 +406,13 @@ if(isset($_POST['titre']) and isset($_POST['prix']) and isset($_POST['superficie
         //bootstrap WYSIHTML5 - text editor
         $(".textarea").wysihtml5();
 
+        
+
 
         $("#cat").click(function(){
           valeur = $(this).val();
+          $("#scat").empty();
+          $('select').select2();
           $.ajax({
                 type: "POST",
                 url: "ajax/getSCat.php",
@@ -386,6 +423,24 @@ if(isset($_POST['titre']) and isset($_POST['prix']) and isset($_POST['superficie
                 dataType: "html"
           });
         });
+
+
+        $("#cat1").click(function(){
+          valeur = $(this).val();
+          $("#scat1").empty();
+          $('select').select2();
+          $.ajax({
+                type: "POST",
+                url: "ajax/getSCat.php",
+                data: {id:valeur},
+                success: function(data){
+                  $("#scat1").html(data);
+                },
+                dataType: "html"
+          });
+        });
+
+
       });
     </script>
 
