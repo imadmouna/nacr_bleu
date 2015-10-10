@@ -64,7 +64,7 @@
   <body class="login-page">
     <div class="login-box">
       <div class="login-logo">
-        <b>Administration</b><br>NACR BLEU
+        <b>Administration</b><br>NACRE BLEU
       </div><!-- /.login-logo -->
       <div class="login-box-body">
         <p class="login-box-msg">Authentifiez-vous!</p>
