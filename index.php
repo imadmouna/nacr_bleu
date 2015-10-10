@@ -1,7 +1,11 @@
+<?php
+include("connect.php");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Home</title>
+    <title>Accueil</title>
     <meta charset="utf-8">
     <meta name="format-detection" content="telephone=no">
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
@@ -51,87 +55,129 @@
       <main>
         <section class="camera_container">
           <div id="camera" class="camera_wrap">
-            <div data-src="images/page-1_slide01.jpg">
-              <div class="camera_caption fadeIn">
-                <div class="container">
-                  <div class="row">
-                    <div class="preffix_6 grid_6"></div>
+            
+
+            <?php
+              $req1 = mysql_query("select * from slider order by id");
+              while($tab1 = mysql_fetch_array($req1)){
+            ?>
+              <div data-src="<?php echo $tab1[1];?>">
+                <div class="camera_caption fadeIn">
+                  <div class="container">
+                    <div class="row">
+                      <div class="preffix_6 grid_6"></div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div data-src="images/page-1_slide02.jpg">
-              <div class="camera_caption fadeIn">
-                <div class="container">
-                  <div class="row">
-                    <div class="preffix_6 grid_6"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div data-src="images/page-1_slide03.jpg">
-              <div class="camera_caption fadeIn">
-                <div class="container">
-                  <div class="row">
-                    <div class="preffix_6 grid_6"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <?php
+              }
+            ?>
+
           </div>
         </section>
+
         <p>&nbsp;</p>
+
         <section>
           <div class="container banner_wr">
             <div class="container hr">
               <ul class="row product-list">
+
                 <li class="grid_6">
+                  <?php
+                    $t = mysql_fetch_array(mysql_query("select * from mise_avant m join bien b on b.id = m.id_bien limit 0,1"));
+                    if($t){
+                  ?>
                   <div class="box wow fadeInRight">
                     <div class="box_aside">
-                       <img src="images/22.jpg" height="250" width="250"> 
+                       <img src="<?php echo "images/bien/".$t['dossier']."/big/".$t['photo'];?>" height="250" width="250"> 
                     </div>
                     <div class="box_cnt__no-flow">
-                      <h3><a href="#">Villa de prestige a vendre</a></h3>
-                      <p>Une villa de luxe a vendre a marrakech a palmeie de 10 hectar avec pescine, jardin bien entretenue,20 chambre avec balcon,5 salle de bain, 3 salon.</p>
+                      <h3><a href="#"><?php echo stripslashes(utf8_decode($t['titre']));?></a></h3>
+                      <p>
+                        <?php echo stripslashes(utf8_decode($t['Description']));?>
+                      </p>
                     </div>
                   </div>
+
                   <hr>
+
+                  <?php
+                    }
+                  ?>
+
+
+                  <?php
+                    $t = mysql_fetch_array(mysql_query("select * from mise_avant m join bien b on b.id = m.id_bien limit 1,1"));
+                    if($t){
+                  ?>
                   <div data-wow-delay="0.2s" class="box wow fadeInRight">
                     <div class="box_aside">
-                      <div class="box_aside">
-                       <img src="images/23.jpg" height="250" width="250"> 
-                    </div>
+                       <img src="<?php echo "images/bien/".$t['dossier']."/big/".$t['photo'];?>" height="250" width="250"> 
                     </div>
                     <div class="box_cnt__no-flow">
-                      <h3><a href="#">Villa de prestige a vendre</a></h3>
-                      <p>Une villa de luxe a vendre a marrakech a palmeie de 10 hectar avec pescine, jardin bien entretenue,20 chambre avec balcon,5 salle de bain, 3 salon.</p>
+                      <h3><a href="#"><?php echo stripslashes(utf8_decode($t['titre']));?></a></h3>
+                      <p>
+                        <?php echo stripslashes(utf8_decode($t['Description']));?>
+                      </p>
                     </div>
                   </div>
+
+
+                  <?php
+                    }
+                  ?>
+
+                  
+
                 </li>
                 <li class="grid_6">
+
+
+                  <?php
+                    $t = mysql_fetch_array(mysql_query("select * from mise_avant m join bien b on b.id = m.id_bien limit 2,1"));
+                    if($t){
+                  ?>
                   <div data-wow-delay="0.3s" class="box wow fadeInRight">
                     <div class="box_aside">
-                      <div class="box_aside">
-                       <img src="images/24.jpg" height="250" width="250"> 
-                    </div>
+                       <img src="<?php echo "images/bien/".$t['dossier']."/big/".$t['photo'];?>" height="250" width="250"> 
                     </div>
                     <div class="box_cnt__no-flow">
-                     <h3><a href="#">Villa de prestige a vendre</a></h3>
-                      <p>Une villa de luxe a vendre a marrakech a palmeie de 10 hectar avec pescine, jardin bien entretenue,20 chambre avec balcon,5 salle de bain, 3 salon.</p>
+                      <h3><a href="#"><?php echo stripslashes(utf8_decode($t['titre']));?></a></h3>
+                      <p>
+                        <?php echo stripslashes(utf8_decode($t['Description']));?>
+                      </p>
                     </div>
                   </div>
+
                   <hr>
+
+                  <?php
+                    }
+                  ?>
+
+                  <?php
+                    $t = mysql_fetch_array(mysql_query("select * from mise_avant m join bien b on b.id = m.id_bien limit 3,1"));
+                    if($t){
+                  ?>
                   <div data-wow-delay="0.4s" class="box wow fadeInRight">
                     <div class="box_aside">
-                      <div class="box_aside">
-                       <img src="images/25.jpg" height="250" width="250"> 
-                    </div>
+                       <img src="<?php echo "images/bien/".$t['dossier']."/big/".$t['photo'];?>" height="250" width="250"> 
                     </div>
                     <div class="box_cnt__no-flow">
-                     <h3><a href="#">Villa de prestige a vendre</a></h3>
-                      <p>Une villa de luxe a vendre a marrakech a palmeie de 10 hectar avec pescine, jardin bien entretenue,20 chambre avec balcon,5 salle de bain, 3 salon.</p>
+                      <h3><a href="#"><?php echo stripslashes(utf8_decode($t['titre']));?></a></h3>
+                      <p>
+                        <?php echo stripslashes(utf8_decode($t['Description']));?>
+                      </p>
                     </div>
                   </div>
+
+                  <hr>
+
+                  <?php
+                    }
+                  ?>
                 </li>
               </ul>
             </div>
