@@ -1,89 +1,16 @@
-<?php
-include("connect.php");
-$tab = "";
-if(isset($_REQUEST['id']) and $_REQUEST['id']){
-  $req= mysql_query("select * from bien where id= ".$_REQUEST['id']);
-  $tab = mysql_fetch_array($req);
-  if(!$tab){
-    echo "<script language='javascript'>document.location.href='index.php';</script>";
-  }
-}else{
-  echo "<script language='javascript'>document.location.href='index.php';</script>";
-}
-?>
-
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>D&eacute;tail du bien</title>
+<html>
+<head>
     <meta charset="utf-8">
-    <meta name="format-detection" content="telephone=no">
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="css/grid.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/camera.css">
-    <link rel="stylesheet" href="css/owl-carousel.css">
-    <script src="js/jquery.js"></script>
-    <script src="js/jquery-migrate-1.2.1.js"></script><!--[if lt IE 9]>
-    <html class="lt-ie9">
-      <div style="clear: both; text-align:center; position: relative;"><a href="http://windows.microsoft.com/en-US/internet-explorer/.."><img src="images/ie8-panel/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
-    </html>
-    <script src="js/html5shiv.js"></script><![endif]-->
-    <script src="js/device.min.js"></script>
-  </head>
-  <body>
-    <div class="page">
-      <!--
-      ========================================================
-      							HEADER
-      ========================================================
-      
-      
-      -->
-      <header>
-        <div class="container">
-          <div class="brand">
-           
-            <h1 class="brand_name"><input type="image" src="images/logo_footer.png"></h1>
-            
-          </div>
-  <ul class="row contact-list">
-    <a href="contact.html" style="float:right;">Contactez-Nous</a></div></ul>
-        <div id="stuck_container" class="stuck_container">
-          <div class="container">
-            <nav class="nav">
-              <?php include("menu.php")?>
-            </nav>
-          </div>
-        </div>
-      </header>
-      <!--
-      ========================================================
-                                  CONTENT
-      ========================================================
-      -->
-      <main>
-        
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body style="padding:0px; margin:0px; background-color:#fff;">
 
-        
-            
-        <section class="well ins1">
+    <!-- The following codes demostrate jssor slider work with jquery library -->
 
-          <div class="container hr">
-            <ul class="row">
-
-
-              <li class="grid_12">
-                <?php
-                  if(is_array($tab))echo "<h3>".stripslashes(utf8_decode($tab['titre']))."</h3><br />";
-                ?>
-              </li>
-
-              <li class="grid_8">
-
-
-        <script type="text/javascript" src="slider/js/jquery-1.9.1.min.js"></script>
-    <script type="text/javascript" src="slider/js/jssor.slider-20.mini.js"></script>
+    <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="js/jssor.slider-20.mini.js"></script>
     <!-- use jssor.slider-20.debug.js instead for debug -->
     <script>
         jQuery(document).ready(function ($) {
@@ -172,7 +99,7 @@ if(isset($_REQUEST['id']) and $_REQUEST['id']){
             width: 40px;
             height: 40px;
             cursor: pointer;
-            background: url('slider/img/a17.png') no-repeat;
+            background: url('img/a17.png') no-repeat;
             overflow: hidden;
         }
         .jssora05l { background-position: -10px -40px; }
@@ -222,7 +149,7 @@ if(isset($_REQUEST['id']) and $_REQUEST['id']){
             height: 68px;
             border: #000 2px solid;
             box-sizing: content-box;
-            background: url('slider/img/t01.png') -800px -800px no-repeat;
+            background: url('img/t01.png') -800px -800px no-repeat;
             _background: none;
         }
         
@@ -267,56 +194,56 @@ if(isset($_REQUEST['id']) and $_REQUEST['id']){
         <!-- Loading Screen -->
         <div data-u="loading" style="position: absolute; top: 0px; left: 0px;">
             <div style="filter: alpha(opacity=70); opacity: 0.7; position: absolute; display: block; top: 0px; left: 0px; width: 100%; height: 100%;"></div>
-            <div style="position:absolute;display:block;background:url('slider/img/loading.gif') no-repeat center center;top:0px;left:0px;width:100%;height:100%;"></div>
+            <div style="position:absolute;display:block;background:url('img/loading.gif') no-repeat center center;top:0px;left:0px;width:100%;height:100%;"></div>
         </div>
         <div data-u="slides" style="cursor: default; position: relative; top: 0px; left: 0px; width: 800px; height: 356px; overflow: hidden;">
             <div style="display: none;">
-                <img data-u="image" src="slider/img/01.jpg" />
-                <img data-u="thumb" src="slider/img/thumb-01.jpg" />
+                <img data-u="image" src="img/01.jpg" />
+                <img data-u="thumb" src="img/thumb-01.jpg" />
             </div>
             <div style="display: none;">
-                <img data-u="image" src="slider/img/02.jpg" />
-                <img data-u="thumb" src="slider/img/thumb-02.jpg" />
+                <img data-u="image" src="img/02.jpg" />
+                <img data-u="thumb" src="img/thumb-02.jpg" />
             </div>
             <div style="display: none;">
-                <img data-u="image" src="slider/img/03.jpg" />
-                <img data-u="thumb" src="slider/img/thumb-03.jpg" />
+                <img data-u="image" src="img/03.jpg" />
+                <img data-u="thumb" src="img/thumb-03.jpg" />
             </div>
             <div style="display: none;">
-                <img data-u="image" src="slider/img/04.jpg" />
-                <img data-u="thumb" src="slider/img/thumb-04.jpg" />
+                <img data-u="image" src="img/04.jpg" />
+                <img data-u="thumb" src="img/thumb-04.jpg" />
             </div>
             <div style="display: none;">
-                <img data-u="image" src="slider/img/05.jpg" />
-                <img data-u="thumb" src="slider/img/thumb-05.jpg" />
+                <img data-u="image" src="img/05.jpg" />
+                <img data-u="thumb" src="img/thumb-05.jpg" />
             </div>
             <div style="display: none;">
-                <img data-u="image" src="slider/img/06.jpg" />
-                <img data-u="thumb" src="slider/img/thumb-06.jpg" />
+                <img data-u="image" src="img/06.jpg" />
+                <img data-u="thumb" src="img/thumb-06.jpg" />
             </div>
             <div style="display: none;">
-                <img data-u="image" src="slider/img/07.jpg" />
-                <img data-u="thumb" src="slider/img/thumb-07.jpg" />
+                <img data-u="image" src="img/07.jpg" />
+                <img data-u="thumb" src="img/thumb-07.jpg" />
             </div>
             <div style="display: none;">
-                <img data-u="image" src="slider/img/08.jpg" />
-                <img data-u="thumb" src="slider/img/thumb-08.jpg" />
+                <img data-u="image" src="img/08.jpg" />
+                <img data-u="thumb" src="img/thumb-08.jpg" />
             </div>
             <div style="display: none;">
-                <img data-u="image" src="slider/img/09.jpg" />
-                <img data-u="thumb" src="slider/img/thumb-09.jpg" />
+                <img data-u="image" src="img/09.jpg" />
+                <img data-u="thumb" src="img/thumb-09.jpg" />
             </div>
             <div style="display: none;">
-                <img data-u="image" src="slider/img/10.jpg" />
-                <img data-u="thumb" src="slider/img/thumb-10.jpg" />
+                <img data-u="image" src="img/10.jpg" />
+                <img data-u="thumb" src="img/thumb-10.jpg" />
             </div>
             <div style="display: none;">
-                <img data-u="image" src="slider/img/11.jpg" />
-                <img data-u="thumb" src="slider/img/thumb-11.jpg" />
+                <img data-u="image" src="img/11.jpg" />
+                <img data-u="thumb" src="img/thumb-11.jpg" />
             </div>
             <div style="display: none;">
-                <img data-u="image" src="slider/img/12.jpg" />
-                <img data-u="thumb" src="slider/img/thumb-12.jpg" />
+                <img data-u="image" src="img/12.jpg" />
+                <img data-u="thumb" src="img/thumb-12.jpg" />
             </div>
         </div>
         <!-- Thumbnail Navigator -->
@@ -337,38 +264,5 @@ if(isset($_REQUEST['id']) and $_REQUEST['id']){
         <span data-u="arrowright" class="jssora05r" style="top:158px;right:8px;width:40px;height:40px;"></span>
         <a href="http://www.jssor.com" style="display:none">Jssor Slider</a>
     </div>
-
-
-
-              </li>
-
-
-
-            
-              <li class="grid_4">
-                aaa
-              </li>
-
-            </ul>
-          </div>
-
-
-
-
-
-
-        </section>
-        
-      </main>
-      <!--
-      ========================================================
-                                  FOOTER
-      ========================================================
-      -->
-      <?php
-        include("footer.php");
-      ?>
-    </div>
-    <script src="js/script.js"></script>
 </body>
 </html>

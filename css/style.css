@@ -1138,8 +1138,8 @@ table tr:nth-child(even) {
 .stuck_container {
 	margin-top: 22px;
 	background-color: #CACACA;
-	width:1140px;
-	margin-left:100px;
+	//width:1140px;
+	//margin-left:100px;
 }
 
 .isStuck {
