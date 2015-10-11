@@ -79,7 +79,7 @@ if(isset($_REQUEST['id']) and $_REQUEST['id']){
                 ?>
               </li>
 
-              <li class="grid_8">
+              <li class="grid_7">
 
 
         <script type="text/javascript" src="slider/js/jquery-1.9.1.min.js"></script>
@@ -270,54 +270,19 @@ if(isset($_REQUEST['id']) and $_REQUEST['id']){
             <div style="position:absolute;display:block;background:url('slider/img/loading.gif') no-repeat center center;top:0px;left:0px;width:100%;height:100%;"></div>
         </div>
         <div data-u="slides" style="cursor: default; position: relative; top: 0px; left: 0px; width: 800px; height: 356px; overflow: hidden;">
+            
+            <?php
+              $qq= mysql_query("select * from galerie where id_bien = ".$_REQUEST['id']);
+              while($tt = mysql_fetch_array($qq)){
+            ?>
             <div style="display: none;">
-                <img data-u="image" src="slider/img/01.jpg" />
-                <img data-u="thumb" src="slider/img/thumb-01.jpg" />
+                <img data-u="image" src="images/bien/<?php echo $tab['dossier']."/big/".$tt['chemin']; ?>" />
+                <img data-u="thumb" src="images/bien/<?php echo $tab['dossier']."/big/".$tt['chemin']; ?>" />
             </div>
-            <div style="display: none;">
-                <img data-u="image" src="slider/img/02.jpg" />
-                <img data-u="thumb" src="slider/img/thumb-02.jpg" />
-            </div>
-            <div style="display: none;">
-                <img data-u="image" src="slider/img/03.jpg" />
-                <img data-u="thumb" src="slider/img/thumb-03.jpg" />
-            </div>
-            <div style="display: none;">
-                <img data-u="image" src="slider/img/04.jpg" />
-                <img data-u="thumb" src="slider/img/thumb-04.jpg" />
-            </div>
-            <div style="display: none;">
-                <img data-u="image" src="slider/img/05.jpg" />
-                <img data-u="thumb" src="slider/img/thumb-05.jpg" />
-            </div>
-            <div style="display: none;">
-                <img data-u="image" src="slider/img/06.jpg" />
-                <img data-u="thumb" src="slider/img/thumb-06.jpg" />
-            </div>
-            <div style="display: none;">
-                <img data-u="image" src="slider/img/07.jpg" />
-                <img data-u="thumb" src="slider/img/thumb-07.jpg" />
-            </div>
-            <div style="display: none;">
-                <img data-u="image" src="slider/img/08.jpg" />
-                <img data-u="thumb" src="slider/img/thumb-08.jpg" />
-            </div>
-            <div style="display: none;">
-                <img data-u="image" src="slider/img/09.jpg" />
-                <img data-u="thumb" src="slider/img/thumb-09.jpg" />
-            </div>
-            <div style="display: none;">
-                <img data-u="image" src="slider/img/10.jpg" />
-                <img data-u="thumb" src="slider/img/thumb-10.jpg" />
-            </div>
-            <div style="display: none;">
-                <img data-u="image" src="slider/img/11.jpg" />
-                <img data-u="thumb" src="slider/img/thumb-11.jpg" />
-            </div>
-            <div style="display: none;">
-                <img data-u="image" src="slider/img/12.jpg" />
-                <img data-u="thumb" src="slider/img/thumb-12.jpg" />
-            </div>
+            <?php
+              }
+            ?>
+            
         </div>
         <!-- Thumbnail Navigator -->
         <div data-u="thumbnavigator" class="jssort01" style="position:absolute;left:0px;bottom:0px;width:800px;height:100px;" data-autocenter="1">
@@ -345,7 +310,7 @@ if(isset($_REQUEST['id']) and $_REQUEST['id']){
 
 
             
-              <li class="grid_4">
+              <li class="grid_5">
                 aaa
               </li>
 
