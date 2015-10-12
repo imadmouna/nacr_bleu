@@ -309,10 +309,27 @@ if(isset($_REQUEST['id']) and $_REQUEST['id']){
 
 
 
-            
+
               <li class="grid_5">
-                aaa
+                <ul>
+                  <li>
+                    <strong>Ville:</strong><?php $v = mysql_fetch_array(mysql_query("select ville from ville where id = ".$tab['id_ville'])); echo stripslashes(utf8_decode($v['ville'])); ?>
+                  </li>
+                  <li>
+                    <strong>Prix:</strong><?php echo stripslashes(utf8_decode($tab['prix'])); ?>
+                  </li>
+                  <li>
+                    <strong>Superficie:</strong><?php echo stripslashes(utf8_decode($tab['superficie'])); ?>
+                  </li>
+                  <li>
+                    <strong>Nombre de pi&egrave;ces:</strong><?php echo stripslashes(utf8_decode($tab['nbr_piece'])); ?>
+                  </li>
+                  <li>
+                    <strong>Description:</strong><?php echo stripslashes(utf8_decode($tab['Description'])); ?>
+                  </li>
+                </ul>
               </li>
+
 
             </ul>
           </div>
