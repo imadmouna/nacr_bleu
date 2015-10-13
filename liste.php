@@ -57,6 +57,28 @@ include("connect.php");
         <section>
           <div class="container banner_wr">
             <div class="container hr">
+              <h3>
+                Liste des bien pour 
+                <?php 
+                  if(isset($_REQUEST['id_cat']) and $_REQUEST['id_cat']){
+                    $t = mysql_fetch_array(mysql_query("select libelle from categorie where id_cat = ".$_REQUEST['id_cat']));
+                    if($t) echo '"'.stripslashes(utf8_decode($t[0])).'"';
+                  }
+                ?>
+                <?php 
+                  if(isset($_REQUEST['id_sous_cat']) and $_REQUEST['id_sous_cat']){
+
+                    $t = mysql_fetch_array(mysql_query("select c.libelle from categorie c join sous_categorie ss on c.id_cat = ss.id_cat where ss.id_sous_cat = ".$_REQUEST['id_sous_cat']));
+                    if($t) echo '"'.stripslashes(utf8_decode($t[0])).' - ';
+
+                    $t = mysql_fetch_array(mysql_query("select libelle from sous_categorie where id_sous_cat = ".$_REQUEST['id_sous_cat']));
+                    if($t) echo '"'.stripslashes(utf8_decode($t[0])).'"';
+                  }
+                ?>
+              </h3>
+
+              <hr>
+
               <ul class="row product-list myliste">
 
                 

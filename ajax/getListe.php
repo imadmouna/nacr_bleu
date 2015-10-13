@@ -11,19 +11,18 @@ $count = $_POST['limit'];
   		$req1 = mysql_query("select * from bien where id_cat = '".$_POST['id_cat']."' limit ".$count.",2");
   		$c = mysql_query("select count(*) from bien where id_cat = '".$_POST['id_cat']."'");
   		$o = mysql_fetch_array($c);
-		//if($o[0]>0)$count += 2;else $count = 0;
 
   		$ta = mysql_fetch_array($req);
   	}
-	/*
+	
   	if(isset($_POST['id_sous_cat']) and $_POST['id_sous_cat']!="0"){
   		$req = mysql_query("select * from bien where id_sous_cat = '".$_POST['id_sous_cat']."' limit ".$count.",2");
   		$req1 = mysql_query("select * from bien where id_sous_cat = '".$_POST['id_sous_cat']."' limit ".$count.",2");
   		$c = mysql_query("select count(*) from bien where id_sous_cat = '".$_POST['id_sous_cat']."'");
   		$o = mysql_fetch_array($c);
-		//if($o[0]>0)$count += 2;else $count = 0;
+
   		$ta = mysql_fetch_array($req);
-  	}*/
+  	}
     
     if($ta){
     	while($t = mysql_fetch_array($req1)){
