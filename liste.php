@@ -21,7 +21,7 @@ include("connect.php");
     <script src="js/html5shiv.js"></script><![endif]-->
     <script src="js/device.min.js"></script>
   </head>
-  <body onload="loadListe()">
+  <body onload="loadListe('2')">
     <div class="page">
       <!--
       ========================================================
@@ -95,15 +95,20 @@ include("connect.php");
     </div>
     <script src="js/script.js"></script>
     <script type="text/javascript">
-      function loadListe(){
+      function loadListe(limite){
+        $(".myliste").append("<div class='load' style='text-align:center'><img src='images/camera-loader.gif' /><br>Chargement</div>");
         $.ajax({
           type: "POST",
           url: "ajax/getListe.php",
           data: {
             id_cat:"<?php if(isset($_REQUEST['id_cat']) and $_REQUEST['id_cat']) echo $_REQUEST['id_cat']; else echo "0";?>",
-            id_sous_cat:"<?php if(isset($_REQUEST['id_sous_cat']) and $_REQUEST['id_sous_cat']) echo $_REQUEST['id_sous_cat']; else echo "0";?>"},
+            id_sous_cat:"<?php if(isset($_REQUEST['id_sous_cat']) and $_REQUEST['id_sous_cat']) echo $_REQUEST['id_sous_cat']; else echo "0";?>",
+            limit:limite
+          },
           success: function(data){
-            $(".myliste").append(data);
+            $(".load").hide();
+            $(".btn_load").hide();
+            $(".myliste").append("<li class='grid_12'>&nbsp;</li>"+data);
           },
           dataType: "html"
         });
