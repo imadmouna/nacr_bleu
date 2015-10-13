@@ -1,21 +1,29 @@
-<?php include("../connect.php"); ?>
+<?php
+include("../connect.php"); 
 
-  <?php
+$t = "";
+$req= "";
 
-  $t = "";
-  $req= "";
+$count = $_POST['limit'];
 
   	if(isset($_POST['id_cat']) and $_POST['id_cat']!="0"){
-  		$req = mysql_query("select * from bien where id_cat = '".$_POST['id_cat']."' limit 0,2");
-  		$req1 = mysql_query("select * from bien where id_cat = '".$_POST['id_cat']."' limit 0,2");
-  		$ta = mysql_fetch_array($req);
-  	}
+  		$req = mysql_query("select * from bien where id_cat = '".$_POST['id_cat']."' limit ".$count.",2");
+  		$req1 = mysql_query("select * from bien where id_cat = '".$_POST['id_cat']."' limit ".$count.",2");
+  		$c = mysql_query("select count(*) from bien where id_cat = '".$_POST['id_cat']."'");
+  		$o = mysql_fetch_array($c);
+		//if($o[0]>0)$count += 2;else $count = 0;
 
-  	if(isset($_POST['id_sous_cat']) and $_POST['id_sous_cat']!="0"){
-  		$req = mysql_query("select * from bien where id_sous_cat = '".$_POST['id_sous_cat']."' limit 0,2");
-  		$req1 = mysql_query("select * from bien where id_sous_cat = '".$_POST['id_sous_cat']."' limit 0,2");
   		$ta = mysql_fetch_array($req);
   	}
+	/*
+  	if(isset($_POST['id_sous_cat']) and $_POST['id_sous_cat']!="0"){
+  		$req = mysql_query("select * from bien where id_sous_cat = '".$_POST['id_sous_cat']."' limit ".$count.",2");
+  		$req1 = mysql_query("select * from bien where id_sous_cat = '".$_POST['id_sous_cat']."' limit ".$count.",2");
+  		$c = mysql_query("select count(*) from bien where id_sous_cat = '".$_POST['id_sous_cat']."'");
+  		$o = mysql_fetch_array($c);
+		//if($o[0]>0)$count += 2;else $count = 0;
+  		$ta = mysql_fetch_array($req);
+  	}*/
     
     if($ta){
     	while($t = mysql_fetch_array($req1)){
@@ -38,7 +46,13 @@
 		}
 	  ?>
 
+<?php
+if($count<$o[0]){
+?>
 <li class="grid_12 btn_load" style='text-align:center'>
 	<br>
-	<a class="btn" onclick="javascript:loadListe('2')">Charger plus</a>
+	<a class="btn" onclick="javascript:loadListe('<?php echo $count+2; ?>','<?php echo $o[0]; ?>')">Charger plus</a>
 </li>
+<?php
+}
+?>
