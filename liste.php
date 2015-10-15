@@ -120,7 +120,8 @@ include("connect.php");
       function loadListe(limite, total){
 
         if(limite<total){
-          $(".myliste").append("<div class='load' style='text-align:center'><img src='images/camera-loader.gif' /><br>Chargement</div>");
+          $(".myliste").append("<div class='load' style='text-align:center;'><img src='images/camera-loader.gif' style='padding-top:50px' /><br>Chargement</div>");
+              $(".btn_load").hide();
           $.ajax({
             type: "POST",
             url: "ajax/getListe.php",

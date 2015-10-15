@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- G�n�r� le :  Mar 06 Octobre 2015 � 23:13
+-- G�n�r� le :  Jeu 15 Octobre 2015 � 12:11
 -- Version du serveur :  5.6.15-log
 -- Version de PHP :  5.5.8
 
@@ -56,14 +56,22 @@ CREATE TABLE IF NOT EXISTS `bien` (
   `dossier` text NOT NULL,
   `photo` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=28 ;
 
 --
 -- Contenu de la table `bien`
 --
 
 INSERT INTO `bien` (`id`, `titre`, `Description`, `prix`, `superficie`, `nbr_piece`, `id_ville`, `id_cat`, `id_sous_cat`, `dossier`, `photo`) VALUES
-(19, 'mm', '<p>Entrez la Description</p>\r\n', 'mm', 'mm', 'mm', 97, 2, 2, '1444163885', '1444163885_Desert.jpg');
+(27, 'vente Bel appartement TitrÃ©, 2 Ch.74MÂ², Rt de casa', '<p>Ceci est un test</p>\r\n', 'mm', 'mm', 'mm', 97, 5, 3, '1444163885', '1444250493_Tulips.jpg'),
+(26, 'vente Bel appartement TitrÃ©, 2 Ch.74MÂ², Rt de casa', '<p>Ceci est un test</p>\r\n', 'mm', 'mm', 'mm', 97, 2, 4, '1444163885', '1444250493_Tulips.jpg'),
+(25, 'vente Bel appartement TitrÃ©, 2 Ch.74MÂ², Rt de casa', '<p>Ceci est un test</p>\r\n', 'mm', 'mm', 'mm', 97, 2, 4, '1444163885', '1444250493_Tulips.jpg'),
+(24, 'vente Bel appartement TitrÃ©, 2 Ch.74MÂ², Rt de casa', '<p>Ceci est un test</p>\r\n', 'mm', 'mm', 'mm', 97, 2, 4, '1444163885', '1444250493_Tulips.jpg'),
+(23, 'vente Bel appartement TitrÃ©, 2 Ch.74MÂ², Rt de casa', '<p>Ceci est un test</p>\r\n', 'mm', 'mm', 'mm', 97, 2, 4, '1444163885', '1444250493_Tulips.jpg'),
+(22, 'vente Bel appartement TitrÃ©, 2 Ch.74MÂ², Rt de casa', '<p>Ceci est un test</p>\r\n', 'mm', 'mm', 'mm', 97, 2, 4, '1444163885', '1444250493_Tulips.jpg'),
+(21, 'vente Bel appartement TitrÃ©, 2 Ch.74MÂ², Rt de casa', '<p>Ceci est un test</p>\r\n', 'mm', 'mm', 'mm', 97, 2, 4, '1444163885', '1444250493_Tulips.jpg'),
+(20, 'vente Bel appartement TitrÃ©, 2 Ch.74MÂ², Rt de casa', '<p>Ceci est un test</p>\r\n', 'mm', 'mm', 'mm', 97, 2, 4, '1444163885', '1444250493_Tulips.jpg'),
+(19, 'vente Bel appartement TitrÃ©, 2 Ch.74MÂ², Rt de casa', '<p>Ceci est un test</p>\r\n', 'mm', 'mm', 'mm', 97, 2, 4, '1444163885', '1444250493_Tulips.jpg');
 
 -- --------------------------------------------------------
 
@@ -75,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `categorie` (
   `id_cat` int(11) NOT NULL AUTO_INCREMENT,
   `libelle` text NOT NULL,
   PRIMARY KEY (`id_cat`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 --
 -- Contenu de la table `categorie`
@@ -83,7 +91,10 @@ CREATE TABLE IF NOT EXISTS `categorie` (
 
 INSERT INTO `categorie` (`id_cat`, `libelle`) VALUES
 (2, 'Villa et maison'),
-(5, 'terrain');
+(5, 'Terrain et ferme'),
+(7, 'Magasin et commerce'),
+(8, 'Appartements'),
+(9, 'Location vacance');
 
 -- --------------------------------------------------------
 
@@ -97,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `galerie` (
   `date_ajout` text NOT NULL,
   `id_bien` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
 --
 -- Contenu de la table `galerie`
@@ -105,7 +116,10 @@ CREATE TABLE IF NOT EXISTS `galerie` (
 
 INSERT INTO `galerie` (`id`, `chemin`, `date_ajout`, `id_bien`) VALUES
 (2, '1444165312_Koala.jpg', '2015/10/06', 19),
-(4, '1444165547_Jellyfish.jpg', '2015/10/06', 19);
+(4, '1444165547_Jellyfish.jpg', '2015/10/06', 19),
+(7, '1444250671_Lighthouse.jpg', '2015/10/07', 19),
+(8, '1444250671_Penguins.jpg', '2015/10/07', 19),
+(9, '1444560950_Desert.jpg', '2015/10/11', 19);
 
 -- --------------------------------------------------------
 
@@ -125,7 +139,28 @@ CREATE TABLE IF NOT EXISTS `manager` (
 --
 
 INSERT INTO `manager` (`login`, `pass`, `salt`, `last_login`) VALUES
-('admin', 'bfXRV7V4R1OJE', 'bfcaec2d1296930ee50e874480c638e6f78cd0b4', 'Tue 06 Oct 20h, 2015');
+('admin', '4748Ulp.Vsn5o', '4736d1dc1aaf0b525d739ab5fb0ac626', 'Sun 11 Oct 12h, 2015');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `mise_avant`
+--
+
+CREATE TABLE IF NOT EXISTS `mise_avant` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_bien` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+
+--
+-- Contenu de la table `mise_avant`
+--
+
+INSERT INTO `mise_avant` (`id`, `id_bien`) VALUES
+(10, 19),
+(11, 25),
+(12, 26);
 
 -- --------------------------------------------------------
 
@@ -137,13 +172,14 @@ CREATE TABLE IF NOT EXISTS `slider` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `photo` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
 
 --
 -- Contenu de la table `slider`
 --
 
 INSERT INTO `slider` (`id`, `photo`) VALUES
+(13, 'images/1444418845_Chrysanthemum.jpg'),
 (3, 'images/1443807603_Koala.jpg'),
 (4, 'images/1443807603_Lighthouse.jpg'),
 (5, 'images/1443807603_Penguins.jpg'),
@@ -151,9 +187,15 @@ INSERT INTO `slider` (`id`, `photo`) VALUES
 (7, 'images/1443807682_Hydrangeas.jpg'),
 (8, 'images/1443807682_Jellyfish.jpg'),
 (9, 'images/1443807682_Koala.jpg'),
-(10, 'images/1443807682_Lighthouse.jpg'),
 (11, 'images/1443807682_Penguins.jpg'),
-(12, 'images/1443807682_Tulips.jpg');
+(12, 'images/1443807682_Tulips.jpg'),
+(14, 'images/1444418845_Desert.jpg'),
+(15, 'images/1444418845_Hydrangeas.jpg'),
+(16, 'images/1444418845_Jellyfish.jpg'),
+(17, 'images/1444418845_Koala.jpg'),
+(18, 'images/1444418845_Lighthouse.jpg'),
+(19, 'images/1444418845_Penguins.jpg'),
+(20, 'images/1444418845_Tulips.jpg');
 
 -- --------------------------------------------------------
 
@@ -166,7 +208,7 @@ CREATE TABLE IF NOT EXISTS `sous_categorie` (
   `id_cat` int(11) NOT NULL,
   `libelle` text NOT NULL,
   PRIMARY KEY (`id_sous_cat`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 --
 -- Contenu de la table `sous_categorie`
@@ -174,7 +216,15 @@ CREATE TABLE IF NOT EXISTS `sous_categorie` (
 
 INSERT INTO `sous_categorie` (`id_sous_cat`, `id_cat`, `libelle`) VALUES
 (4, 2, 'Louer'),
-(3, 2, 'Vendre');
+(3, 2, 'Vendre'),
+(5, 9, 'Louer un appartement'),
+(6, 9, 'Louer une villa'),
+(7, 7, 'Vente de magasin'),
+(8, 7, 'Location de magasin'),
+(9, 5, 'Vente terrain'),
+(10, 5, 'Vente ferme'),
+(11, 8, 'Vente appartement'),
+(12, 8, 'Location appartement');
 
 -- --------------------------------------------------------
 

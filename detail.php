@@ -79,6 +79,13 @@ if(isset($_REQUEST['id']) and $_REQUEST['id']){
                 ?>
               </li>
 
+    <?php
+      $qqtest= mysql_query("select * from galerie where id_bien = ".$_REQUEST['id']);
+      $ttest = mysql_fetch_array($qqtest);
+
+      if($ttest){
+    ?>
+
               <li class="grid_7">
 
 
@@ -262,6 +269,8 @@ if(isset($_REQUEST['id']) and $_REQUEST['id']){
         
     </style>
 
+    
+
 
     <div id="jssor_1" style="position: relative; margin: 0 auto; top: 0px; left: 0px; width: 800px; height: 456px; overflow: hidden; background-color: #24262e;">
         <!-- Loading Screen -->
@@ -300,13 +309,17 @@ if(isset($_REQUEST['id']) and $_REQUEST['id']){
         <!-- Arrow Navigator -->
         <span data-u="arrowleft" class="jssora05l" style="top:158px;left:8px;width:40px;height:40px;"></span>
         <span data-u="arrowright" class="jssora05r" style="top:158px;right:8px;width:40px;height:40px;"></span>
-        <a href="http://www.jssor.com" style="display:none">Jssor Slider</a>
+        <a href="http://www.jssor.com" style="display:none"></a>
     </div>
+
+    
 
 
 
               </li>
-
+          <?php
+            }
+          ?>
 
 
 
