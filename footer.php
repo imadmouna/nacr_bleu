@@ -14,12 +14,22 @@
               <li class="grid_4">
                 <div class="box">
                  <strong>Plan du site</strong><br>
-                 <a href="#">Accueil</a><br>
-                 <a href="#">Villa et Maison</a><br>
-                 <a href="#">Magasin et commerce</a><br>
-                 <a href="#">Appartement</a><br>
-                 <a href="#">Terrain et Ferme</a><br>
-                 <a href="#">Location Vacance</a>
+
+                  <a href="index.php">Accueil</a><br>
+                  
+
+                  <?php
+                    $req = mysql_query("select * from categorie order by id_cat");
+                    while($t = mysql_fetch_array($req)){
+                  ?>
+                    
+                      <a href="liste.php?id_cat=<?php echo $t[0];?>"><?php echo $t[1];?></a>
+                      <br>
+                  <?php
+                    }
+                  ?>
+
+
                   
                 </div>
                 
