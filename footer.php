@@ -4,10 +4,10 @@
             <ul class="row contact-list">
               <li class="grid_4">
                 <div class="box">
-                  <div class="box_aside"></div>
-                  <div class="box_cnt__no-flow">
-                    <div class="box_cnt__no-flow">Contactez-nous<br>Tél :+212 664364860 <br> Email:<a href="mailto:info@nacrbleu.com">info@nacrbleu.com</a><br><a href="#">Suivez nous sur facebook</a><br><a href="#">Suivez nous sur Twitter</a></div>
-                  </div>
+                  Contactez-nous<br>Tél :+212 664364860 <br> 
+                  Email:<a href="mailto:info@nacrbleu.com">info@nacrbleu.com</a><br>
+                  <a href="#">Suivez nous sur facebook</a><br><a href="#">Suivez nous sur Twitter</a>
+                  
                 </div>
                
               </li>

@@ -38,7 +38,7 @@ include("connect.php");
             
           </div>
   <ul class="row contact-list">
-    <a href="contact.html" style="float:right;">Contactez-Nous</a></div></ul>
+    <a href="contact.php" style="float:right;">Contactez-Nous</a></div></ul>
         <div id="stuck_container" class="stuck_container">
           <div class="container">
             <nav class="nav">
