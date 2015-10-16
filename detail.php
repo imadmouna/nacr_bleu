@@ -344,6 +344,45 @@ if(isset($_REQUEST['id']) and $_REQUEST['id']){
               </li>
 
 
+              <?php 
+              $rr = mysql_fetch_array(
+                      mysql_query(
+                        "select * from bien where id_cat = (select id_cat from bien where id = ".
+                        $_REQUEST['id'].") and id_sous_cat = (select id_sous_cat from bien where id = ".
+                        $_REQUEST['id'].") and id not in (".$_REQUEST['id'].") order by rand() limit 4"
+                      )
+                    );
+                if($rr){
+              ?>
+
+              <li class="grid_12">
+                  <strong style="font-size:20px"><br>Suggestions</strong>
+                  <ul class="row product-list ">
+                    <?php
+                      $qu = mysql_query("select * from bien where id_cat = (select id_cat from bien where id = ".$_REQUEST['id'].") and id_sous_cat = (select id_sous_cat from bien where id = ".$_REQUEST['id'].") and id not in (".$_REQUEST['id'].") order by rand() limit 4");
+                      while($tqu = mysql_fetch_array($qu)){
+                    ?>
+                    <li class="grid_3">
+                      <div class="box">
+                        <div class="box_aside">
+                           <img style="padding:3px;border:solid 1px #ccc" src="<?php echo "images/bien/".$tqu['dossier']."/big/".$tqu['photo'];?>" height="100" width="100"> 
+                        </div>
+                        <div class="box_cnt__no-flow">
+                          <strong><a href="detail.php?id=<?php echo $tqu['id'];?>"><?php echo stripslashes(utf8_decode($tqu['titre']));?></a></strong>
+                        </div>
+                      </div>
+                    </li>
+                    <?php
+                      }
+                    ?>
+                  </ul>
+              </li>
+
+              <?php
+                }
+              ?>
+
+
             </ul>
           </div>
 
