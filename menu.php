@@ -3,7 +3,7 @@
   
 
   <?php
-    $req = mysql_query("select * from categorie order by id_cat");
+    $req = mysql_query("select * from categorie order by id_cat limit 0,5");
     while($t = mysql_fetch_array($req)){
   ?>
     <li>
