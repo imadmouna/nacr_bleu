@@ -101,15 +101,7 @@ include("connect.php");
                    <div class="grid_3">
                     <dl class="info">
                      <ul class="row contact-list">
-                      <dt>Horaire de Travail</dt>
-                      <dd>
-                        <ul>
-                          <li> Lundi - Vendredi : 08:15 - 18:00</li>
-                          <li>Samedi : 08:15 - 17:00</li>
-                          <li>Dimanche - Fermé</li>
-                         
-                        </ul>
-                      </dd>
+                      
                       </ul>
                       <ul class="row contact-list">
                        <dt>Réseaux Sociaux</dt>

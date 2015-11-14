@@ -20,6 +20,22 @@ if(isset($_REQUEST['id_sp']) and is_numeric($_REQUEST['id_sp'])){
   echo "<script language='javascript'>document.location.href='slider.php';</script>";
 }
 
+if(isset($_REQUEST['spr']) and $_REQUEST['spr']=="all"){
+  mysql_query("delete from slider");
+  echo "<script language='javascript'>document.location.href='slider.php';</script>";
+}
+
+$a = 0;
+$qqq=mysql_query("select id from slider");
+while($ttt = mysql_fetch_array($qqq)){
+  if(isset($_POST['ch'.$ttt[0]]) and $_POST['ch'.$ttt[0]]){
+    mysql_query("delete from slider where id = ".$_POST['ch'.$ttt[0]]);
+    $a = 1;
+  }
+}
+if($a == 1){
+  echo "<script language='javascript'>document.location.href='slider.php';</script>";
+}
 
 
 
@@ -57,6 +73,7 @@ if(isset($_FILES['photos']['tmp_name'])){
     if($err == 1){
       echo "<script language='javascript'>alert('Une ou plusieurs photos ne respectent pas la taille minimum requise, veuillez utiliser une image de taille superieure !');</script>";
     }
+    echo "<script language='javascript'>document.location.href='slider.php';</script>";
   }
 }
 
@@ -79,6 +96,12 @@ if(isset($_REQUEST['id_sp']) and is_numeric($_REQUEST['id_sp'])){
   <head>
     <meta charset="UTF-8">
     <title>Administration | NACR BLEU</title>
+
+    <style type="text/css">
+      .icheckbox_square-blue, .iradio_square-blue {
+        border: 3px solid #FFF !important;
+      }
+    </style>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.2 -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />    
@@ -92,6 +115,9 @@ if(isset($_REQUEST['id_sp']) and is_numeric($_REQUEST['id_sp'])){
     <link href="dist/css/skins/skin-blue.min.css" rel="stylesheet" type="text/css" />
     <!-- iCheck -->
     <link href="plugins/iCheck/flat/blue.css" rel="stylesheet" type="text/css" />
+
+
+    <link href="plugins/iCheck/square/blue.css" rel="stylesheet" type="text/css" />
     <!-- Morris chart -->
     <link href="plugins/morris/morris.css" rel="stylesheet" type="text/css" />
     <!-- jvectormap -->
@@ -171,11 +197,13 @@ if(isset($_REQUEST['id_sp']) and is_numeric($_REQUEST['id_sp'])){
               <div class="box box-alert">
                 <div class="box-header">
                   <h3 class="box-title">Liste des photos</h3>
+                  <a class="btn btn-danger btn-xs pull-right btn-spr-all">Supprimer tout</a>
                 </div><!-- /.box-header -->
                 
                 <div class="box-body">
 
                   <div class="row" style="padding-left:40px">
+                    <form method="post" action="slider.php">
                   <?php
                     $q = mysql_query("select * from slider order by id");
                     while($tab = mysql_fetch_array($q)){
@@ -184,7 +212,11 @@ if(isset($_REQUEST['id_sp']) and is_numeric($_REQUEST['id_sp'])){
                   <table width="120" border="0" cellspacing="0" cellpadding="0" style="font-size:11px;">
                     <tr>
                       <td align="left" valign="top">
-                        <img src="../<?php echo stripslashes(utf8_decode($tab[1])); ?>" width="100" height="100" style="border:1px solid #ccc;padding:2px" />
+                        <div style="float:left;position:absolute;padding-left:0px">
+                          <input type="checkbox" name="ch<?php echo $tab[0];?>" value="<?php echo $tab[0];?>" />
+                        </div>
+                          <img src="../<?php echo stripslashes(utf8_decode($tab[1])); ?>" width="100" height="100" style="border:1px solid #ccc;padding:2px" />
+                        
                       </td>
                     </tr>
                     <tr>
@@ -198,6 +230,10 @@ if(isset($_REQUEST['id_sp']) and is_numeric($_REQUEST['id_sp'])){
                   <?php
                     }
                   ?>
+                  <div class="col-md-12">
+                    <input type="submit" value="Valider la suppression" class="btn btn-primary" />
+                  </div>
+                </form>
                 </div>
                 </div>
 
@@ -229,19 +265,10 @@ if(isset($_REQUEST['id_sp']) and is_numeric($_REQUEST['id_sp'])){
     <script src="dist/js/demo.js" type="text/javascript"></script>-->
     <script src="plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
     <!-- CK Editor -->
-    <script src="//cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
-    <!-- Bootstrap WYSIHTML5 -->
-    <script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
-    <script type="text/javascript">
-      $(function () {
-        // Replace the <textarea id="editor1"> with a CKEditor
-        // instance, using default configuration.
-        CKEDITOR.replace('editor1');
-        //bootstrap WYSIHTML5 - text editor
-        $(".textarea").wysihtml5();
-      });
-    </script>
+    
 
+
+    <script src="plugins/iCheck/icheck.min.js" type="text/javascript"></script>
 
     <link href="dist/css/select2.css" rel="stylesheet" />
     <link href="dist/css/select2-bootstrap.css" rel="stylesheet" />
@@ -250,11 +277,29 @@ if(isset($_REQUEST['id_sp']) and is_numeric($_REQUEST['id_sp'])){
     <script type="text/javascript">
       $('select').select2();
 
+      $(function () {
+
+        "use strict";
+
+        //iCheck for checkbox and radio inputs
+        $('input[type="checkbox"]').iCheck({
+          checkboxClass: 'icheckbox_square-blue',
+          radioClass: 'iradio_minimal-blue'
+        });
+      });
+
+
       function sup(id){
         if(confirm('Etes-vous sure de supprimer cette photo?')){
           document.location.href='slider.php?id_sp='+id;
         }
       }
+
+      $(".btn-spr-all").click(function(){
+        if(confirm('Etes-vous sure de supprimer toutes les photos?')){
+          document.location.href='slider.php?spr=all';
+        }
+      });
     </script>
 
     <!-- AdminLTE for demo purposes <script src="dist/js/demo.js" type="text/javascript"></script>-->

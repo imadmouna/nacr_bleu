@@ -340,6 +340,19 @@ if(isset($_REQUEST['id']) and $_REQUEST['id']){
                   <li>
                     <strong>Description:</strong><?php echo stripslashes(utf8_decode($tab['Description'])); ?>
                   </li>
+                  <li>&nbsp;</li>
+                  <li>
+                    <ul>
+                      <li style="width:40%;float:left;position:relative">
+                        <input type="button" value="Telephone" id="btn-tel" style="color: #FFF;background-color: #5BC0DE;border-color: #46B8DA;padding:8px;width:110px" />
+                        <div id="tel" style="display:none"><a href="tel:+212664364860" target="_blank">+212 (0)6 64 36 48 60</a></div>
+                      </li>
+                      <li style="width:20%;float:left;position:relative">
+                        <input type="button" value="Email" id="btn-email" style="color: #FFF;background-color: #5BC0DE;border-color: #46B8DA;padding:8px;width:110px" />
+                        <div id="email" style="display:none"><a href="mailto:info@nacrbleu.com">info@nacrbleu.com</a></div>
+                      </li>
+                    </ul>
+                  </li>
                 </ul>
               </li>
 
@@ -404,5 +417,13 @@ if(isset($_REQUEST['id']) and $_REQUEST['id']){
       ?>
     </div>
     <script src="js/script.js"></script>
+    <script type="text/javascript">
+      $("#btn-tel").click(function(){
+        $("#tel").show();
+      });
+      $("#btn-email").click(function(){
+        $("#email").show();
+      });
+    </script>
 </body>
 </html>
