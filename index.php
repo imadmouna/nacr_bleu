@@ -84,121 +84,40 @@ include("connect.php");
             <div class="container hr">
               <ul class="row product-list">
 
-                <li class="grid_6">
+                
                   <?php
-                    $t = mysql_fetch_array(mysql_query("select * from mise_avant m join bien b on b.id = m.id_bien limit 0,1"));
-                    if($t){
+                    $a = 0;
+                    $tq = mysql_fetch_array(mysql_query("select * from mise_avant m join bien b on b.id = m.id_bien"));
+                    $query = mysql_query("select * from mise_avant m join bien b on b.id = m.id_bien");
+                    if($tq){
+                      while($t = mysql_fetch_array($query)){
+                        
                   ?>
-                  <div class="box wow fadeInRight">
-                    <div class="box_aside">
-                       <img src="<?php echo "images/bien/".$t['dossier']."/big/".$t['photo'];?>" height="250" width="250"> 
+                  <li class="grid_6">
+                    <div class="box wow fadeInRight">
+                      <div class="box_aside">
+                         <img src="<?php echo "images/bien/".$t['dossier']."/big/".$t['photo'];?>" height="250" width="250"> 
+                      </div>
+                      <div class="box_cnt__no-flow">
+                        <h3><a href="detail.php?id=<?php echo $t['id'];?>"><?php echo stripslashes(utf8_decode($t['titre']));?></a></h3>
+                        <p>
+                          <?php echo substr(stripslashes(utf8_decode($t['Description'])),0,100)."...";?>
+                        </p>
+                      </div>
                     </div>
-                    <div class="box_cnt__no-flow">
-                      <h3><a href="detail.php?id=<?php echo $t['id'];?>"><?php echo stripslashes(utf8_decode($t['titre']));?></a></h3>
-                      <p>
-                        <?php echo stripslashes(utf8_decode($t['Description']));?>
-                      </p>
-                    </div>
-                  </div>
+                  </li>
 
-                  <hr>
-
-                  <?php
+                  <?php 
+                    $a+=1;                  
+                    if($a%2 == 0)echo '<li class="grid_12">&nbsp;</li>';
+                      }
                     }
                   ?>
-
-
-                  <?php
-                    $t = mysql_fetch_array(mysql_query("select * from mise_avant m join bien b on b.id = m.id_bien limit 1,1"));
-                    if($t){
-                  ?>
-                  <div data-wow-delay="0.2s" class="box wow fadeInRight">
-                    <div class="box_aside">
-                       <img src="<?php echo "images/bien/".$t['dossier']."/big/".$t['photo'];?>" height="250" width="250"> 
-                    </div>
-                    <div class="box_cnt__no-flow">
-                      <h3><a href="detail.php?id=<?php echo $t['id'];?>"><?php echo stripslashes(utf8_decode($t['titre']));?></a></h3>
-                      <p>
-                        <?php echo stripslashes(utf8_decode($t['Description']));?>
-                      </p>
-                    </div>
-                  </div>
-
-
-                  <?php
-                    }
-                  ?>
-
-                  
-
-                </li>
-                <li class="grid_6">
-
-
-                  <?php
-                    $t = mysql_fetch_array(mysql_query("select * from mise_avant m join bien b on b.id = m.id_bien limit 2,1"));
-                    if($t){
-                  ?>
-                  <div data-wow-delay="0.3s" class="box wow fadeInRight">
-                    <div class="box_aside">
-                       <img src="<?php echo "images/bien/".$t['dossier']."/big/".$t['photo'];?>" height="250" width="250"> 
-                    </div>
-                    <div class="box_cnt__no-flow">
-                      <h3><a href="detail.php?id=<?php echo $t['id'];?>"><?php echo stripslashes(utf8_decode($t['titre']));?></a></h3>
-                      <p>
-                        <?php echo stripslashes(utf8_decode($t['Description']));?>
-                      </p>
-                    </div>
-                  </div>
-
-                  <hr>
-
-                  <?php
-                    }
-                  ?>
-
-                  <?php
-                    $t = mysql_fetch_array(mysql_query("select * from mise_avant m join bien b on b.id = m.id_bien limit 3,1"));
-                    if($t){
-                  ?>
-                  <div data-wow-delay="0.4s" class="box wow fadeInRight">
-                    <div class="box_aside">
-                       <img src="<?php echo "images/bien/".$t['dossier']."/big/".$t['photo'];?>" height="250" width="250"> 
-                    </div>
-                    <div class="box_cnt__no-flow">
-                      <h3><a href="detail.php?id=<?php echo $t['id'];?>"><?php echo stripslashes(utf8_decode($t['titre']));?></a></h3>
-                      <p>
-                        <?php echo stripslashes(utf8_decode($t['Description']));?>
-                      </p>
-                    </div>
-                  </div>
-
-                  <hr>
-
-                  <?php
-                    }
-                  ?>
-                </li>
+                
+                
               </ul>
             </div>
-            <div class="container hr">
-              <ul class="row product-list">
-                <li class="grid_6">
-                  <div class="box wow fadeInRight">
-                    <div class="box_aside"></div>
-                  </div>
-                  <div data-wow-delay="0.2s" class="box wow fadeInRight">
-                    <div class="box_aside"></div></div></li>
-                <li class="grid_6">
-                  <div data-wow-delay="0.3s" class="box wow fadeInRight">
-                    <div class="box_aside"></div>
-                  </div>
-                  <div data-wow-delay="0.4s" class="box wow fadeInRight">
-                    <div class="box_aside"></div>
-                  </div>
-                </li>
-              </ul>
-            </div>
+            
           </div>
         </section>
         <section class="well ins1"></section>
