@@ -101,7 +101,7 @@ if(isset($_POST['titre']) and isset($_POST['prix']) and isset($_POST['superficie
         
         //SAUVEGARDE DB
        mysql_query(
-          "INSERT INTO `nacr_bleu`.`bien` (`titre`, `Description`, `prix`, `superficie`, `nbr_piece`, `id_ville`, `id_cat`, `id_sous_cat`, `photo`, `dossier`) 
+          "INSERT INTO `bien` (`titre`, `Description`, `prix`, `superficie`, `nbr_piece`, `id_ville`, `id_cat`, `id_sous_cat`, `photo`, `dossier`) 
           VALUES (
             '".addslashes(utf8_encode($_POST['titre']))."',
             '".addslashes(utf8_encode($_POST['editor1']))."',

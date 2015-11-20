@@ -111,7 +111,7 @@ if(isset($_POST['titre']) and isset($_POST['prix']) and isset($_POST['superficie
             
             //SAUVEGARDE DB
            mysql_query(
-              "update `nacr_bleu`.`bien` set 
+              "update `bien` set 
               `titre`='".addslashes(utf8_encode($_POST['titre']))."', 
               `Description`='".addslashes(utf8_encode($_POST['editor1']))."', 
               `prix`='".addslashes(utf8_encode($_POST['prix']))."', 
@@ -133,7 +133,7 @@ if(isset($_POST['titre']) and isset($_POST['prix']) and isset($_POST['superficie
 
       }else{
          mysql_query(
-              "update `nacr_bleu`.`bien` set 
+              "update `bien` set 
               `titre`='".addslashes(utf8_encode($_POST['titre']))."', 
               `Description`='".addslashes(utf8_encode($_POST['editor1']))."', 
               `prix`='".addslashes(utf8_encode($_POST['prix']))."', 

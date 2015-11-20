@@ -154,6 +154,7 @@ include('js/jquery.easing.1.3.js');
 /* Contact Form
  ========================================================*/
 ;
+/*
 (function ($) {
     var o = $('#contact-form');
     if (o.length > 0) {
@@ -165,7 +166,7 @@ include('js/jquery.easing.1.3.js');
         }
     }
 })(jQuery);
-
+*/
 /* Orientation tablet fix
  ========================================================*/
 $(function () {
@@ -271,7 +272,7 @@ var o = $('#camera');
 
 /* Mailform
 =============================================*/
-;(function ($) {
+;/*(function ($) {
     include('js/mailform/jquery.form.min.js');
     include('js/mailform/jquery.rd-mailform.min.c.js');
-})(jQuery);
+})(jQuery);*/

@@ -1,5 +1,17 @@
 <?php
 include("connect.php");
+
+if(isset($_POST['name']) and isset($_POST['email']) and isset($_POST['phone']) and isset($_POST['message'])){
+  if($_POST['name'] and $_POST['email'] and $_POST['phone'] and $_POST['message']){
+      //mail("","SOURCE | SITE WEB: Message de: ".utf8_decode(strtoupper($_POST['name']))."\nEmail: ".utf8_decode($_POST['email'])."\nTelephone: ".utf8_decode($_POST['phone'])."\n\nContenu: ".utf8_decode($_POST['message']));
+      if(!mail("contact@nacrebleu.com","SOURCE | SITE WEB","Message de: ".utf8_decode(strtoupper($_POST['name']))."\nEmail: ".utf8_decode($_POST['email'])."\nTelephone: ".utf8_decode($_POST['phone'])."\n\nContenu: ".utf8_decode($_POST['message']))){
+        echo "<script>alert('Erreur lors de envoi du mail, veuillez reessayer plus tard!')</script>";
+      }else{
+        echo "<script>document.location.href='contact.php'</script>";
+      }
+      
+  }
+}
 ?>
 
 <!DOCTYPE html>
@@ -91,7 +103,7 @@ include("connect.php");
                       <dd>    Tél : +212 (0)6 64 36 48 60<br>
    							  Tél : +212 (0)5 24 31 76 76<br>
     						  Fax : +212 (0)5 24 31 74 74<br>
-    						   <img src="images/90.png">&nbsp;<strong>Email :</strong><a href="mailto:info@nacrbleu.com">info@nacrbleu.com</a>
+    						   <img src="images/90.png">&nbsp;<strong>Email :</strong><a href="mailto:contact@nacrebleu.com">contact@nacrebleu.com</a>
 
 					  </dd>
                      
@@ -121,7 +133,7 @@ include("connect.php");
         <section class="well1">
           <div class="container">
             <h22>Contactez-Nous</h22>
-            <form method="post" action="bat/rd-mailform.php" class="mailform off2">
+            <form method="post" action="contact.php" class="mailform ">
               <input type="hidden" name="form-type" value="contact">
               <fieldset class="row">
                 <label class="grid_4">
