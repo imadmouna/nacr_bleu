@@ -804,6 +804,7 @@ table tr:nth-child(even) {
 /*========================   Menu   ==========================*/
 .sf-menu {
   display: inline-block;
+  padding-left: 1%;
 }
 .sf-menu:before, .sf-menu:after {
   display: table;
@@ -818,6 +819,7 @@ table tr:nth-child(even) {
 	float: left;
 	width: 190px;
 	height: 60px;
+  background-color: #D3BA8B;
 }
 .sf-menu a {
   display: block;
@@ -1137,7 +1139,7 @@ table tr:nth-child(even) {
 /*==================  Stuck menu  ======================*/
 .stuck_container {
 	margin-top: 22px;
-	background-color: #d3ba8b;
+	//background-color: #d3ba8b;
 	//width:1140px;
 	//margin-left:100px;
 }
@@ -1145,7 +1147,7 @@ table tr:nth-child(even) {
 .isStuck {
   margin-top: 0;
   z-index: 9999;
-  border-bottom: 1px solid #888;
+  //border-bottom: 1px solid #888;
 }
 
 @media only screen and (max-width: 979px) {

@@ -1,5 +1,5 @@
 <ul data-type="navbar" class="sf-menu">
-  <li class="active"><a href="index.php">Accueil</a></li>
+  <li class="activee"><a href="index.php">Accueil</a></li>
   
 
   <?php

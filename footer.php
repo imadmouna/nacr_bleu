@@ -5,7 +5,7 @@
               <li class="grid_4">
                 <div class="box">
                   Contactez-nous<br>Tél :+212 664364860 <br> 
-                  Email:<a href="mailto:info@nacrbleu.com">info@nacrbleu.com</a><br>
+                  Email:<a href="mailto:info@nacrbleu.com">contact@nacrebleu.com</a><br>
                   <a href="#">Suivez nous sur facebook</a><br><a href="#">Suivez nous sur Twitter</a>
                   
                 </div>
@@ -47,7 +47,7 @@
         </section>
         <section>
           <div class="container">
-            <div class="copyright">Nacr Bleu © <span id="copyright-year"></span>.&nbsp;</a>Tous droits réservés.
+            <div class="copyright">Nacre Bleu © <span id="copyright-year"></span>.&nbsp;</a>Tous droits réservés.
             </div>
           </div>
         </section>
