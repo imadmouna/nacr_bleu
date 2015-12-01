@@ -21,8 +21,23 @@ if(isset($_REQUEST['id_sp']) and is_numeric($_REQUEST['id_sp']) and isset($_REQU
 }
 
 
+if(isset($_REQUEST['spr']) and isset($_REQUEST['id']) and $_REQUEST['id'] and $_REQUEST['spr']=="all"){
+  mysql_query("delete from galerie where id_bien=".$_REQUEST['id']);
+  echo "<script language='javascript'>document.location.href='galerie.php?id=".$_REQUEST['id']."';</script>";
+}
 
 
+$a = 0;
+$qqq=mysql_query("select id from galerie");
+while($ttt = mysql_fetch_array($qqq)){
+  if(isset($_POST['ch'.$ttt[0]]) and $_POST['ch'.$ttt[0]]){
+    mysql_query("delete from galerie where id = ".$_POST['ch'.$ttt[0]]);
+    $a = 1;
+  }
+}
+if($a == 1){
+  echo "<script language='javascript'>document.location.href='galerie.php?id=".$_REQUEST['id']."';</script>";
+}
 
 
 
@@ -74,6 +89,11 @@ if(isset($_FILES['photos']['tmp_name']) and isset($_POST['id'])){
   <head>
     <meta charset="UTF-8">
     <title>Administration | NACR BLEU</title>
+    <style type="text/css">
+      .icheckbox_square-blue, .iradio_square-blue {
+        border: 3px solid #FFF !important;
+      }
+    </style>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <!-- Bootstrap 3.3.2 -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />    
@@ -87,6 +107,9 @@ if(isset($_FILES['photos']['tmp_name']) and isset($_POST['id'])){
     <link href="dist/css/skins/skin-blue.min.css" rel="stylesheet" type="text/css" />
     <!-- iCheck -->
     <link href="plugins/iCheck/flat/blue.css" rel="stylesheet" type="text/css" />
+
+
+    <link href="plugins/iCheck/square/blue.css" rel="stylesheet" type="text/css" />
     <!-- Morris chart -->
     <link href="plugins/morris/morris.css" rel="stylesheet" type="text/css" />
     <!-- jvectormap -->
@@ -167,11 +190,13 @@ if(isset($_FILES['photos']['tmp_name']) and isset($_POST['id'])){
               <div class="box box-alert">
                 <div class="box-header">
                   <h3 class="box-title">Liste des photos</h3>
+                  <a class="btn btn-danger btn-xs pull-right btn-spr-all">Supprimer tout</a>
                 </div><!-- /.box-header -->
                 
                 <div class="box-body">
 
                   <div class="row" style="padding-left:40px">
+                    <form method="post" action="galerie.php?id=<?php echo $_REQUEST['id']; ?>">
                   <?php
 
                     $tq = mysql_fetch_array(mysql_query("select dossier from bien where id=".$_REQUEST['id']));
@@ -184,6 +209,9 @@ if(isset($_FILES['photos']['tmp_name']) and isset($_POST['id'])){
                   <table width="120" border="0" cellspacing="0" cellpadding="0" style="font-size:11px;">
                     <tr>
                       <td align="left" valign="top">
+                        <div style="float:left;position:absolute;padding-left:0px">
+                          <input type="checkbox" name="ch<?php echo $tab[0];?>" value="<?php echo $tab[0];?>" />
+                        </div>
                         <img src="../images/bien/<?php echo $dossier;?>/big/<?php echo stripslashes(utf8_decode($tab[1])); ?>" width="100" height="100" style="border:1px solid #ccc;padding:2px" />
                       </td>
                     </tr>
@@ -198,6 +226,10 @@ if(isset($_FILES['photos']['tmp_name']) and isset($_POST['id'])){
                   <?php
                     }
                   ?>
+                  <div class="col-md-12">
+                    <input type="submit" value="Valider la suppression" class="btn btn-primary" />
+                  </div>
+                </form>
                 </div>
                 </div>
 
@@ -232,13 +264,18 @@ if(isset($_FILES['photos']['tmp_name']) and isset($_POST['id'])){
     <script src="//cdn.ckeditor.com/4.4.3/standard/ckeditor.js"></script>
     <!-- Bootstrap WYSIHTML5 -->
     <script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
+
+    <script src="plugins/iCheck/icheck.min.js" type="text/javascript"></script>
     <script type="text/javascript">
       $(function () {
-        // Replace the <textarea id="editor1"> with a CKEditor
-        // instance, using default configuration.
-        CKEDITOR.replace('editor1');
-        //bootstrap WYSIHTML5 - text editor
-        $(".textarea").wysihtml5();
+
+        "use strict";
+
+        //iCheck for checkbox and radio inputs
+        $('input[type="checkbox"]').iCheck({
+          checkboxClass: 'icheckbox_square-blue',
+          radioClass: 'iradio_minimal-blue'
+        });
       });
     </script>
 
@@ -255,6 +292,11 @@ if(isset($_FILES['photos']['tmp_name']) and isset($_POST['id'])){
           document.location.href='galerie.php?id_sp='+id+'&id='+id_bien;
         }
       }
+      $(".btn-spr-all").click(function(){
+        if(confirm('Etes-vous sure de supprimer toutes les photos?')){
+          document.location.href='galerie.php?id=<?php echo $_REQUEST['id'];?>&spr=all';
+        }
+      });
     </script>
 
     <!-- AdminLTE for demo purposes <script src="dist/js/demo.js" type="text/javascript"></script>-->

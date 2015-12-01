@@ -208,6 +208,14 @@ img + h3 {
   margin-top: 30px;
 }
 @media (min-width: 480px) and (max-width: 767px) {
+  #topbarMobile{
+    z-index:99999992 !important;
+    display:block !important;
+  }
+  #topbar{
+    display:none !important;
+  }
+
   .grid_2 img + img {
     margin-top: 0;
     margin-left: 8%;
@@ -635,6 +643,16 @@ blockquote p + cite {
   }
 }
 @media (max-width: 479px) {
+
+  #topbarMobile{
+    z-index:99999992 !important;
+    display:block !important;
+  }
+  #topbar{
+    display:none !important;
+  }
+
+
   blockquote .box_aside {
     width: 100%;
     float: none;
@@ -804,7 +822,7 @@ table tr:nth-child(even) {
 /*========================   Menu   ==========================*/
 .sf-menu {
   display: inline-block;
-  padding-left: 1%;
+  //margin-left: 0px;
 }
 .sf-menu:before, .sf-menu:after {
   display: table;
@@ -1137,10 +1155,15 @@ table tr:nth-child(even) {
   }
 }
 /*==================  Stuck menu  ======================*/
+
+
+#stuck_container div{
+  margin-left:0px;
+}
 .stuck_container {
-	margin-top: 22px;
-	//background-color: #d3ba8b;
-	//width:1140px;
+	//margin-top: 22px;
+	background-color: #d3ba8b;
+	//width:100%;
 	//margin-left:100px;
 }
 

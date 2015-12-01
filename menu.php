@@ -1,3 +1,30 @@
+<div id="topbarMobile" style="display:none;position:absolute;right:20px;top:10px;height:25px;padding-left:0px;color:black">
+  <ul id="mymenu">
+    <li><a href="#">FR</a></li>
+    <li>&nbsp;</li>
+    <li><a href="#">EN</a></li>
+  </ul>
+</div>
+<div id="topbar" style="position:absolute;right:2%;top:10px;width:200px;height:25px;background-color:#D3BA8B;padding-left:25px;color:white">
+<style>
+ul#mymenu li {
+    display:inline;
+}
+</style>
+	<ul id="mymenu">
+    	<li><a href="contact.php">Contact</a> - </li>
+    	<li>Langue</li>
+        <li>&nbsp;</li>
+    	<li>
+        <a href="#"><img style="padding-top:5px" src="images/fr.png"></a>
+      </li>
+    	<li>
+        <a href="#"><img style="padding-top:5px" src="images/en.png"></a>
+      </li>
+    </ul>
+</div>
+
+
 <ul data-type="navbar" class="sf-menu">
   <li class="activee"><a href="index.php">Accueil</a></li>
   
