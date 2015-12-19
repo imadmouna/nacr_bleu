@@ -47,7 +47,7 @@ if(isset($_FILES['photos']['tmp_name']) and isset($_POST['id'])){
     for($i = 0 ; $i < count($_FILES['photos']['tmp_name']) ; $i++){
       $type="";
       $prop=getimagesize($_FILES['photos']['tmp_name'][$i]);
-      if($prop[1]>=400){
+      if($prop[1]>=300){
         if($_FILES['photos']['type'][$i]=='image/jpeg'){$type="jpg";}
         if($_FILES['photos']['type'][$i]=='image/gif'){$type="gif";}
         if($_FILES['photos']['type'][$i]=='image/png'){$type="png";}

@@ -63,8 +63,8 @@ if(isset($_FILES['photos']['tmp_name'])){
         
         
         //SAUVEGARDE DB
-        
-        mysql_query("insert into slider(photo) values('".addslashes($fichier_max.$fichier_src)."')");
+         mysql_query("insert into slider(photo,url) values('".addslashes($fichier_max.$fichier_src)."','".($_POST['url'])."')");
+
         
       }else{
         $err = 1;
@@ -180,7 +180,10 @@ if(isset($_REQUEST['id_sp']) and is_numeric($_REQUEST['id_sp'])){
                       <label for="exampleInputEmail1">Photos *</label>
                       <input class="form-control" type="file" name="photos[]" required multiple>
                     </div>
-
+ 					<div class="form-group">
+                      <label for="exampleInputEmail1">Entrer SVP URL de l'image *</label>
+                          <input type="text" name="url" class="form-control" size="80" value=""/>
+                    </div>
                     
 
                   </div>

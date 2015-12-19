@@ -34,11 +34,11 @@ include("connect.php");
         <div class="container">
           <div class="brand">
            
-            <h1 class="brand_name"><input type="image" src="images/logo_footer.png"></h1>
+            <a href="index.php"><input type="image" src="images/logo_footer.png"></a>
             
           </div>
   <ul class="row contact-list">
-    <a href="contact.php" style="float:right;">Contactez-Nous</a></div></ul>
+    <a href="contact.php" style="float:right;"></a></div></ul>
         <div id="stuck_container" class="stuck_container">
           <div class="container">
             <nav class="nav">

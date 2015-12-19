@@ -30,7 +30,7 @@ $count = $_POST['limit'];
 	<li class="grid_6">
 	  <div class="box">
 	    <div class="box_aside">
-	       <img src="<?php echo "images/bien/".$t['dossier']."/big/".$t['photo'];?>" height="250" width="250"> 
+	       <a href="detail.php?id=<?php echo $t['id'];?>"><img src="<?php echo "images/bien/".$t['dossier']."/big/".$t['photo'];?>" height="250" width="250"></a> 
 	    </div>
 	    <div class="box_cnt__no-flow">
 	      <h3><a href="detail.php?id=<?php echo $t['id'];?>"><?php echo stripslashes(utf8_decode($t['titre']));?></a></h3>

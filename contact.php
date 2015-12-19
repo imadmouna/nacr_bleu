@@ -49,11 +49,11 @@ if(isset($_POST['name']) and isset($_POST['email']) and isset($_POST['phone']) a
         <div class="container">
           <div class="brand">
            
-            <h1 class="brand_name"><input type="image" src="images/logo_footer.png"></h1>
+            <a href="index.php"><input type="image" src="images/logo_footer.png"></a>
             
           </div>
   <ul class="row contact-list">
-    <a href="contact.php" style="float:right;">Contactez-Nous</a></div></ul>
+    <a href="contact.php" style="float:right;"></a></div></ul>
         <div id="stuck_container" class="stuck_container">
           <div class="container">
             <nav class="nav">
@@ -98,12 +98,25 @@ if(isset($_POST['name']) and isset($_POST['email']) and isset($_POST['phone']) a
               <div class="grid_6">
                 <dl class="info">
                       <dt><img src="images/88.png"> Siège social :</dt>
-                      <dd>Km 1,5 Daoudiate, Marrakech</dd>
+                      <dd><?php
+                      $t = mysql_fetch_array(mysql_query("select siege_social from infos"));
+                      echo stripslashes(utf8_decode($t[0]));
+                    ?></dd>
                       <dt><img src="images/89.png">Téléphone :</dt>
-                      <dd>    Tél : +212 (0)6 64 36 48 60<br>
-   							  Tél : +212 (0)5 24 31 76 76<br>
-    						  Fax : +212 (0)5 24 31 74 74<br>
-    						   <img src="images/90.png">&nbsp;<strong>Email :</strong><a href="mailto:contact@nacrebleu.com">contact@nacrebleu.com</a>
+                      <dd>    Téléphone : <?php
+                      $t = mysql_fetch_array(mysql_query("select tel from infos"));
+                      echo stripslashes(utf8_decode($t[0]));
+                    ?><br>Fixe : <?php
+                      $t = mysql_fetch_array(mysql_query("select fixe from infos"));
+                      echo stripslashes(utf8_decode($t[0]));
+                    ?><br>Faxe : <?php
+                      $t = mysql_fetch_array(mysql_query("select fax from infos"));
+                      echo stripslashes(utf8_decode($t[0]));
+                    ?><br>
+   					<img src="images/90.png">&nbsp;<strong>Email : </strong><a href="mailto:info@nacrebleu.com"><?php
+                      $t = mysql_fetch_array(mysql_query("select email from infos"));
+                      echo stripslashes(utf8_decode($t[0]));
+                    ?></a>
 
 					  </dd>
                      
@@ -117,7 +130,19 @@ if(isset($_POST['name']) and isset($_POST['email']) and isset($_POST['phone']) a
                       </ul>
                       <ul class="row contact-list">
                        <dt>Réseaux Sociaux</dt>
-                      <dd><img src="images/91.png">&nbsp;<a href="#">Suivez nous sur facebook</a><br><img src="images/92.png">				<a href="#">Suivez nous sur Twitter</a></dd>
+                      <dd>
+                        <p><img src="images/91.png">&nbsp;<a href="<?php
+                      $t = mysql_fetch_array(mysql_query("select fb_page from infos"));
+                      echo stripslashes(utf8_decode($t[0]));
+                    ?>">Suivez nous sur facebook</a><br><img src="images/92.png">				<a href="<?php
+                      $t = mysql_fetch_array(mysql_query("select twitter_page from infos"));
+                      echo stripslashes(utf8_decode($t[0]));
+                    ?>">Suivez nous sur Twitter</a><br><img src="images/93.png">				<a href="<?php
+                      $t = mysql_fetch_array(mysql_query("select instagram from infos"));
+                      echo stripslashes(utf8_decode($t[0]));
+                    ?>">Suivez nous sur Instagram</a></p>
+                        <p>&nbsp;</p>
+                      </dd>
                       </ul>
                     </dl>
                   </div> 

@@ -4,9 +4,30 @@
             <ul class="row contact-list">
               <li class="grid_4">
                 <div class="box">
-                  Contactez-nous<br>Tél :+212 664364860 <br> 
-                  Email:<a href="mailto:info@nacrbleu.com">contact@nacrebleu.com</a><br>
-                  <a href="#">Suivez nous sur facebook</a><br><a href="#">Suivez nous sur Twitter</a>
+                  Contactez-nous<br>Téléphone : <?php
+                      $t = mysql_fetch_array(mysql_query("select tel from infos"));
+                      echo stripslashes(utf8_decode($t[0]));
+                    ?> <br>Fixe : <?php
+                      $t = mysql_fetch_array(mysql_query("select fixe from infos"));
+                      echo stripslashes(utf8_decode($t[0]));
+                    ?><br> Fax : <?php
+                      $t = mysql_fetch_array(mysql_query("select fax from infos"));
+                      echo stripslashes(utf8_decode($t[0]));
+                    ?><br> 
+                  Email : <a href="mailto:info@nacrebleu.com"><?php
+                      $t = mysql_fetch_array(mysql_query("select email from infos"));
+                      echo stripslashes(utf8_decode($t[0]));
+                    ?></a><br>
+                  <a href="<?php
+                      $t = mysql_fetch_array(mysql_query("select fb_page from infos"));
+                      echo stripslashes(utf8_decode($t[0]));
+                    ?>">Suivez nous sur facebook</a><br><a href="<?php
+                      $t = mysql_fetch_array(mysql_query("select twitter_page from infos"));
+                      echo stripslashes(utf8_decode($t[0]));
+                    ?>">Suivez nous sur Twitter</a><br><a href="<?php
+                      $t = mysql_fetch_array(mysql_query("select instagram from infos"));
+                      echo stripslashes(utf8_decode($t[0]));
+                    ?>">Suivez nous sur instagram</a>
                   
                 </div>
                

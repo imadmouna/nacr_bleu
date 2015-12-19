@@ -14,7 +14,21 @@ include("connect.php");
     <link rel="stylesheet" href="css/camera.css">
     <link rel="stylesheet" href="css/owl-carousel.css">
     <script src="js/jquery.js"></script>
-    <script src="js/jquery-migrate-1.2.1.js"></script><!--[if lt IE 9]>
+    <script src="js/jquery-migrate-1.2.1.js"></script>
+    <!-- Insert to your webpage before the </head> -->
+    <script src="sliderengine/amazingslider.js"></script>
+    <link rel="stylesheet" type="text/css" href="sliderengine/amazingslider-1.css">
+    <script src="sliderengine/initslider-1.js"></script>
+
+
+    <link rel="stylesheet" href="files/jquery.bxslider.css" type="text/css" />
+    <script src="files/jquery.bxslider.js"></script>
+
+
+    <!-- End of head section HTML codes -->
+    
+    
+    <!--[if lt IE 9]>
     <html class="lt-ie9">
       <div style="clear: both; text-align:center; position: relative;"><a href="http://windows.microsoft.com/en-US/internet-explorer/.."><img src="images/ie8-panel/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a></div>
     </html>
@@ -32,13 +46,13 @@ include("connect.php");
       -->
       <header>
         <div class="container">
-          <div class="brand">
-           
-            <h1 class="brand_name"><input type="image" src="images/logo_footer.png"></h1>
+        <div class="brand">
+           <a href="index.php"><input type="image" src="images/logo_footer.png"></a>
+            
             
           </div>
   <ul class="row contact-list">
-    <a href="contact.php" style="float:right;">Contactez-Nous</a></div></ul>
+    <a href="contact.php" style="float:right;"></a></div></ul>
         <div id="stuck_container" class="stuck_container">
           <div class="container">
             <nav class="nav">
@@ -53,30 +67,50 @@ include("connect.php");
       ========================================================
       -->
       <main>
-        <section class="camera_container">
-          <div id="camera" class="camera_wrap">
-            
+      
+      
 
-            <?php
-              $req1 = mysql_query("select * from slider order by id");
-              while($tab1 = mysql_fetch_array($req1)){
+
+
+
+
+      <script type="text/javascript">
+        $(document).ready(function(){
+          
+          $('.bxslider').bxSlider({
+            pager: false,
+            controls: true,
+            mode: 'fade',
+            captions: false,
+            auto: true
+          });
+
+        });
+      </script>
+
+      <div class="slider" style="margin:0px !important">
+        <ul class="bxslider" style="padding:0px !important;z-index: 1 !important;">
+          <?php
+              $aa = 0;
+              $tqq = mysql_query("select * from slider order by id");
+              if($tqq){
+                while($tt = mysql_fetch_array($tqq)){
             ?>
-              <div data-src="<?php echo $tab1[1];?>">
-                <div class="camera_caption fadeIn">
-                  <div class="container">
-                    <div class="row">
-                      <div class="preffix_6 grid_6"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            <?php
+                  
+            <li><a href="<?php echo $tt[2];?>"><img src="<?php echo $tt[1];?>" /></a></li>
+
+            <?php 
+                }
               }
             ?>
+        </ul>
+      </div>
+      
 
-          </div>
-        </section>
-
+      
+      
+      
+      
         <p>&nbsp;</p>
 
         <section>
@@ -93,10 +127,10 @@ include("connect.php");
                       while($t = mysql_fetch_array($query)){
                         
                   ?>
-                  <li class="grid_6">
+                  <li class="grid_6"  style="font-weight: lighter;">
                     <div class="box wow fadeInRight">
                       <div class="box_aside">
-                         <img src="<?php echo "images/bien/".$t['dossier']."/big/".$t['photo'];?>" height="250" width="250"> 
+     <a href="detail.php?id=<?php echo $t['id'];?>"><img src="<?php echo "images/bien/".$t['dossier']."/big/".$t['photo'];?>" height="250" width="250"></a> 
                       </div>
                       <div class="box_cnt__no-flow">
                         <h3><a href="detail.php?id=<?php echo $t['id'];?>"><?php echo stripslashes(utf8_decode($t['titre']));?></a></h3>

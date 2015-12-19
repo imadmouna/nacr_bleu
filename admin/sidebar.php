@@ -39,5 +39,6 @@
             
             <li class="header">AUTRES</li>
             <li><a href="profil.php"><i class="fa fa-circle-o text-danger"></i> Mon profil</a></li>
+            <li><a href="infos.php"><i class="fa fa-circle-o text-danger"></i> Autre Informations</a></li>
           </ul>
         </section>
