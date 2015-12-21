@@ -172,6 +172,14 @@ include("connect.php");
                 <div class="info-box">
                   <h3 class="fa-comment">M&eacute;t&eacute;o Marrakech</h3>
                   <hr>
+                  <style type="text/css">
+                    #widget_705e297ff3439d6933c8c1c6ec6ce2f7{
+                      width: 100% !important;
+                    }
+                    #widget_705e297ff3439d6933c8c1c6ec6ce2f7 iframe{
+                      width: 100% !important;
+                    }
+                  </style>
                   <!-- widget meteo -->
 <div id="widget_705e297ff3439d6933c8c1c6ec6ce2f7">
 <span id="l_705e297ff3439d6933c8c1c6ec6ce2f7"><a href="http://www.my-meteo.fr/previsions+meteo+maroc/marrakech.html"></a></span>
