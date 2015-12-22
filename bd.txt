@@ -1,0 +1,977 @@
+-- phpMyAdmin SQL Dump
+-- version 4.0.7
+-- http://www.phpmyadmin.net
+--
+-- Client: localhost
+-- G�n�r� le: Lun 21 D�cembre 2015 � 17:42
+-- Version du serveur: 5.5.35
+-- Version de PHP: 5.2.17
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Base de donn�es: `cl16-nacrebleu`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `apropos`
+--
+
+CREATE TABLE IF NOT EXISTS `apropos` (
+  `texte` text NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `apropos`
+--
+
+INSERT INTO `apropos` (`texte`) VALUES
+('<p>Depuis plusieurs ann&eacute;es l&#39;agence immobili&egrave;re nacre bleu vous propose ses comp&eacute;tences et son savoir faire pour toutes transactions immobili&egrave;res sur la ville de Marrakech et ses environs.</p>\r\n\r\n<p>L&#39;agence immobili&egrave;re NACRE BLEU situ&eacute;e &agrave; Marrakech, met tout en &oelig;uvre pour r&eacute;pondre &agrave; votre demande, vous proposer une s&eacute;lection de biens en fonction de votre budget, que ce soit une maison, un appartement, un terrain, un local</p>\r\n');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `bien`
+--
+
+CREATE TABLE IF NOT EXISTS `bien` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `titre` text NOT NULL,
+  `Description` text NOT NULL,
+  `prix` text NOT NULL,
+  `superficie` text NOT NULL,
+  `nbr_piece` text NOT NULL,
+  `id_ville` int(11) NOT NULL,
+  `id_cat` int(11) NOT NULL,
+  `id_sous_cat` int(11) NOT NULL,
+  `dossier` text NOT NULL,
+  `photo` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=48 ;
+
+--
+-- Contenu de la table `bien`
+--
+
+INSERT INTO `bien` (`id`, `titre`, `Description`, `prix`, `superficie`, `nbr_piece`, `id_ville`, `id_cat`, `id_sous_cat`, `dossier`, `photo`) VALUES
+(30, 'trÃ¨s belle villa 365 M2 Ã  louer ', '<p>Une tr&egrave;s belle villa &agrave; louer meubl&eacute;, situ&eacute; &agrave; TARGA pr&eacute;s de GUELIZ &agrave; Marrakech dans une r&eacute;sidence de haut standing.</p>\r\n\r\n<p>La surface titr&eacute;e de la villa est de 360 M2 en R+1, un rez de chausser comprend&nbsp;: un tr&egrave;s beau salon marocain moderne tr&egrave;s propre avec climatiseur r&eacute;versible, un s&eacute;jour comprend un salon sous forme de L moderne avec chemin&eacute; op&eacute;rationnelle et climatiseur r&eacute;versible, une tr&egrave;s belle cuisine moderne &eacute;quip&eacute;e en toutes &eacute;quipements n&eacute;cessaire pour la cuisine (plaque de cuisson, hotte spirante, four, lave vaisselle, lave lange, r&eacute;frig&eacute;rateur&nbsp; ext&nbsp;&hellip;.) &nbsp;Un coin salle &agrave; manger dans la cuisine avec t&eacute;l&eacute;, toilette invit&eacute;, un jardin &agrave; l entr&eacute;, un autre jardin avec piscine priv&eacute;e.</p>\r\n\r\n<p>Le haut comprend une suite parentale avec dressing et salle de bain avec baignoire et climatiseur r&eacute;versible et balcon, deux chambres invit&eacute;es avec placards et climatiseurs r&eacute;versible.</p>\r\n\r\n<p>La villa air&eacute;e&nbsp; &eacute;clair&eacute;e et ensoleill&eacute;e toute la journ&eacute;e.</p>\r\n\r\n<p>La r&eacute;sidence s&eacute;curis&eacute;e 24H/24H pr&eacute;s de toutes les commodit&eacute;s commerciales et les moyennes de transports.</p>\r\n', '16000 dirhams/ mois', '360', '6', 103, 2, 4, '1449257812', '1449257812_DSCN0675.jpg'),
+(29, 'bel appartement 83 M2 Ã  vendre', '<p>tr&eacute;s bel appartement a vendre meubl&eacute; d&#39;une surface titr&eacute;e de 83M2, situ&eacute; dans la palmeraie au 3 &eacute;me &eacute;tage dans un immeuble de haute standing avec une belle piscine salle de gym terrain de foot terrain de tennis terrain de basket une garderie d&#39;enfant et un grand jardin.</p>\r\n\r\n<p>L&rsquo;appartement comprend deux chambres chaque une avec salle de bain, un salon moderne, une cuisine ind&eacute;pendante &eacute;quip&eacute;e en plaque hotte four &eacute;tag&egrave;res et placards, une salle douche invit&eacute;e.</p>\r\n\r\n<p>la r&eacute;sidence pr&eacute;s du centre commercial marjane, aussi bien il existe au sein de la r&eacute;sidence une sup&eacute;rette des produits alimentaires, s&eacute;curis&eacute;e 24H/24. &nbsp;</p>\r\n', '1450000 dirhams', '83', '3', 103, 8, 11, '1448916926', '1448916926_DSCN0420.jpg'),
+(31, 'trÃ¨s bel appartement Ã  vendre ', '<p><strong>La conception de la&nbsp;r&eacute;sidence s&#39;inscrit dans un cadre de modernit&eacute; se traduisant par une offre de commodit&eacute;s de haut standing, un confort, un bien &ecirc;tre et une diversit&eacute; de services d&#39;espaces verts offrant aux r&eacute;sidents un climat s&eacute;curis&eacute;, reposant et harmonieux.</strong></p>\r\n\r\n<p><strong>Le complexe vous&nbsp;offre un cadre de vie de grande qualit&eacute; et de&nbsp;confort</strong></p>\r\n\r\n<p><strong>La r&eacute;sidence s&rsquo;&eacute;tend sur&nbsp;un hectare et 7000 mettre carr&eacute; compos&eacute; de deux complexe&nbsp;r&eacute;sidentiels en R+3, une v&eacute;ritable cit&eacute; jardin, avec 3 piscines dont une couverte, salle de sport et parking sous sol, mais surtout un espace pens&eacute; pour votre confort et votre&nbsp;plaisir.</strong></p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>Excellence, innovation,&nbsp;engagement et satisfaction client,&nbsp;telles sont les valeurs de la r&eacute;sidence.&nbsp;</strong></p>\r\n\r\n<p><strong>D&eacute;couvrez notre Projet dans&nbsp;la ville ocre&nbsp;Marrakech</strong></p>\r\n\r\n<p><strong>Pour votre achat d&rsquo;appartements neufs nous sommes &agrave; votre disposition pour toutes informations, un bureau de vente est sur place.</strong></p>\r\n', 'Ã  partir de 10500 DH/M2', 'entre 38 M2 et 121 M2', 'F1 F2 et F3', 103, 8, 11, '1449258455', '1449258455_NACRE BLEU 1.jpg'),
+(32, 'appartement au centre de GUELIZ  128 M2 Ã  louer', '<p>Un tr&egrave;s bel appartement &agrave; louer non meubl&eacute;, situ&eacute; en plein centre de GUELIZ au 1 &eacute;r &eacute;tage dans un immeuble de haut standing avec ascenseur et parking souterrain.</p>\r\n\r\n<p>La surface titr&eacute;e est de 128M2, comprend trois chambres avec placards et climatiseurs r&eacute;versibles, un tr&egrave;s beau salon et un s&eacute;jour, une toilette ind&eacute;pendante &eacute;quip&eacute;e en plaque hotte spirante four &eacute;lectrique placards et &eacute;tag&egrave;res, l&rsquo;appartement air&eacute; &eacute;clair&eacute; et ensoleill&eacute;.</p>\r\n\r\n<p>La r&eacute;sidence situ&eacute; en plein centre de GUELIZ s&eacute;curis&eacute;e 24H/24H&nbsp; pr&eacute;s de toutes les commodit&eacute;s commerciales et les moyennes de transports.</p>\r\n\r\n<p>&nbsp;</p>\r\n', '6500 dirhams/mois', '128', '5', 103, 8, 12, '1449259000', '1449259000_DSCN0248.jpg'),
+(33, 'belle villa Ã  vendre 2970 M2 situÃ© sur la route de fes Ã  Marrakech', '<p>Dans un environnement naturel calme absolu et agr&eacute;able, sans vis-&agrave;-vis une tr&egrave;s belle villa de standing &agrave; vendre b&acirc;tie sur 2970 M2 de terrain, Comprenant 335 M2 habitable sur deux niveaux, id&eacute;alement situ&eacute; &agrave; 18KM du centre de la ville.</p>\r\n\r\n<p>La villa se compose de cinq chambres dont deux avec salles douches et une suite parentale.</p>\r\n\r\n<p>Le rez de chausser se compose de&nbsp;: trois chambres dont une avec placard, une suite parentale avec salle de bain et dressing, un grand salon, un s&eacute;jour avec chemin&eacute;e, une belle cuisine ind&eacute;pendante, une salle douche invit&eacute;e, une salle d&rsquo;eau et des placards d&rsquo;arrangements, une chambre de Bonne avec salle douche et placard.</p>\r\n\r\n<p>Le premier &eacute;tage se compose de&nbsp;deux chambres avec placards et salle douches dont une avec une belle terrasse.</p>\r\n\r\n<p>Une grande terrasse id&eacute;alement plac&eacute;e avec une excellente vue sur le jardin et la piscine de la villa et les montagnes environnantes.</p>\r\n\r\n<p>Un tr&egrave;s beau jardin priv&eacute; comprend 94 arbres fruitiers palmiers et deux oliviers centenaires, aussi bien plusieurs types d&rsquo;arbres d&rsquo;ornement (des cocos, washingtoniens, myoporums, &nbsp;brachichinton&hellip;)</p>\r\n', '3200000 dirhams', '2970 M2', '9', 103, 2, 3, '1449262419', '1449262419_DSCN0162.jpg'),
+(36, 'trÃ©s bel appartement 89 M2 Ã  vendre en plein centre de Gueliz Ã  marrakech', '<p>Tr&egrave;s bel appartement &agrave; vendre situ&eacute; en plein centre de gueliz, au 5 &eacute;me &eacute;tage dans un immeuble de haut standing avec ascenseur et place de parking souterrain titr&eacute;e repr&eacute;sente 26M2.</p>\r\n\r\n<p>La surface de l&rsquo;appartement est de 89M2 titr&eacute;, comprend deux chambres avec placards balcons et climatiseur r&eacute;versible, un salon et s&eacute;jour avec chemin&eacute;e op&eacute;rationnelle, toilette invit&eacute;, une salle douche invit&eacute;e avec cabine, une&nbsp;tr&egrave;s belle cuisine ind&eacute;pendante &eacute;quip&eacute;e en plaque de cuisson &agrave; gaze four &eacute;lectrique hotte spirante climatiseur r&eacute;versible des &eacute;tag&egrave;res et placards. L&rsquo;appartement air&eacute; &eacute;clair&eacute; et ensoleill&eacute;.</p>\r\n\r\n<p>La r&eacute;sidence s&eacute;curis&eacute;e 24H/24H pr&eacute;s de toutes les commodit&eacute;s commerciales et les moyennes de transports.</p>\r\n', '1000000 dirhams', '89 M2', '3', 103, 8, 11, '1449522164', '1449522164_DSCN0399.jpg'),
+(35, 'appartement Ã  louer meublÃ© prÃ©s de la palmeraie 89 M2', '<p>Un tr&egrave;s bel appartement a vendre ou a louer, situ&eacute; au d&eacute;but de la palmeraie Marrakech, au 2 &eacute;me &eacute;tage d&rsquo;une superficie titr&eacute;e de 88,5M2, comprend deux chambres avec placards dont une avec balcon et climatiseur centralis&eacute; r&eacute;versible, un salon avec climatiseur centralis&eacute; r&eacute;versible et un balcon de 10M2 vue sur le jardin de la r&eacute;sidence et un chemin&eacute; op&eacute;rationnel, une salle douche invit&eacute;e avec cabine, une cuisine ind&eacute;pendante &eacute;quip&eacute;e en plaque hotte et four aussi bien de toutes les &eacute;quipements n&eacute;cessaire pour cuisine, une place parking souterrain de 11M2 titr&eacute;e. L&rsquo;appartement air&eacute; &eacute;clair&eacute; et ensoleill&eacute;.</p>\r\n\r\n<p>La r&eacute;sidence comprend trois piscines op&eacute;rationnelles&nbsp; une grande fontaine et un beau jardin. Pour avoir de la tranquillit&eacute; des agents de surveillances&nbsp; distribuer dans plusieurs coins de la r&eacute;sidence, pr&eacute;s de toutes les commodit&eacute;s commerciales et les moyennes de transports.</p>\r\n', '6000 dirhams/mois', '89 M2', '3', 103, 8, 12, '1449519894', '1449519895_DSCN8111.JPG'),
+(37, 'duplex 228 M2  Ã  vendre en plein centre de Gueliz Ã  marrakech', '<p>Duplex &agrave; vendre situ&eacute; en plein centre de GUELIZ &agrave; Marrakech au 4 &eacute;me &eacute;tage d&rsquo;un immeuble de haut standing avec ascenseur.</p>\r\n\r\n<p>La surface titr&eacute;e est de 226M2, comprend&nbsp;: 109 M2 habitable, 103 M2 de terrasse&nbsp; et 14M2 qui repr&eacute;sente une place de parking sous terrain titr&eacute;e.</p>\r\n\r\n<p>Le duplex comprend deux chambres avec placards et climatiseurs r&eacute;versibles, deux salle de bain une situ&eacute; au rez de chausser et l autre au 1 &eacute;r &eacute;tage,&nbsp; un salon avec climatiseur r&eacute;versible, une cuisine ind&eacute;pendante &eacute;quip&eacute;e en plaque hotte four&nbsp; &eacute;tag&egrave;res et placards. Le duplex air&eacute; &eacute;clair&eacute; et ensoleill&eacute;.</p>\r\n\r\n<p>La r&eacute;sidence s&eacute;curis&eacute; 24H/24H et pr&eacute;s de toutes les commodit&eacute;s commerciales et les toutes les moyennes de transports.</p>\r\n', '1800000 dirhams', '228 M2', '3', 103, 8, 11, '1449522709', '1449522709_DSCN1150.jpg'),
+(38, 'duplex 200 M2 Ã  louer en plein centre de Gueliz Ã  marrakech', '<p>Duplex &agrave; louer vide en plein centre de gueliz, situ&eacute; au 3 &eacute;me &eacute;tage avec ascenseur d&rsquo;une superficie total de 200 M2, comprend quatre chambres dont une avec salle de bain, une salle de bain avec baignoire invit&eacute;e, un salon, un s&eacute;jour, une grande cuisine ind&eacute;pendante avec buanderie, des balcons dans tous les coins de l&rsquo;appartement.</p>\r\n\r\n<p>Cet appartement air&eacute; &eacute;clair&eacute; et en soleill&eacute;e situ&eacute; dans une r&eacute;sidence s&eacute;curis&eacute;e 24H/24H &nbsp;pr&eacute;s de toutes les commodit&eacute;s commercial et les moyennes de transports.</p>\r\n', '6500 dirhams/mois', '200 M2', '6', 103, 8, 12, '1449523358', '1449523358_DSCN9918.JPG'),
+(44, 'duplex 122 M2 Ã  vendre en plein centre de GUELIZ', '<p>Tr&egrave;s bel duplex &agrave; vendre situ&eacute; en plein centre de gueliz &agrave; Marrakech, situ&eacute; au rez de chausser d&rsquo;un immeuble de haut standing.</p>\r\n\r\n<p>La surface titr&eacute;e est de 122 M2, comprend deux chambres avec placards et climatiseurs r&eacute;versible, un tr&egrave;s joli salon avec climatiseur r&eacute;versible, une belle cuisine ind&eacute;pendante &eacute;quip&eacute;e en plaque hotte spirante&nbsp; four &eacute;lectrique des &eacute;tag&egrave;res et placards, salle douche invit&eacute;, une belle terrasse avec barbecue, une salle de bain invit&eacute;e avec baignoire et petit s&eacute;jour.</p>\r\n\r\n<p>L&rsquo;appartement comprend une place de parking et box, la r&eacute;sidence s&eacute;curis&eacute;e 24H/24H pr&eacute;s de toutes les commodit&eacute;s commerciales et les moyennes de transports.</p>\r\n', '1400000 dirhams', '122 M2', '4', 103, 8, 11, '1449865294', '1449865322_DSCN0491.jpg'),
+(45, 'Ã©tage de villa 95 M2 deux chambres Ã  louer non meublÃ© Ã  Marrakech', '<p>&Eacute;tage de villa &agrave; lou&eacute; non meubl&eacute;, situ&eacute; au rez de chausser air&eacute; &eacute;clair&eacute; et ensoleill&eacute;.</p>\r\n\r\n<p>La superficie habitable est de 95 m2, comprend deux chambres avec fen&ecirc;tres dont une avec placard, un grand salon, une belle cuisine ind&eacute;pendante, une salle de bain invit&eacute;e, toilette invit&eacute;.</p>\r\n\r\n<p>La villa situ&eacute;e dans un quartier propre pr&eacute;s de toutes les commodit&eacute;s commerciales et les moyennes de transports.</p>\r\n', '3500 dirhams/mois', '95 M2', '3', 103, 8, 12, '1450015132', '1450015132_DSCN9786.jpg'),
+(46, 'Ã©tage de villa 115 M2 trois chambres Ã  louer non meublÃ© Ã  Marrakech ', '<p>Dans un quartier propre et pr&eacute;s de toutes les commodit&eacute;s commerciales et les moyennes de transports, un tr&egrave;s joli &eacute;tage de villa &agrave; lou&eacute; non meubl&eacute;.</p>\r\n\r\n<p>La superficie habitable est de 115 M2, situ&eacute; au 1 &eacute;r &eacute;tage air&eacute; &eacute;clair&eacute; et ensoleill&eacute;, comprend trois chambres dont une avec balcon et placards les autres avec fen&ecirc;tres, une salle de bain invit&eacute;e, toilette invit&eacute; et une cuisine ind&eacute;pendante.</p>\r\n', '4000 dirhams', '115 M2', '4', 103, 8, 12, '1450015369', '1450015369_DSCN9787.jpg'),
+(47, 'trÃ©s bel appartement 85M2 Ã  louer situÃ© dans la palmeraie Ã  marrakech', '<p>Bel appartement&nbsp;&nbsp;&agrave; vendre ou &agrave; louer meubl&eacute;, d&rsquo;une superficie titr&eacute;e de 85M2, situ&eacute; au 1 &eacute;r &eacute;tage avec ascenseur au sein d&rsquo;un complexe r&eacute;sidentiel de haut standing.</p>\r\n\r\n<p>L&rsquo;appartement comprend deux chambres dont une parental avec salle de bain placards et climatiseur centralis&eacute; r&eacute;versible et grand balcon d&rsquo;une vue sur le jardin, une autre chambre invit&eacute;e avec salle douche invit&eacute;e placard et climatiseur centralis&eacute; r&eacute;versible, un salon avec balcon vue sur le jardin et climatiseur centralis&eacute; r&eacute;versible, une cuisine am&eacute;ricaine &eacute;quip&eacute;e en hotte plaque four r&eacute;frig&eacute;rateur des &eacute;tag&egrave;res et placards, une grande piscine collective, une salle de gym, un terrain de foot, un terrain de tennis, un terrain de basket, une garderie des enfants, un espace jeux d&rsquo;enfant, une salle de musculation.</p>\r\n\r\n<p>La r&eacute;sidence s&eacute;curis&eacute;e 24H/24H aussi bien comprend une superette qui commercialise les produits alimentaires.</p>\r\n', '8500 dirhams ', '85 M2', '3', 103, 8, 12, '1450557134', '1450557134_DSCN0471.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `categorie`
+--
+
+CREATE TABLE IF NOT EXISTS `categorie` (
+  `id_cat` int(11) NOT NULL AUTO_INCREMENT,
+  `libelle` text NOT NULL,
+  PRIMARY KEY (`id_cat`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
+
+--
+-- Contenu de la table `categorie`
+--
+
+INSERT INTO `categorie` (`id_cat`, `libelle`) VALUES
+(2, 'Villa et maison'),
+(5, 'Terrain et ferme'),
+(7, 'Magasin et commerce'),
+(8, 'Appartements'),
+(9, 'Location vacance'),
+(14, 'plateaux et bureaux');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `galerie`
+--
+
+CREATE TABLE IF NOT EXISTS `galerie` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `chemin` text NOT NULL,
+  `date_ajout` text NOT NULL,
+  `id_bien` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=454 ;
+
+--
+-- Contenu de la table `galerie`
+--
+
+INSERT INTO `galerie` (`id`, `chemin`, `date_ajout`, `id_bien`) VALUES
+(4, '1444165547_Jellyfish.jpg', '2015/10/06', 19),
+(7, '1444250671_Lighthouse.jpg', '2015/10/07', 19),
+(8, '1444250671_Penguins.jpg', '2015/10/07', 19),
+(9, '1444560950_Desert.jpg', '2015/10/11', 19),
+(10, '1447944879_Desert.jpg', '2015/11/19', 28),
+(19, '1448915000_DSCN0405.jpg', '2015/11/30', 19),
+(12, '1447945094_Koala.jpg', '2015/11/19', 28),
+(13, '1447945094_Lighthouse.jpg', '2015/11/19', 28),
+(14, '1447945123_Chrysanthemum.jpg', '2015/11/19', 28),
+(15, '1447945123_Desert.jpg', '2015/11/19', 28),
+(18, '1448915000_DSCN0404.jpg', '2015/11/30', 19),
+(20, '1448915000_DSCN0407.jpg', '2015/11/30', 19),
+(21, '1448915000_DSCN0410.jpg', '2015/11/30', 19),
+(22, '1448915000_DSCN0411.jpg', '2015/11/30', 19),
+(23, '1448915000_DSCN0414.jpg', '2015/11/30', 19),
+(24, '1448915000_DSCN0416.jpg', '2015/11/30', 19),
+(25, '1448915000_DSCN0420.jpg', '2015/11/30', 19),
+(26, '1448915000_DSCN0421.jpg', '2015/11/30', 19),
+(27, '1448915000_DSCN0423.jpg', '2015/11/30', 19),
+(28, '1448915000_DSCN0435.jpg', '2015/11/30', 19),
+(29, '1448915000_DSCN0453.jpg', '2015/11/30', 19),
+(30, '1448915000_DSCN0454.jpg', '2015/11/30', 19),
+(31, '1448915000_DSCN0456.jpg', '2015/11/30', 19),
+(32, '1448915000_DSCN0462.jpg', '2015/11/30', 19),
+(33, '1448915000_DSCN0464.jpg', '2015/11/30', 19),
+(34, '1448915000_DSCN0472.jpg', '2015/11/30', 19),
+(35, '1448915000_DSCN0475.jpg', '2015/11/30', 19),
+(36, '1448915000_DSCN0479.jpg', '2015/11/30', 19),
+(37, '1448915000_DSCN0481.jpg', '2015/11/30', 19),
+(59, '1448916974_DSCN0410.jpg', '2015/11/30', 29),
+(39, '1448915817_DSCN0403.jpg', '2015/11/30', 20),
+(58, '1448916952_DSCN0404.jpg', '2015/11/30', 29),
+(41, '1448915817_DSCN0406.jpg', '2015/11/30', 20),
+(42, '1448915817_DSCN0407.jpg', '2015/11/30', 20),
+(43, '1448915817_DSCN0408.jpg', '2015/11/30', 20),
+(44, '1448915817_DSCN0410.jpg', '2015/11/30', 20),
+(45, '1448915817_DSCN0411.jpg', '2015/11/30', 20),
+(46, '1448915817_DSCN0412.jpg', '2015/11/30', 20),
+(47, '1448915817_DSCN0414.jpg', '2015/11/30', 20),
+(48, '1448915817_DSCN0415.jpg', '2015/11/30', 20),
+(49, '1448915817_DSCN0416.jpg', '2015/11/30', 20),
+(50, '1448915817_DSCN0418.jpg', '2015/11/30', 20),
+(51, '1448915817_DSCN0419.jpg', '2015/11/30', 20),
+(52, '1448915817_DSCN0420.jpg', '2015/11/30', 20),
+(53, '1448915817_DSCN0422.jpg', '2015/11/30', 20),
+(54, '1448915817_DSCN0423.jpg', '2015/11/30', 20),
+(55, '1448915817_DSCN0424.jpg', '2015/11/30', 20),
+(56, '1448915817_DSCN0426.jpg', '2015/11/30', 20),
+(60, '1448916974_DSCN0411.jpg', '2015/11/30', 29),
+(61, '1448916974_DSCN0416.jpg', '2015/11/30', 29),
+(62, '1448917026_DSCN0407.jpg', '2015/11/30', 29),
+(63, '1448917026_DSCN0408.jpg', '2015/11/30', 29),
+(64, '1448917026_DSCN0411.jpg', '2015/11/30', 29),
+(65, '1448917026_DSCN0415.jpg', '2015/11/30', 29),
+(66, '1448917026_DSCN0416.jpg', '2015/11/30', 29),
+(67, '1448917026_DSCN0419.jpg', '2015/11/30', 29),
+(68, '1448917026_DSCN0423.jpg', '2015/11/30', 29),
+(69, '1448917120_DSCN0435.jpg', '2015/11/30', 29),
+(70, '1448917121_DSCN0453.jpg', '2015/11/30', 29),
+(71, '1448917121_DSCN0454.jpg', '2015/11/30', 29),
+(72, '1448917121_DSCN0462.jpg', '2015/11/30', 29),
+(73, '1448917121_DSCN0464.jpg', '2015/11/30', 29),
+(75, '1449258045_DSCN0612.jpg', '2015/12/04', 30),
+(76, '1449258045_DSCN0615.jpg', '2015/12/04', 30),
+(77, '1449258045_DSCN0617.jpg', '2015/12/04', 30),
+(78, '1449258045_DSCN0619.jpg', '2015/12/04', 30),
+(79, '1449258045_DSCN0638.jpg', '2015/12/04', 30),
+(80, '1449258045_DSCN0639.jpg', '2015/12/04', 30),
+(81, '1449258045_DSCN0641.jpg', '2015/12/04', 30),
+(82, '1449258045_DSCN0645.jpg', '2015/12/04', 30),
+(83, '1449258045_DSCN0647.jpg', '2015/12/04', 30),
+(84, '1449258045_DSCN0651.jpg', '2015/12/04', 30),
+(85, '1449258045_DSCN0652.jpg', '2015/12/04', 30),
+(86, '1449258045_DSCN0654.jpg', '2015/12/04', 30),
+(87, '1449258045_DSCN0655.jpg', '2015/12/04', 30),
+(88, '1449258045_DSCN0661.jpg', '2015/12/04', 30),
+(89, '1449258045_DSCN0663.jpg', '2015/12/04', 30),
+(90, '1449258045_DSCN0667.jpg', '2015/12/04', 30),
+(91, '1449258045_DSCN0669.jpg', '2015/12/04', 30),
+(92, '1449258045_DSCN0673.jpg', '2015/12/04', 30),
+(93, '1449258045_DSCN0674.jpg', '2015/12/04', 30),
+(94, '1449258045_DSCN0675.jpg', '2015/12/04', 30),
+(95, '1449259120_DSCN0247.jpg', '2015/12/04', 32),
+(96, '1449259120_DSCN0248.jpg', '2015/12/04', 32),
+(97, '1449259120_DSCN0249.jpg', '2015/12/04', 32),
+(98, '1449259120_DSCN0250.jpg', '2015/12/04', 32),
+(99, '1449259120_DSCN0251.jpg', '2015/12/04', 32),
+(100, '1449259120_DSCN0256.jpg', '2015/12/04', 32),
+(101, '1449259120_DSCN0258.jpg', '2015/12/04', 32),
+(102, '1449259120_DSCN0265.jpg', '2015/12/04', 32),
+(103, '1449259120_DSCN0266.jpg', '2015/12/04', 32),
+(104, '1449259120_DSCN0269.jpg', '2015/12/04', 32),
+(105, '1449259120_DSCN0270.jpg', '2015/12/04', 32),
+(106, '1449259120_DSCN0272.jpg', '2015/12/04', 32),
+(107, '1449259120_DSCN0282.jpg', '2015/12/04', 32),
+(108, '1449262672_DSCN0159.jpg', '2015/12/04', 33),
+(109, '1449262672_DSCN0162.jpg', '2015/12/04', 33),
+(110, '1449262672_DSCN0164.jpg', '2015/12/04', 33),
+(111, '1449262672_DSCN0169.jpg', '2015/12/04', 33),
+(112, '1449262672_DSCN0174.jpg', '2015/12/04', 33),
+(113, '1449262672_DSCN0176.jpg', '2015/12/04', 33),
+(114, '1449262672_DSCN0182.jpg', '2015/12/04', 33),
+(115, '1449262672_DSCN0190.jpg', '2015/12/04', 33),
+(116, '1449262672_DSCN0206.jpg', '2015/12/04', 33),
+(117, '1449262672_DSCN0212.jpg', '2015/12/04', 33),
+(118, '1449262672_DSCN0215.jpg', '2015/12/04', 33),
+(119, '1449262672_DSCN0217.jpg', '2015/12/04', 33),
+(120, '1449262672_DSCN0219.jpg', '2015/12/04', 33),
+(121, '1449262672_DSCN0237.jpg', '2015/12/04', 33),
+(122, '1449262672_DSCN0238.jpg', '2015/12/04', 33),
+(123, '1449262672_DSCN0240.jpg', '2015/12/04', 33),
+(124, '1449262672_DSCN0245.jpg', '2015/12/04', 33),
+(125, '1449262672_DSCN0248.jpg', '2015/12/04', 33),
+(126, '1449262672_DSCN0265.jpg', '2015/12/04', 33),
+(127, '1449262672_DSCN0274.jpg', '2015/12/04', 33),
+(128, '1449264358_DSCN9422.JPG', '2015/12/04', 34),
+(129, '1449264358_DSCN9423.JPG', '2015/12/04', 34),
+(130, '1449264359_DSCN9424.JPG', '2015/12/04', 34),
+(131, '1449264359_DSCN9426.JPG', '2015/12/04', 34),
+(132, '1449264359_DSCN9427.JPG', '2015/12/04', 34),
+(133, '1449264359_DSCN9429.JPG', '2015/12/04', 34),
+(134, '1449264359_DSCN9430.JPG', '2015/12/04', 34),
+(135, '1449264359_DSCN9432.JPG', '2015/12/04', 34),
+(136, '1449264359_DSCN9433.JPG', '2015/12/04', 34),
+(137, '1449264359_DSCN9436.JPG', '2015/12/04', 34),
+(138, '1449264359_DSCN9437.JPG', '2015/12/04', 34),
+(139, '1449264359_DSCN9442.JPG', '2015/12/04', 34),
+(140, '1449519973_DSCN8089.jpg', '2015/12/07', 35),
+(141, '1449519973_DSCN8090.jpg', '2015/12/07', 35),
+(142, '1449519973_DSCN8095.jpg', '2015/12/07', 35),
+(143, '1449519973_DSCN8097.jpg', '2015/12/07', 35),
+(144, '1449519973_DSCN8098.jpg', '2015/12/07', 35),
+(145, '1449519973_DSCN8101.jpg', '2015/12/07', 35),
+(146, '1449519973_DSCN8102.jpg', '2015/12/07', 35),
+(147, '1449519973_DSCN8104.jpg', '2015/12/07', 35),
+(148, '1449519973_DSCN8114.jpg', '2015/12/07', 35),
+(149, '1449519973_DSCN8116.jpg', '2015/12/07', 35),
+(155, '1449522264_DSCN0393.jpg', '2015/12/07', 36),
+(151, '1449520377_DSCN8087.JPG', '2015/12/07', 35),
+(152, '1449520377_DSCN8093.JPG', '2015/12/07', 35),
+(153, '1449520440_DSCN8118.JPG', '2015/12/07', 35),
+(154, '1449520440_DSCN8120.JPG', '2015/12/07', 35),
+(156, '1449522264_DSCN0395.jpg', '2015/12/07', 36),
+(157, '1449522264_DSCN0396.jpg', '2015/12/07', 36),
+(158, '1449522264_DSCN0399.jpg', '2015/12/07', 36),
+(159, '1449522264_DSCN0403.jpg', '2015/12/07', 36),
+(160, '1449522264_DSCN0405.jpg', '2015/12/07', 36),
+(161, '1449522264_DSCN0406.jpg', '2015/12/07', 36),
+(162, '1449522264_DSCN0411.jpg', '2015/12/07', 36),
+(163, '1449522264_DSCN0413.jpg', '2015/12/07', 36),
+(164, '1449522264_DSCN0414.jpg', '2015/12/07', 36),
+(165, '1449522264_DSCN0415.jpg', '2015/12/07', 36),
+(166, '1449522264_DSCN0417.jpg', '2015/12/07', 36),
+(167, '1449522264_DSCN0419.jpg', '2015/12/07', 36),
+(168, '1449522264_DSCN0422.jpg', '2015/12/07', 36),
+(169, '1449522264_DSCN0423.jpg', '2015/12/07', 36),
+(170, '1449522264_DSCN0425.jpg', '2015/12/07', 36),
+(171, '1449522264_DSCN0427.jpg', '2015/12/07', 36),
+(172, '1449522264_DSCN0429.jpg', '2015/12/07', 36),
+(173, '1449522264_DSCN0431.jpg', '2015/12/07', 36),
+(174, '1449522264_DSCN0433.jpg', '2015/12/07', 36),
+(175, '1449522789_DSCN1149.jpg', '2015/12/07', 37),
+(176, '1449522789_DSCN1150.jpg', '2015/12/07', 37),
+(177, '1449522789_DSCN1151.jpg', '2015/12/07', 37),
+(178, '1449522789_DSCN1152.jpg', '2015/12/07', 37),
+(179, '1449522789_DSCN1153.jpg', '2015/12/07', 37),
+(180, '1449522789_DSCN1154.jpg', '2015/12/07', 37),
+(181, '1449522789_DSCN1155.jpg', '2015/12/07', 37),
+(182, '1449522789_DSCN1156.jpg', '2015/12/07', 37),
+(183, '1449522789_DSCN1158.jpg', '2015/12/07', 37),
+(184, '1449522789_DSCN1159.jpg', '2015/12/07', 37),
+(185, '1449522789_DSCN1160.jpg', '2015/12/07', 37),
+(186, '1449522789_DSCN1162.jpg', '2015/12/07', 37),
+(187, '1449522789_DSCN1168.jpg', '2015/12/07', 37),
+(188, '1449522789_DSCN1169.jpg', '2015/12/07', 37),
+(189, '1449522789_DSCN1175.jpg', '2015/12/07', 37),
+(190, '1449522789_DSCN1177.jpg', '2015/12/07', 37),
+(191, '1449523503_DSCN9887.jpg', '2015/12/07', 38),
+(192, '1449523503_DSCN9889.jpg', '2015/12/07', 38),
+(193, '1449523503_DSCN9891.jpg', '2015/12/07', 38),
+(194, '1449523503_DSCN9892.jpg', '2015/12/07', 38),
+(195, '1449523503_DSCN9894.jpg', '2015/12/07', 38),
+(196, '1449523503_DSCN9898.jpg', '2015/12/07', 38),
+(197, '1449523503_DSCN9902.jpg', '2015/12/07', 38),
+(198, '1449523503_DSCN9904.jpg', '2015/12/07', 38),
+(199, '1449523503_DSCN9907.jpg', '2015/12/07', 38),
+(200, '1449523503_DSCN9910.jpg', '2015/12/07', 38),
+(201, '1449523503_DSCN9912.jpg', '2015/12/07', 38),
+(202, '1449523503_DSCN9914.jpg', '2015/12/07', 38),
+(203, '1449523503_DSCN9916.jpg', '2015/12/07', 38),
+(204, '1449523503_DSCN9917.jpg', '2015/12/07', 38),
+(205, '1449523503_DSCN9918.jpg', '2015/12/07', 38),
+(206, '1449523503_DSCN9919.jpg', '2015/12/07', 38),
+(207, '1449523503_DSCN9920.jpg', '2015/12/07', 38),
+(208, '1449523503_DSCN9921.jpg', '2015/12/07', 38),
+(209, '1449523503_DSCN9926.jpg', '2015/12/07', 38),
+(210, '1449523503_DSCN9927.jpg', '2015/12/07', 38),
+(211, '1449524594_NACRE BLEU 1.jpg', '2015/12/07', 31),
+(212, '1449524594_NACRE BLEU 2.jpg', '2015/12/07', 31),
+(213, '1449524594_NACRE BLEU 4.jpg', '2015/12/07', 31),
+(214, '1449524594_NACRE BLEU 5.jpg', '2015/12/07', 31),
+(215, '1449524594_NACRE BLEU 6.jpg', '2015/12/07', 31),
+(216, '1449524594_NACRE BLEU 8.jpg', '2015/12/07', 31),
+(217, '1449524594_NACRE BLEU 10.jpg', '2015/12/07', 31),
+(218, '1449524594_NACRE BLEU 11.jpg', '2015/12/07', 31),
+(219, '1449524594_NACRE BLEU 12.jpg', '2015/12/07', 31),
+(220, '1449524594_NACRE BLEU 13.jpg', '2015/12/07', 31),
+(221, '1449524594_NACRE BLEU 14.jpg', '2015/12/07', 31),
+(222, '1449524594_NACRE BLEU 15.jpg', '2015/12/07', 31),
+(223, '1449524594_NACRE BLEU 16.jpg', '2015/12/07', 31),
+(224, '1449524594_NACRE BLEU 17.jpg', '2015/12/07', 31),
+(225, '1449524594_NACRE BLEU 19.jpg', '2015/12/07', 31),
+(226, '1449524594_NACRE BLEU 20.jpg', '2015/12/07', 31),
+(227, '1449524594_NACRE BLEU 21.jpg', '2015/12/07', 31),
+(228, '1449576889_DSCN0402.jpg', '2015/12/08', 40),
+(229, '1449576889_DSCN0403.jpg', '2015/12/08', 40),
+(230, '1449576889_DSCN0405.jpg', '2015/12/08', 40),
+(231, '1449576889_DSCN0406.jpg', '2015/12/08', 40),
+(232, '1449576889_DSCN0407.jpg', '2015/12/08', 40),
+(233, '1449576889_DSCN0411.jpg', '2015/12/08', 40),
+(234, '1449576889_DSCN0412.jpg', '2015/12/08', 40),
+(235, '1449576889_DSCN0413.jpg', '2015/12/08', 40),
+(236, '1449576889_DSCN0414.jpg', '2015/12/08', 40),
+(237, '1449576889_DSCN0415.jpg', '2015/12/08', 40),
+(238, '1449577998_DSCN0402.JPG', '2015/12/08', 41),
+(239, '1449577998_DSCN0403.JPG', '2015/12/08', 41),
+(240, '1449577998_DSCN0404.JPG', '2015/12/08', 41),
+(241, '1449577999_DSCN0405.JPG', '2015/12/08', 41),
+(242, '1449577999_DSCN0406.JPG', '2015/12/08', 41),
+(243, '1449577999_DSCN0407.JPG', '2015/12/08', 41),
+(244, '1449577999_DSCN0408.JPG', '2015/12/08', 41),
+(245, '1449577999_DSCN0409.JPG', '2015/12/08', 41),
+(246, '1449577999_DSCN0410.JPG', '2015/12/08', 41),
+(247, '1449577999_DSCN0411.JPG', '2015/12/08', 41),
+(249, '1449784812_DSCN9420.JPG', '2015/12/10', 42),
+(250, '1449784812_DSCN9421.JPG', '2015/12/10', 42),
+(251, '1449784812_DSCN9422.JPG', '2015/12/10', 42),
+(252, '1449784812_DSCN9423.JPG', '2015/12/10', 42),
+(253, '1449784812_DSCN9424.JPG', '2015/12/10', 42),
+(254, '1449784812_DSCN9425.JPG', '2015/12/10', 42),
+(255, '1449784812_DSCN9426.JPG', '2015/12/10', 42),
+(256, '1449784812_DSCN9427.JPG', '2015/12/10', 42),
+(257, '1449784812_DSCN9428.JPG', '2015/12/10', 42),
+(258, '1449784812_DSCN9429.JPG', '2015/12/10', 42),
+(259, '1449784812_DSCN9430.JPG', '2015/12/10', 42),
+(260, '1449784812_DSCN9431.JPG', '2015/12/10', 42),
+(261, '1449784812_DSCN9432.JPG', '2015/12/10', 42),
+(262, '1449784812_DSCN9433.JPG', '2015/12/10', 42),
+(263, '1449784812_DSCN9434.JPG', '2015/12/10', 42),
+(264, '1449784812_DSCN9435.JPG', '2015/12/10', 42),
+(265, '1449784812_DSCN9436.JPG', '2015/12/10', 42),
+(266, '1449784812_DSCN9437.JPG', '2015/12/10', 42),
+(267, '1449784812_DSCN9438.JPG', '2015/12/10', 42),
+(268, '1449784812_DSCN9439.JPG', '2015/12/10', 42),
+(410, '1449865640_DSCN0530.jpg', '2015/12/11', 44),
+(409, '1449865640_DSCN0524.jpg', '2015/12/11', 44),
+(408, '1449865640_DSCN0522.jpg', '2015/12/11', 44),
+(407, '1449865640_DSCN0520.jpg', '2015/12/11', 44),
+(406, '1449865640_DSCN0518.jpg', '2015/12/11', 44),
+(405, '1449865640_DSCN0516.jpg', '2015/12/11', 44),
+(404, '1449865640_DSCN0514.jpg', '2015/12/11', 44),
+(403, '1449865640_DSCN0512.jpg', '2015/12/11', 44),
+(402, '1449865640_DSCN0511.jpg', '2015/12/11', 44),
+(401, '1449865640_DSCN0506.jpg', '2015/12/11', 44),
+(400, '1449865640_DSCN0504.jpg', '2015/12/11', 44),
+(399, '1449865640_DSCN0502.jpg', '2015/12/11', 44),
+(398, '1449865640_DSCN0500.jpg', '2015/12/11', 44),
+(397, '1449865640_DSCN0498.jpg', '2015/12/11', 44),
+(396, '1449865640_DSCN0493.jpg', '2015/12/11', 44),
+(395, '1449865640_DSCN0491.jpg', '2015/12/11', 44),
+(394, '1449865640_DSCN0490.jpg', '2015/12/11', 44),
+(393, '1449865640_DSCN0486.jpg', '2015/12/11', 44),
+(392, '1449865640_DSCN0481.jpg', '2015/12/11', 44),
+(391, '1449865640_DSCN0480.jpg', '2015/12/11', 44),
+(411, '1450015215_DSCN9786.jpg', '2015/12/13', 45),
+(412, '1450015215_DSCN9787.jpg', '2015/12/13', 45),
+(413, '1450015215_DSCN9788.jpg', '2015/12/13', 45),
+(414, '1450015215_DSCN9790.jpg', '2015/12/13', 45),
+(415, '1450015215_DSCN9791.jpg', '2015/12/13', 45),
+(416, '1450015215_DSCN9794.jpg', '2015/12/13', 45),
+(417, '1450015215_DSCN9796.jpg', '2015/12/13', 45),
+(418, '1450015215_DSCN9799.jpg', '2015/12/13', 45),
+(419, '1450015215_DSCN9801.jpg', '2015/12/13', 45),
+(420, '1450015215_DSCN9802.jpg', '2015/12/13', 45),
+(421, '1450015215_DSCN9803.jpg', '2015/12/13', 45),
+(422, '1450015411_DSCN9786.jpg', '2015/12/13', 46),
+(423, '1450015411_DSCN9787.jpg', '2015/12/13', 46),
+(424, '1450015411_DSCN9788.jpg', '2015/12/13', 46),
+(425, '1450015412_DSCN9790.jpg', '2015/12/13', 46),
+(426, '1450015412_DSCN9791.jpg', '2015/12/13', 46),
+(427, '1450015412_DSCN9792.jpg', '2015/12/13', 46),
+(428, '1450015412_DSCN9794.jpg', '2015/12/13', 46),
+(429, '1450015412_DSCN9795.jpg', '2015/12/13', 46),
+(430, '1450015412_DSCN9796.jpg', '2015/12/13', 46),
+(431, '1450015412_DSCN9798.jpg', '2015/12/13', 46),
+(432, '1450015412_DSCN9800.jpg', '2015/12/13', 46),
+(433, '1450015412_DSCN9801.jpg', '2015/12/13', 46),
+(434, '1450015412_DSCN9802.jpg', '2015/12/13', 46),
+(435, '1450557239_DSCN0495.jpg', '2015/12/19', 47),
+(436, '1450557297_DSCN0471.jpg', '2015/12/19', 47),
+(437, '1450557297_DSCN0485.jpg', '2015/12/19', 47),
+(438, '1450557297_DSCN0494.jpg', '2015/12/19', 47),
+(439, '1450557297_DSCN9850.jpg', '2015/12/19', 47),
+(440, '1450557297_DSCN9852.jpg', '2015/12/19', 47),
+(441, '1450557297_DSCN9853.jpg', '2015/12/19', 47),
+(442, '1450557297_DSCN9854.jpg', '2015/12/19', 47),
+(443, '1450557297_DSCN9855.jpg', '2015/12/19', 47),
+(444, '1450557297_DSCN9859.jpg', '2015/12/19', 47),
+(445, '1450557297_DSCN9861.jpg', '2015/12/19', 47),
+(446, '1450557297_DSCN9868.jpg', '2015/12/19', 47),
+(447, '1450557297_DSCN9869.jpg', '2015/12/19', 47),
+(448, '1450557297_DSCN9872.jpg', '2015/12/19', 47),
+(449, '1450557297_DSCN9875.jpg', '2015/12/19', 47),
+(450, '1450557297_DSCN9876.jpg', '2015/12/19', 47),
+(451, '1450557297_DSCN9880.jpg', '2015/12/19', 47),
+(452, '1450557297_DSCN9881.jpg', '2015/12/19', 47),
+(453, '1450557297_DSCN9883.jpg', '2015/12/19', 47);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `infos`
+--
+
+CREATE TABLE IF NOT EXISTS `infos` (
+  `tel` text NOT NULL,
+  `email` text NOT NULL,
+  `fb_page` varchar(100) NOT NULL,
+  `twitter_page` varchar(100) NOT NULL,
+  `siege_social` varchar(100) NOT NULL,
+  `instagram` varchar(100) NOT NULL,
+  `fixe` varchar(100) NOT NULL,
+  `fax` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `infos`
+--
+
+INSERT INTO `infos` (`tel`, `email`, `fb_page`, `twitter_page`, `siege_social`, `instagram`, `fixe`, `fax`) VALUES
+('0664364860 ', 'info@nacrebleu.com', 'facebook.com', 'twitter.com', '57 Daoudiate - Marrakech', '', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `manager`
+--
+
+CREATE TABLE IF NOT EXISTS `manager` (
+  `login` text NOT NULL,
+  `pass` text NOT NULL,
+  `salt` text NOT NULL,
+  `last_login` text NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `manager`
+--
+
+INSERT INTO `manager` (`login`, `pass`, `salt`, `last_login`) VALUES
+('admin', 'ccvLCmjTYZUjo', 'ccc1f124cc87cf11852a983b4ece8e84', 'Sun 20 Dec 21h, 2015');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `mise_avant`
+--
+
+CREATE TABLE IF NOT EXISTS `mise_avant` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_bien` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=70 ;
+
+--
+-- Contenu de la table `mise_avant`
+--
+
+INSERT INTO `mise_avant` (`id`, `id_bien`) VALUES
+(63, 29),
+(64, 30),
+(65, 31),
+(66, 32),
+(67, 33),
+(68, 36),
+(69, 39);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `slider`
+--
+
+CREATE TABLE IF NOT EXISTS `slider` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `photo` text NOT NULL,
+  `url` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=60 ;
+
+--
+-- Contenu de la table `slider`
+--
+
+INSERT INTO `slider` (`id`, `photo`, `url`) VALUES
+(57, 'images/1450556669_DSCN0157.jpg', 'http://nacrebleu.com/liste.php?id_sous_cat=3'),
+(58, 'images/1450556879_DSCN0656.jpg', 'http://nacrebleu.com/detail.php?id=31'),
+(59, 'images/1450557350_DSCN0471.jpg', 'http://nacrebleu.com/detail.php?id=47');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `sous_categorie`
+--
+
+CREATE TABLE IF NOT EXISTS `sous_categorie` (
+  `id_sous_cat` int(11) NOT NULL AUTO_INCREMENT,
+  `id_cat` int(11) NOT NULL,
+  `libelle` text NOT NULL,
+  PRIMARY KEY (`id_sous_cat`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=18 ;
+
+--
+-- Contenu de la table `sous_categorie`
+--
+
+INSERT INTO `sous_categorie` (`id_sous_cat`, `id_cat`, `libelle`) VALUES
+(4, 2, 'Louer'),
+(3, 2, 'Vendre'),
+(5, 9, 'Louer un appartement'),
+(6, 9, 'Louer une villa'),
+(7, 7, 'Vendre'),
+(8, 7, 'Location '),
+(9, 5, 'Vente terrain'),
+(10, 5, 'Vente ferme'),
+(11, 8, 'Vente appartement'),
+(12, 8, 'Location appartement'),
+(14, 10, 'location bureaux et plateaux'),
+(15, 10, 'plateaux'),
+(16, 12, 'vendre'),
+(17, 12, 'location');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `ville`
+--
+
+CREATE TABLE IF NOT EXISTS `ville` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ville` varchar(40) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=403 ;
+
+--
+-- Contenu de la table `ville`
+--
+
+INSERT INTO `ville` (`id`, `ville`) VALUES
+(1, 'Aïn Harrouda'),
+(2, 'Ben Yakhlef'),
+(3, 'Bouskoura'),
+(4, 'Casablanca'),
+(5, 'Médiouna'),
+(6, 'Mohammédia'),
+(7, 'Tit Mellil'),
+(8, 'Ben Yakhlef'),
+(9, 'Bejaâd'),
+(10, 'Ben Ahmed'),
+(11, 'Benslimane'),
+(12, 'Berrechid'),
+(13, 'Boujniba'),
+(14, 'Boulanouare'),
+(15, 'Bouznika'),
+(16, 'Deroua'),
+(17, 'El Borouj'),
+(18, 'El Gara'),
+(19, 'Guisser'),
+(20, 'Hattane'),
+(21, 'Khouribga'),
+(22, 'Loulad'),
+(23, 'Oued Zem'),
+(24, 'Oulad Abbou'),
+(25, 'Oulad H''Riz Sahel'),
+(26, 'Oulad M''rah'),
+(27, 'Oulad Saïd'),
+(28, 'Oulad Sidi Ben Daoud'),
+(29, 'Ras El Aïn'),
+(30, 'Settat'),
+(31, 'Sidi Rahhal Chataï'),
+(32, 'Soualem'),
+(33, 'Azemmour'),
+(34, 'Bir Jdid'),
+(35, 'Bouguedra'),
+(36, 'Echemmaia'),
+(37, 'El Jadida'),
+(38, 'Hrara'),
+(39, 'Ighoud'),
+(40, 'Jamâat Shaim'),
+(41, 'Jorf Lasfar'),
+(42, 'Khemis Zemamra'),
+(43, 'Laaounate'),
+(44, 'Moulay Abdallah'),
+(45, 'Oualidia'),
+(46, 'Oulad Amrane'),
+(47, 'Oulad Frej'),
+(48, 'Oulad Ghadbane'),
+(49, 'Safi'),
+(50, 'Sebt El Maârif'),
+(51, 'Sebt Gzoula'),
+(52, 'Sidi Ahmed'),
+(53, 'Sidi Ali Ban Hamdouche'),
+(54, 'Sidi Bennour'),
+(55, 'Sidi Bouzid'),
+(56, 'Sidi Smaïl'),
+(57, 'Youssoufia'),
+(58, 'Fès'),
+(59, 'Aïn Cheggag'),
+(60, 'Bhalil'),
+(61, 'Boulemane'),
+(62, 'El Menzel'),
+(63, 'Guigou'),
+(64, 'Imouzzer Kandar'),
+(65, 'Imouzzer Marmoucha'),
+(66, 'Missour'),
+(67, 'Moulay Yaâcoub'),
+(68, 'Ouled Tayeb'),
+(69, 'Outat El Haj'),
+(70, 'Ribate El Kheir'),
+(71, 'Séfrou'),
+(72, 'Skhinate'),
+(73, 'Tafajight'),
+(74, 'Arbaoua'),
+(75, 'Aïn Dorij'),
+(76, 'Dar Gueddari'),
+(77, 'Had Kourt'),
+(78, 'Jorf El Melha'),
+(79, 'Kénitra'),
+(80, 'Khenichet'),
+(81, 'Lalla Mimouna'),
+(82, 'Mechra Bel Ksiri'),
+(83, 'Mehdia'),
+(84, 'Moulay Bousselham'),
+(85, 'Sidi Allal Tazi'),
+(86, 'Sidi Kacem'),
+(87, 'Sidi Slimane'),
+(88, 'Sidi Taibi'),
+(89, 'Sidi Yahya El Gharb'),
+(90, 'Souk El Arbaa'),
+(91, 'Akka'),
+(92, 'Assa'),
+(93, 'Bouizakarne'),
+(94, 'El Ouatia'),
+(95, 'Es-Semara'),
+(96, 'Fam El Hisn'),
+(97, 'Foum Zguid'),
+(98, 'Guelmim'),
+(99, 'Taghjijt'),
+(100, 'Tan-Tan'),
+(101, 'Tata'),
+(102, 'Zag'),
+(103, 'Marrakech'),
+(104, 'Ait Daoud'),
+(115, 'Amizmiz'),
+(116, 'Assahrij'),
+(117, 'Aït Ourir'),
+(118, 'Ben Guerir'),
+(119, 'Chichaoua'),
+(120, 'El Hanchane'),
+(121, 'El Kelaâ des Sraghna'),
+(122, 'Essaouira'),
+(123, 'Fraïta'),
+(124, 'Ghmate'),
+(125, 'Ighounane'),
+(126, 'Imintanoute'),
+(127, 'Kattara'),
+(128, 'Lalla Takerkoust'),
+(129, 'Loudaya'),
+(130, 'Lâattaouia'),
+(131, 'Moulay Brahim'),
+(132, 'Mzouda'),
+(133, 'Ounagha'),
+(134, 'Sid L''Mokhtar'),
+(135, 'Sid Zouin'),
+(136, 'Sidi Abdallah Ghiat'),
+(137, 'Sidi Bou Othmane'),
+(138, 'Sidi Rahhal'),
+(139, 'Skhour Rehamna'),
+(140, 'Smimou'),
+(141, 'Tafetachte'),
+(142, 'Tahannaout'),
+(143, 'Talmest'),
+(144, 'Tamallalt'),
+(145, 'Tamanar'),
+(146, 'Tamansourt'),
+(147, 'Tameslouht'),
+(148, 'Tanalt'),
+(149, 'Zeubelemok'),
+(150, 'Meknès‎'),
+(151, 'Khénifra'),
+(152, 'Agourai'),
+(153, 'Ain Taoujdate'),
+(154, 'MyAliCherif'),
+(155, 'Rissani'),
+(156, 'Amalou Ighriben'),
+(157, 'Aoufous'),
+(158, 'Arfoud'),
+(159, 'Azrou'),
+(160, 'Aïn Jemaa'),
+(161, 'Aïn Karma'),
+(162, 'Aïn Leuh'),
+(163, 'Aït Boubidmane'),
+(164, 'Aït Ishaq'),
+(165, 'Boudnib'),
+(166, 'Boufakrane'),
+(167, 'Boumia'),
+(168, 'El Hajeb'),
+(169, 'Elkbab'),
+(170, 'Er-Rich'),
+(171, 'Errachidia'),
+(172, 'Gardmit'),
+(173, 'Goulmima'),
+(174, 'Gourrama'),
+(175, 'Had Bouhssoussen'),
+(176, 'Haj Kaddour'),
+(177, 'Ifrane'),
+(178, 'Itzer'),
+(179, 'Jorf'),
+(180, 'Kehf Nsour'),
+(181, 'Kerrouchen'),
+(182, 'M''haya'),
+(183, 'M''rirt'),
+(184, 'Midelt'),
+(185, 'Moulay Ali Cherif'),
+(186, 'Moulay Bouazza'),
+(187, 'Moulay Idriss Zerhoun'),
+(188, 'Moussaoua'),
+(189, 'N''Zalat Bni Amar'),
+(190, 'Ouaoumana'),
+(191, 'Oued Ifrane'),
+(192, 'Sabaa Aiyoun'),
+(193, 'Sebt Jahjouh'),
+(194, 'Sidi Addi'),
+(195, 'Tichoute'),
+(196, 'Tighassaline'),
+(197, 'Tighza'),
+(198, 'Timahdite'),
+(199, 'Tinejdad'),
+(200, 'Tizguite'),
+(201, 'Toulal'),
+(202, 'Tounfite'),
+(203, 'Zaouia d''Ifrane'),
+(204, 'Zaïda'),
+(205, 'Ahfir'),
+(206, 'Aklim'),
+(207, 'Al Aroui'),
+(208, 'Aïn Bni Mathar'),
+(209, 'Aïn Erreggada'),
+(210, 'Ben Taïeb'),
+(211, 'Berkane'),
+(212, 'Bni Ansar'),
+(213, 'Bni Chiker'),
+(214, 'Bni Drar'),
+(215, 'Bni Tadjite'),
+(216, 'Bouanane'),
+(217, 'Bouarfa'),
+(218, 'Bouhdila'),
+(219, 'Dar El Kebdani'),
+(220, 'Debdou'),
+(221, 'Douar Kannine'),
+(222, 'Driouch'),
+(223, 'El Aïoun Sidi Mellouk'),
+(224, 'Farkhana'),
+(225, 'Figuig'),
+(226, 'Ihddaden'),
+(227, 'Jaâdar'),
+(228, 'Jerada'),
+(229, 'Kariat Arekmane'),
+(230, 'Kassita'),
+(231, 'Kerouna'),
+(232, 'Laâtamna'),
+(233, 'Madagh'),
+(234, 'Midar'),
+(235, 'Nador'),
+(236, 'Naima'),
+(237, 'Oued Heimer'),
+(238, 'Oujda'),
+(239, 'Ras El Ma'),
+(240, 'Saïdia'),
+(241, 'Selouane'),
+(242, 'Sidi Boubker'),
+(243, 'Sidi Slimane Echcharaa'),
+(244, 'Talsint'),
+(245, 'Taourirt'),
+(246, 'Tendrara'),
+(247, 'Tiztoutine'),
+(248, 'Touima'),
+(249, 'Touissit'),
+(250, 'Zaïo'),
+(251, 'Zeghanghane'),
+(252, 'Rabat'),
+(253, 'Salé'),
+(254, 'Ain El Aouda'),
+(255, 'Harhoura'),
+(256, 'Khémisset'),
+(257, 'Oulmès'),
+(258, 'Rommani'),
+(259, 'Sidi Allal El Bahraoui'),
+(260, 'Sidi Bouknadel'),
+(261, 'Skhirat'),
+(262, 'Tamesna'),
+(263, 'Témara'),
+(264, 'Tiddas'),
+(265, 'Tiflet'),
+(266, 'Touarga'),
+(267, 'Agadir'),
+(268, 'Agdz'),
+(269, 'Agni Izimmer'),
+(270, 'Aït Melloul'),
+(271, 'Alnif'),
+(272, 'Anzi'),
+(273, 'Aoulouz'),
+(274, 'Aourir'),
+(275, 'Arazane'),
+(276, 'Aït Baha'),
+(277, 'Aït Iaâza'),
+(278, 'Aït Yalla'),
+(279, 'Ben Sergao'),
+(280, 'Biougra'),
+(281, 'Boumalne-Dadès'),
+(282, 'Dcheira El Jihadia'),
+(283, 'Drargua'),
+(284, 'El Guerdane'),
+(285, 'Harte Lyamine'),
+(286, 'Ida Ougnidif'),
+(287, 'Ifri'),
+(288, 'Igdamen'),
+(289, 'Ighil n''Oumgoun'),
+(290, 'Imassine'),
+(291, 'Inezgane'),
+(292, 'Irherm'),
+(293, 'Kelaat-M''Gouna'),
+(294, 'Lakhsas'),
+(295, 'Lakhsass'),
+(296, 'Lqliâa'),
+(297, 'M''semrir'),
+(298, 'Massa (Maroc)'),
+(299, 'Megousse'),
+(300, 'Ouarzazate'),
+(301, 'Oulad Berhil'),
+(302, 'Oulad Teïma'),
+(303, 'Sarghine'),
+(304, 'Sidi Ifni'),
+(305, 'Skoura'),
+(306, 'Tabounte'),
+(307, 'Tafraout'),
+(308, 'Taghzout'),
+(309, 'Tagzen'),
+(310, 'Taliouine'),
+(311, 'Tamegroute'),
+(312, 'Tamraght'),
+(313, 'Tanoumrite Nkob Zagora'),
+(314, 'Taourirt ait zaghar'),
+(315, 'Taroudant'),
+(316, 'Temsia'),
+(317, 'Tifnit'),
+(318, 'Tisgdal'),
+(319, 'Tiznit'),
+(320, 'Toundoute'),
+(321, 'Zagora'),
+(322, 'Afourar'),
+(323, 'Aghbala'),
+(324, 'Azilal'),
+(325, 'Aït Majden'),
+(326, 'Beni Ayat'),
+(327, 'Béni Mellal'),
+(328, 'Bin elouidane'),
+(329, 'Bradia'),
+(330, 'Bzou'),
+(331, 'Dar Oulad Zidouh'),
+(332, 'Demnate'),
+(333, 'Dra''a'),
+(334, 'El Ksiba'),
+(335, 'Foum Jamaa'),
+(336, 'Fquih Ben Salah'),
+(337, 'Kasba Tadla'),
+(338, 'Ouaouizeght'),
+(339, 'Oulad Ayad'),
+(340, 'Oulad M''Barek'),
+(341, 'Oulad Yaich'),
+(342, 'Sidi Jaber'),
+(343, 'Souk Sebt Oulad Nemma'),
+(344, 'Zaouïat Cheikh'),
+(345, 'Tanger‎'),
+(346, 'Tétouan‎'),
+(347, 'Akchour'),
+(348, 'Assilah'),
+(349, 'Bab Berred'),
+(350, 'Bab Taza'),
+(351, 'Brikcha'),
+(352, 'Chefchaouen'),
+(353, 'Dar Bni Karrich'),
+(354, 'Dar Chaoui'),
+(355, 'Fnideq'),
+(356, 'Gueznaia'),
+(357, 'Jebha'),
+(358, 'Karia'),
+(359, 'Khémis Sahel'),
+(360, 'Ksar El Kébir'),
+(361, 'Larache'),
+(362, 'M''diq'),
+(363, 'Martil'),
+(364, 'Moqrisset'),
+(365, 'Oued Laou'),
+(366, 'Oued Rmel'),
+(367, 'Ouezzane'),
+(368, 'Point Cires'),
+(369, 'Sidi Lyamani'),
+(370, 'Sidi Mohamed ben Abdallah el-Raisuni'),
+(371, 'Zinat'),
+(372, 'Ajdir‎'),
+(373, 'Aknoul‎'),
+(374, 'Al Hoceïma‎'),
+(375, 'Aït Hichem‎'),
+(376, 'Bni Bouayach‎'),
+(377, 'Bni Hadifa‎'),
+(378, 'Ghafsai‎'),
+(379, 'Guercif‎'),
+(380, 'Imzouren‎'),
+(381, 'Inahnahen‎'),
+(382, 'Issaguen (Ketama)‎'),
+(383, 'Karia (El Jadida)‎'),
+(384, 'Karia Ba Mohamed‎'),
+(385, 'Oued Amlil‎'),
+(386, 'Oulad Zbair‎'),
+(387, 'Tahla‎'),
+(388, 'Tala Tazegwaght‎'),
+(389, 'Tamassint‎'),
+(390, 'Taounate‎'),
+(391, 'Targuist‎'),
+(392, 'Taza‎'),
+(393, 'Taïnaste‎'),
+(394, 'Thar Es-Souk‎'),
+(395, 'Tissa‎'),
+(396, 'Tizi Ouasli‎'),
+(397, 'Laayoune‎'),
+(398, 'El Marsa‎'),
+(399, 'Tarfaya‎'),
+(400, 'Boujdour‎'),
+(401, 'Awsard'),
+(402, 'Oued-Eddahab ');
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
