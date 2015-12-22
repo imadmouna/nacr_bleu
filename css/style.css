@@ -835,7 +835,7 @@ table tr:nth-child(even) {
 .sf-menu > li {
 	position: relative;
 	float: left;
-	width: 180px;
+	width: 165px;
 	height: 60px;
   background-color: #D3BA8B;
 }
@@ -845,7 +845,7 @@ table tr:nth-child(even) {
 
 .sf-menu > li > a {
   font-weight: bold !important;
-  padding: 23px 13px;
+  padding: 23px 6px;
   color: #FFF;
   font-size: 13px;
   line-height: 1;

@@ -38,7 +38,7 @@ ul#mymenu li {
   
 
   <?php
-    $req = mysql_query("select * from categorie order by id_cat limit 0,5");
+    $req = mysql_query("select * from categorie order by id_cat limit 0,9999");
     while($t = mysql_fetch_array($req)){
   ?>
     <li>
